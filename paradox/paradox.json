@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.0",
+      "value": "v0.1.2",
       "color": "cb3837"
     },
     {
@@ -69,10 +69,10 @@
   },
   "readmeUsage": [
     {
-      "title": "Bootstrap status",
-      "description": "Bootstrap status\n\n`@ankhorage/board` is the future home for website and source boarding into\nAnkhorage.\n\n`ankhorage/board#1` is intentionally bootstrap-only. It establishes the\npackage shape, provider metadata, explicit command table, shared runner, and\nstandalone CLI surface without implementing the real boarding pipeline yet.\n\nCurrent explicit commands are:\n\n- `board web <source>`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred. The first real website boarding pipeline is deferred to\n`ankhorage/board#2`.",
+      "title": "Website-source boarding",
+      "description": "Website-source boarding\n\n`@ankhorage/board` is the future home for website and source boarding into\nAnkhorage.\n\n`ankhorage/board#2` implements the first real website-source boarding slice.\n`board web <url>` now inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document.\n\nCurrent explicit commands are:\n\n- `board web <url>`\n- `board web <url> --plan`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\n`board web <url>` and `board web <url> --plan` produce the same JSON plan.\n\n`board web <url> --create <project>` is parsed only to return a deferred\nmessage in this slice. OpenAPI import, standalone manifest generation,\nproject creation, crawling, and root CLI sugar remain deferred.\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred.",
       "language": "ts",
-      "code": "import { runCli } from \"./cli.js\";\n\nrunCli([\"--help\"]);",
+      "code": "import { runCli } from \"./cli.js\";\n\nawait runCli([\"--help\"]);",
       "sourcePath": "src/readme-usage.ts"
     }
   ],
@@ -100,7 +100,11 @@
     {
       "path": "src/cli.ts",
       "isEntrypoint": false,
-      "dependencies": ["package.json", "src/commands.ts"],
+      "dependencies": [
+        "package.json",
+        "src/commands.ts",
+        "src/commandServices.ts"
+      ],
       "exports": [
         "BoardCliContext",
         "BoardCliRunResult",
@@ -112,7 +116,11 @@
     {
       "path": "src/commands.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/cli.ts"],
+      "dependencies": [
+        "src/cli.ts",
+        "src/commandServices.ts",
+        "src/webInspection.ts"
+      ],
       "exports": [
         "BOARD_COMMANDS",
         "createProviderHandlers",
@@ -122,15 +130,45 @@
       ]
     },
     {
+      "path": "src/commandServices.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/webInspection.ts"],
+      "exports": ["BoardCommandServices", "createDefaultBoardCommandServices"]
+    },
+    {
       "path": "src/index.ts",
       "isEntrypoint": true,
       "dependencies": [],
       "exports": []
     },
     {
+      "path": "src/webBoardingPlan.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "WebBoardingDiagnostic",
+        "WebBoardingObservedLink",
+        "WebBoardingPlan",
+        "WebBoardingRoute"
+      ]
+    },
+    {
+      "path": "src/webInspection.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/webBoardingPlan.ts"],
+      "exports": [
+        "extractWebsiteSignals",
+        "inspectWebsite",
+        "InspectWebsiteOptions",
+        "InspectWebsiteResult",
+        "renderWebBoardingPlan"
+      ]
+    },
+    {
       "path": "test/ankh.provider.test.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "package.json",
         "src/ankh.provider.ts",
         "src/commands.ts",
         "test/testSupport.ts"
@@ -140,13 +178,17 @@
     {
       "path": "test/cli.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/cli.ts", "test/testSupport.ts"],
+      "dependencies": ["package.json", "src/cli.ts", "test/testSupport.ts"],
       "exports": []
     },
     {
       "path": "test/commands.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/commands.ts", "test/testSupport.ts"],
+      "dependencies": [
+        "src/commands.ts",
+        "src/webInspection.ts",
+        "test/testSupport.ts"
+      ],
       "exports": []
     },
     {
@@ -158,8 +200,18 @@
     {
       "path": "test/testSupport.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/cli.ts"],
-      "exports": ["BufferedContext", "createBufferedContext"]
+      "dependencies": ["src/cli.ts", "src/commandServices.ts"],
+      "exports": [
+        "BufferedContext",
+        "createBufferedContext",
+        "createStubBoardCommandServices"
+      ]
+    },
+    {
+      "path": "test/webInspection.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/webBoardingPlan.ts", "src/webInspection.ts"],
+      "exports": []
     }
   ],
   "exports": [],
@@ -170,7 +222,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/cli.ts",
-        "line": 22,
+        "line": 23,
         "column": 1
       }
     },
@@ -179,7 +231,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/cli.ts",
-        "line": 36,
+        "line": 40,
         "column": 1
       }
     },
@@ -188,7 +240,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/cli.ts",
-        "line": 70,
+        "line": 74,
         "column": 1
       }
     },
@@ -197,7 +249,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/cli.ts",
-        "line": 89,
+        "line": 95,
         "column": 1
       }
     },
@@ -206,7 +258,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 43,
+        "line": 46,
         "column": 1
       }
     },
@@ -215,7 +267,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 51,
+        "line": 54,
         "column": 1
       }
     },
@@ -224,7 +276,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 61,
+        "line": 64,
         "column": 1
       }
     },
@@ -233,7 +285,16 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 80,
+        "line": 83,
+        "column": 1
+      }
+    },
+    {
+      "name": "runWebBoardCommand",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/commands.ts",
+        "line": 111,
         "column": 1
       }
     },
@@ -242,7 +303,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 104,
+        "line": 142,
         "column": 1
       }
     },
@@ -251,7 +312,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 115,
+        "line": 153,
         "column": 1
       }
     },
@@ -260,7 +321,277 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 128,
+        "line": 166,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseWebCommandArgs",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/commands.ts",
+        "line": 185,
+        "column": 1
+      }
+    },
+    {
+      "name": "createDefaultBoardCommandServices",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/commandServices.ts",
+        "line": 15,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseFixtureStatus",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/commandServices.ts",
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "inspectWebsite",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 45,
+        "column": 1
+      }
+    },
+    {
+      "name": "renderWebBoardingPlan",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 164,
+        "column": 1
+      }
+    },
+    {
+      "name": "extractWebsiteSignals",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 168,
+        "column": 1
+      }
+    },
+    {
+      "name": "fetchWithTimeout",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 188,
+        "column": 1
+      }
+    },
+    {
+      "name": "readResponseText",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 207,
+        "column": 1
+      }
+    },
+    {
+      "name": "isSupportedHtmlContentType",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 227,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveFetchedUrl",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 234,
+        "column": 1
+      }
+    },
+    {
+      "name": "createFailureResult",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 246,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPlan",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 263,
+        "column": 1
+      }
+    },
+    {
+      "name": "createRoute",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 292,
+        "column": 1
+      }
+    },
+    {
+      "name": "createPlaceholderRoute",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 309,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeRoutePath",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 318,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSuggestedName",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 322,
+        "column": 1
+      }
+    },
+    {
+      "name": "hostnameToName",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 331,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSuggestedSlug",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 348,
+        "column": 1
+      }
+    },
+    {
+      "name": "slugify",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 358,
+        "column": 1
+      }
+    },
+    {
+      "name": "capitalizeWord",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 367,
+        "column": 1
+      }
+    },
+    {
+      "name": "readMetaDescription",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 373,
+        "column": 1
+      }
+    },
+    {
+      "name": "readTextMatches",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 388,
+        "column": 1
+      }
+    },
+    {
+      "name": "readFirstMatch",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 418,
+        "column": 1
+      }
+    },
+    {
+      "name": "readObservedLinks",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 423,
+        "column": 1
+      }
+    },
+    {
+      "name": "readHref",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 461,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveSameOriginLink",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 470,
+        "column": 1
+      }
+    },
+    {
+      "name": "stripHtml",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 478,
+        "column": 1
+      }
+    },
+    {
+      "name": "decodeHtmlEntities",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 482,
+        "column": 1
+      }
+    },
+    {
+      "name": "normalizeOptionalText",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 492,
+        "column": 1
+      }
+    },
+    {
+      "name": "isAbortError",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 501,
         "column": 1
       }
     }
@@ -298,14 +629,44 @@
         "sourcePath": "src/cli.ts"
       },
       {
+        "fromPath": "src/cli.ts",
+        "toPath": "src/commandServices.ts",
+        "sourcePath": "src/cli.ts"
+      },
+      {
         "fromPath": "src/commands.ts",
         "toPath": "src/cli.ts",
         "sourcePath": "src/commands.ts"
       },
       {
+        "fromPath": "src/commands.ts",
+        "toPath": "src/commandServices.ts",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromPath": "src/commands.ts",
+        "toPath": "src/webInspection.ts",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromPath": "src/commandServices.ts",
+        "toPath": "src/webInspection.ts",
+        "sourcePath": "src/commandServices.ts"
+      },
+      {
         "fromPath": "src/readme-usage.ts",
         "toPath": "src/cli.ts",
         "sourcePath": "src/readme-usage.ts"
+      },
+      {
+        "fromPath": "src/webInspection.ts",
+        "toPath": "src/webBoardingPlan.ts",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromPath": "test/ankh.provider.test.ts",
+        "toPath": "package.json",
+        "sourcePath": "test/ankh.provider.test.ts"
       },
       {
         "fromPath": "test/ankh.provider.test.ts",
@@ -324,6 +685,11 @@
       },
       {
         "fromPath": "test/cli.test.ts",
+        "toPath": "package.json",
+        "sourcePath": "test/cli.test.ts"
+      },
+      {
+        "fromPath": "test/cli.test.ts",
         "toPath": "src/cli.ts",
         "sourcePath": "test/cli.test.ts"
       },
@@ -335,6 +701,11 @@
       {
         "fromPath": "test/commands.test.ts",
         "toPath": "src/commands.ts",
+        "sourcePath": "test/commands.test.ts"
+      },
+      {
+        "fromPath": "test/commands.test.ts",
+        "toPath": "src/webInspection.ts",
         "sourcePath": "test/commands.test.ts"
       },
       {
@@ -351,6 +722,21 @@
         "fromPath": "test/testSupport.ts",
         "toPath": "src/cli.ts",
         "sourcePath": "test/testSupport.ts"
+      },
+      {
+        "fromPath": "test/testSupport.ts",
+        "toPath": "src/commandServices.ts",
+        "sourcePath": "test/testSupport.ts"
+      },
+      {
+        "fromPath": "test/webInspection.test.ts",
+        "toPath": "src/webBoardingPlan.ts",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromPath": "test/webInspection.test.ts",
+        "toPath": "src/webInspection.ts",
+        "sourcePath": "test/webInspection.test.ts"
       }
     ],
     "calls": [
@@ -371,6 +757,12 @@
         "toSymbol": "createProviderHandlers",
         "callExpression": "createProviderHandlers",
         "sourcePath": "src/ankh.provider.ts"
+      },
+      {
+        "fromSymbol": "createDefaultBoardCliContext",
+        "toSymbol": "createDefaultBoardCommandServices",
+        "callExpression": "createDefaultBoardCommandServices",
+        "sourcePath": "src/cli.ts"
       },
       {
         "fromSymbol": "runCli",
@@ -434,6 +826,12 @@
       },
       {
         "fromSymbol": "runBoardCommand",
+        "toSymbol": "runWebBoardCommand",
+        "callExpression": "runWebBoardCommand",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runBoardCommand",
         "toSymbol": "readExactSourceArg",
         "callExpression": "readExactSourceArg",
         "sourcePath": "src/commands.ts"
@@ -457,10 +855,262 @@
         "sourcePath": "src/commands.ts"
       },
       {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "parseWebCommandArgs",
+        "callExpression": "parseWebCommandArgs",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "writeStderr",
+        "callExpression": "context.writeStderr",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "createDefaultBoardCommandServices",
+        "callExpression": "createDefaultBoardCommandServices",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "inspectWebsite",
+        "callExpression": "services.inspectWebsite",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "writeStdout",
+        "callExpression": "context.writeStdout",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "runWebBoardCommand",
+        "toSymbol": "renderWebBoardingPlan",
+        "callExpression": "renderWebBoardingPlan",
+        "sourcePath": "src/commands.ts"
+      },
+      {
+        "fromSymbol": "createDefaultBoardCommandServices",
+        "toSymbol": "parseFixtureStatus",
+        "callExpression": "parseFixtureStatus",
+        "sourcePath": "src/commandServices.ts"
+      },
+      {
+        "fromSymbol": "fetchImplementation",
+        "toSymbol": "readFileSync",
+        "callExpression": "readFileSync",
+        "sourcePath": "src/commandServices.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "inspectWebsite",
+        "callExpression": "inspectWebsite",
+        "sourcePath": "src/commandServices.ts"
+      },
+      {
         "fromSymbol": "src/readme-usage.ts",
         "toSymbol": "runCli",
         "callExpression": "runCli",
         "sourcePath": "src/readme-usage.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "fetchWithTimeout",
+        "callExpression": "fetchWithTimeout",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "isAbortError",
+        "callExpression": "isAbortError",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "createFailureResult",
+        "callExpression": "createFailureResult",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "resolveFetchedUrl",
+        "callExpression": "resolveFetchedUrl",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "isSupportedHtmlContentType",
+        "callExpression": "isSupportedHtmlContentType",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "readResponseText",
+        "callExpression": "readResponseText",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "__type",
+        "callExpression": "(\n      options.extractWebsiteSignals ?? extractWebsiteSignals\n    )",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "createPlan",
+        "callExpression": "createPlan",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "inspectWebsite",
+        "toSymbol": "createRoute",
+        "callExpression": "createRoute",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "extractWebsiteSignals",
+        "toSymbol": "readFirstMatch",
+        "callExpression": "readFirstMatch",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "extractWebsiteSignals",
+        "toSymbol": "readMetaDescription",
+        "callExpression": "readMetaDescription",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "extractWebsiteSignals",
+        "toSymbol": "normalizeOptionalText",
+        "callExpression": "normalizeOptionalText",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "extractWebsiteSignals",
+        "toSymbol": "readTextMatches",
+        "callExpression": "readTextMatches",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "extractWebsiteSignals",
+        "toSymbol": "readObservedLinks",
+        "callExpression": "readObservedLinks",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "fetchWithTimeout",
+        "toSymbol": "fetchImplementation",
+        "callExpression": "fetchImplementation",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createFailureResult",
+        "toSymbol": "createPlan",
+        "callExpression": "createPlan",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createFailureResult",
+        "toSymbol": "createPlaceholderRoute",
+        "callExpression": "createPlaceholderRoute",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createPlan",
+        "toSymbol": "createSuggestedName",
+        "callExpression": "createSuggestedName",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createPlan",
+        "toSymbol": "createSuggestedSlug",
+        "callExpression": "createSuggestedSlug",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createRoute",
+        "toSymbol": "normalizeRoutePath",
+        "callExpression": "normalizeRoutePath",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createPlaceholderRoute",
+        "toSymbol": "normalizeRoutePath",
+        "callExpression": "normalizeRoutePath",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createSuggestedName",
+        "toSymbol": "normalizeOptionalText",
+        "callExpression": "normalizeOptionalText",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createSuggestedName",
+        "toSymbol": "hostnameToName",
+        "callExpression": "hostnameToName",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "createSuggestedSlug",
+        "toSymbol": "slugify",
+        "callExpression": "slugify",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readMetaDescription",
+        "toSymbol": "readFirstMatch",
+        "callExpression": "readFirstMatch",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readTextMatches",
+        "toSymbol": "normalizeOptionalText",
+        "callExpression": "normalizeOptionalText",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readTextMatches",
+        "toSymbol": "stripHtml",
+        "callExpression": "stripHtml",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readFirstMatch",
+        "toSymbol": "stripHtml",
+        "callExpression": "stripHtml",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readObservedLinks",
+        "toSymbol": "readHref",
+        "callExpression": "readHref",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readObservedLinks",
+        "toSymbol": "normalizeOptionalText",
+        "callExpression": "normalizeOptionalText",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readObservedLinks",
+        "toSymbol": "stripHtml",
+        "callExpression": "stripHtml",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readObservedLinks",
+        "toSymbol": "resolveSameOriginLink",
+        "callExpression": "resolveSameOriginLink",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "stripHtml",
+        "toSymbol": "decodeHtmlEntities",
+        "callExpression": "decodeHtmlEntities",
+        "sourcePath": "src/webInspection.ts"
       },
       {
         "fromSymbol": "test/ankh.provider.test.ts",
@@ -529,6 +1179,18 @@
         "sourcePath": "test/cli.test.ts"
       },
       {
+        "fromSymbol": "test/cli.test.ts",
+        "toSymbol": "createStubBoardCommandServices",
+        "callExpression": "createStubBoardCommandServices",
+        "sourcePath": "test/cli.test.ts"
+      },
+      {
+        "fromSymbol": "test/cli.test.ts",
+        "toSymbol": "join",
+        "callExpression": "join",
+        "sourcePath": "test/cli.test.ts"
+      },
+      {
         "fromSymbol": "test/commands.test.ts",
         "toSymbol": "describe",
         "callExpression": "describe",
@@ -565,6 +1227,18 @@
         "sourcePath": "test/commands.test.ts"
       },
       {
+        "fromSymbol": "test/commands.test.ts",
+        "toSymbol": "createStubBoardCommandServices",
+        "callExpression": "createStubBoardCommandServices",
+        "sourcePath": "test/commands.test.ts"
+      },
+      {
+        "fromSymbol": "test/commands.test.ts",
+        "toSymbol": "renderWebBoardingPlan",
+        "callExpression": "renderWebBoardingPlan",
+        "sourcePath": "test/commands.test.ts"
+      },
+      {
         "fromSymbol": "test/package.test.ts",
         "toSymbol": "describe",
         "callExpression": "describe",
@@ -581,6 +1255,48 @@
         "toSymbol": "expect",
         "callExpression": "expect",
         "sourcePath": "test/package.test.ts"
+      },
+      {
+        "fromSymbol": "createBufferedContext",
+        "toSymbol": "createStubBoardCommandServices",
+        "callExpression": "createStubBoardCommandServices",
+        "sourcePath": "test/testSupport.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "inspectWebsite",
+        "callExpression": "inspectWebsite",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "renderWebBoardingPlan",
+        "callExpression": "renderWebBoardingPlan",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "extractWebsiteSignals",
+        "callExpression": "extractWebsiteSignals",
+        "sourcePath": "test/webInspection.test.ts"
       }
     ],
     "typeReferences": [],

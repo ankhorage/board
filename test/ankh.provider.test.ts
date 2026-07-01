@@ -1,6 +1,7 @@
 import type { AnkhRuntimeCommandProvider } from "@ankhorage/ankh";
 import { describe, expect, it } from "bun:test";
 
+import packageJson from "../package.json";
 import provider from "../src/ankh.provider.js";
 import { BOARD_COMMANDS, runBoardCommand } from "../src/commands.js";
 import { createBufferedContext } from "./testSupport.js";
@@ -9,6 +10,7 @@ describe("board provider", () => {
   it("exports the expected provider metadata", () => {
     expect(provider.id).toBe("@ankhorage/board");
     expect(provider.category).toBe("board");
+    expect(provider.version).toBe(packageJson.version);
     expect(provider.capabilities).toEqual([
       "board.web.import",
       "board.openapi.import",
@@ -46,7 +48,7 @@ describe("board provider", () => {
     expect(handlersByPath.size).toBe(handlers.length);
   });
 
-  it("delegates provider handlers to the shared runner", () => {
+  it("delegates provider handlers to the shared runner", async () => {
     const handler = provider.handlers.find(
       (entry) => entry.path.join(" ") === "web",
     )?.handler;
@@ -54,13 +56,13 @@ describe("board provider", () => {
     if (handler === undefined) return;
 
     const providerContext = createBufferedContext();
-    const providerResult = handler({
+    const providerResult = await handler({
       argv: ["https://example.com"],
       context: providerContext,
     });
 
     const directContext = createBufferedContext();
-    const directResult = runBoardCommand(
+    const directResult = await runBoardCommand(
       BOARD_COMMANDS[0],
       ["https://example.com"],
       directContext,
