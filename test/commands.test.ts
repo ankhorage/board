@@ -5,7 +5,11 @@ import {
   resolveBoardCommand,
   runBoardCommand,
 } from "../src/commands.js";
-import { createBufferedContext } from "./testSupport.js";
+import { renderWebBoardingPlan } from "../src/webInspection.js";
+import {
+  createBufferedContext,
+  createStubBoardCommandServices,
+} from "./testSupport.js";
 
 describe("BOARD_COMMANDS", () => {
   it("locks the exact command surface and capabilities", () => {
@@ -13,7 +17,8 @@ describe("BOARD_COMMANDS", () => {
       {
         path: ["web"],
         capability: "board.web.import",
-        summary: "Board a website source through an explicit bootstrap stub.",
+        summary:
+          "Inspect a public website URL and emit a deterministic boarding plan.",
       },
       {
         path: ["openapi"],
@@ -52,9 +57,9 @@ describe("resolveBoardCommand", () => {
 });
 
 describe("runBoardCommand", () => {
-  it("prints deterministic stub output for valid input", () => {
+  it("prints deferred stub output for openapi", async () => {
     const context = createBufferedContext();
-    const result = runBoardCommand(
+    const result = await runBoardCommand(
       BOARD_COMMANDS[1],
       ["./openapi.json"],
       context,
@@ -66,9 +71,69 @@ describe("runBoardCommand", () => {
         "command: board openapi",
         "source: ./openapi.json",
         "status: bootstrap stub",
-        "note: Real boarding/import behavior is deferred to ankhorage/board#2.",
+        "note: This command surface remains deferred beyond ankhorage/board#2.",
         "",
       ].join("\n"),
+    );
+  });
+
+  it("prints plan JSON for a valid website URL", async () => {
+    const expectedPlan = {
+      app: {
+        suggestedName: "Example Domain",
+        suggestedSlug: "example-domain",
+      },
+      diagnostics: [],
+      kind: "web-boarding-plan",
+      observedLinks: [],
+      routes: [
+        {
+          headings: [],
+          path: "/",
+          sections: [],
+          sourceUrl: "https://example.com/",
+          title: "Example Domain",
+        },
+      ],
+      source: {
+        fetchedUrl: "https://example.com/",
+        kind: "website",
+        url: "https://example.com/",
+      },
+      version: 1,
+    } as const;
+    const services = createStubBoardCommandServices(() =>
+      Promise.resolve({
+        exitCode: 0,
+        plan: expectedPlan,
+      }),
+    );
+    const context = createBufferedContext({ services });
+
+    const result = await runBoardCommand(
+      BOARD_COMMANDS[0],
+      ["https://example.com"],
+      context,
+    );
+
+    expect(result.exitCode).toBe(0);
+    expect(context.stdout).toBe(renderWebBoardingPlan(expectedPlan));
+    expect(context.stderr).toBe("");
+  });
+
+  it("returns deferred stderr for --create", async () => {
+    const context = createBufferedContext();
+
+    const result = await runBoardCommand(
+      BOARD_COMMANDS[0],
+      ["https://example.com", "--create", "my-app"],
+      context,
+    );
+
+    expect(result.exitCode).toBe(1);
+    expect(context.stdout).toBe("");
+    expect(context.stderr).toContain(
+      "Project creation from a web boarding plan is deferred.",
     );
   });
 });

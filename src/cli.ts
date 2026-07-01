@@ -1,15 +1,16 @@
 #!/usr/bin/env bun
 
 import packageJson from "../package.json";
+import { resolveBoardCommand, runBoardCommand } from "./commands.js";
 import {
-  BOARD_COMMANDS,
-  resolveBoardCommand,
-  runBoardCommand,
-} from "./commands.js";
+  type BoardCommandServices,
+  createDefaultBoardCommandServices,
+} from "./commandServices.js";
 
 export interface BoardCliContext {
   readonly cwd: string;
   readonly env: Readonly<Record<string, string | undefined>>;
+  readonly services?: BoardCommandServices;
   readonly version: string;
   writeStdout(text: string): void;
   writeStderr(text: string): void;
@@ -20,9 +21,12 @@ export interface BoardCliRunResult {
 }
 
 export function createDefaultBoardCliContext(): BoardCliContext {
+  const { env } = process;
+
   return {
     cwd: process.cwd(),
-    env: process.env,
+    env,
+    services: createDefaultBoardCommandServices(env),
     version: packageJson.version,
     writeStdout(text: string) {
       process.stdout.write(text);
@@ -33,10 +37,10 @@ export function createDefaultBoardCliContext(): BoardCliContext {
   };
 }
 
-export function runCli(
+export async function runCli(
   argv: readonly string[],
   context: BoardCliContext = createDefaultBoardCliContext(),
-): BoardCliRunResult {
+): Promise<BoardCliRunResult> {
   const [firstToken] = argv;
 
   if (
@@ -60,7 +64,7 @@ export function runCli(
     return { exitCode: 1 };
   }
 
-  return runBoardCommand(
+  return await runBoardCommand(
     resolvedCommand.command,
     resolvedCommand.argv,
     context,
@@ -68,20 +72,22 @@ export function runCli(
 }
 
 export function renderHelp(): string {
-  const commandLines = BOARD_COMMANDS.map(
-    (command) => `  ankhorage-board ${command.path.join(" ")} <source>`,
-  );
   return [
     "@ankhorage/board",
     "",
-    "Bootstrap Ankh provider and standalone CLI for boarding external sources.",
+    "Ankh provider and standalone CLI for boarding external website sources.",
     "",
     "Usage:",
-    ...commandLines,
+    "  ankhorage-board web <url>",
+    "  ankhorage-board web <url> --plan",
+    "  ankhorage-board web <url> --create <project>",
+    "  ankhorage-board openapi <source>",
+    "  ankhorage-board manifest generate <source>",
     "  ankhorage-board --help",
     "  ankhorage-board --version",
     "",
-    "Current commands are explicit only. Bare URL shortcuts are deferred.",
+    "The website-source pipeline is currently implemented only for `web`.",
+    "OpenAPI import, standalone manifest generation, project creation, and bare URL shortcuts are deferred.",
     "",
   ].join("\n");
 }
@@ -97,6 +103,6 @@ function renderUnknownCommand(argv: readonly string[]): string {
 }
 
 if (import.meta.main) {
-  const result = runCli(process.argv.slice(2));
+  const result = await runCli(process.argv.slice(2));
   process.exit(result.exitCode);
 }

@@ -14,22 +14,36 @@ graph TD
   package__ankhorage_board -.-> module_src_cli_ts
   module_src_cli_ts --> module_package_json
   module_src_cli_ts --> module_src_commands_ts
+  module_src_cli_ts --> module_src_commandServices_ts
   module_src_commands_ts["src/commands.ts"]
   package__ankhorage_board -.-> module_src_commands_ts
   module_src_commands_ts --> module_src_cli_ts
+  module_src_commands_ts --> module_src_commandServices_ts
+  module_src_commands_ts --> module_src_webInspection_ts
+  module_src_commandServices_ts["src/commandServices.ts"]
+  package__ankhorage_board -.-> module_src_commandServices_ts
+  module_src_commandServices_ts --> module_src_webInspection_ts
   module_src_index_ts["src/index.ts"]
+  module_src_webBoardingPlan_ts["src/webBoardingPlan.ts"]
+  package__ankhorage_board -.-> module_src_webBoardingPlan_ts
+  module_src_webInspection_ts["src/webInspection.ts"]
+  package__ankhorage_board -.-> module_src_webInspection_ts
+  module_src_webInspection_ts --> module_src_webBoardingPlan_ts
   module_test_ankh_provider_test_ts["test/ankh.provider.test.ts"]
   package__ankhorage_board -.-> module_test_ankh_provider_test_ts
+  module_test_ankh_provider_test_ts --> module_package_json
   module_test_ankh_provider_test_ts --> module_src_ankh_provider_ts
   module_test_ankh_provider_test_ts --> module_src_commands_ts
   module_test_ankh_provider_test_ts --> module_test_testSupport_ts
   module_test_cli_test_ts["test/cli.test.ts"]
   package__ankhorage_board -.-> module_test_cli_test_ts
+  module_test_cli_test_ts --> module_package_json
   module_test_cli_test_ts --> module_src_cli_ts
   module_test_cli_test_ts --> module_test_testSupport_ts
   module_test_commands_test_ts["test/commands.test.ts"]
   package__ankhorage_board -.-> module_test_commands_test_ts
   module_test_commands_test_ts --> module_src_commands_ts
+  module_test_commands_test_ts --> module_src_webInspection_ts
   module_test_commands_test_ts --> module_test_testSupport_ts
   module_test_package_test_ts["test/package.test.ts"]
   package__ankhorage_board -.-> module_test_package_test_ts
@@ -37,3 +51,8 @@ graph TD
   module_test_testSupport_ts["test/testSupport.ts"]
   package__ankhorage_board -.-> module_test_testSupport_ts
   module_test_testSupport_ts --> module_src_cli_ts
+  module_test_testSupport_ts --> module_src_commandServices_ts
+  module_test_webInspection_test_ts["test/webInspection.test.ts"]
+  package__ankhorage_board -.-> module_test_webInspection_test_ts
+  module_test_webInspection_test_ts --> module_src_webBoardingPlan_ts
+  module_test_webInspection_test_ts --> module_src_webInspection_ts
