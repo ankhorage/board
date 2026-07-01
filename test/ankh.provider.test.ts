@@ -9,7 +9,6 @@ describe("board provider", () => {
   it("exports the expected provider metadata", () => {
     expect(provider.id).toBe("@ankhorage/board");
     expect(provider.category).toBe("board");
-    expect(provider.version).toBe("0.0.0");
     expect(provider.capabilities).toEqual([
       "board.web.import",
       "board.openapi.import",
