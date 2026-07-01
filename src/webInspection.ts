@@ -216,12 +216,75 @@ async function readResponseText(
     }
   }
 
-  const buffer = await response.arrayBuffer();
-  if (buffer.byteLength > maxResponseBytes) {
-    throw new ResponseTooLargeError();
+  const reader = response.body?.getReader();
+  if (reader === undefined) {
+    const text = await response.text();
+    const textBytes = new TextEncoder().encode(text).length;
+    if (textBytes > maxResponseBytes) {
+      throw new ResponseTooLargeError();
+    }
+
+    return text;
   }
 
-  return new TextDecoder().decode(buffer);
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+
+  for (;;) {
+    const rawReadResult: unknown = await reader.read();
+    const readResult = readStreamChunk(rawReadResult);
+    if (readResult.done) {
+      break;
+    }
+
+    const { value } = readResult;
+    totalBytes += value.byteLength;
+    if (totalBytes > maxResponseBytes) {
+      throw new ResponseTooLargeError();
+    }
+
+    chunks.push(value);
+  }
+
+  return new TextDecoder().decode(concatenateChunks(chunks, totalBytes));
+}
+
+function readStreamChunk(
+  value: unknown,
+):
+  | { readonly done: true }
+  | { readonly done: false; readonly value: Uint8Array } {
+  if (!isRecord(value) || typeof value.done !== "boolean") {
+    throw new Error("Invalid response stream chunk.");
+  }
+
+  if (value.done) {
+    return { done: true };
+  }
+
+  if (!(value.value instanceof Uint8Array)) {
+    throw new Error("Invalid response stream chunk value.");
+  }
+
+  return {
+    done: false,
+    value: value.value,
+  };
+}
+
+function concatenateChunks(
+  chunks: readonly Uint8Array[],
+  totalBytes: number,
+): Uint8Array {
+  const output = new Uint8Array(totalBytes);
+  let offset = 0;
+
+  for (const chunk of chunks) {
+    output.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  return output;
 }
 
 function isSupportedHtmlContentType(contentType: string): boolean {
@@ -503,3 +566,7 @@ function isAbortError(error: unknown): boolean {
 }
 
 class ResponseTooLargeError extends Error {}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}

@@ -116,6 +116,40 @@ describe("inspectWebsite", () => {
     ]);
   });
 
+  it("returns a diagnostic plan for timeouts", async () => {
+    const result = await inspectWebsite("https://example.com", {
+      fetchImplementation: (_input, init) =>
+        new Promise<Response>((_resolve, reject) => {
+          init?.signal?.addEventListener(
+            "abort",
+            () => {
+              reject(new DOMException("Timed out", "AbortError"));
+            },
+            { once: true },
+          );
+        }),
+      timeoutMs: 1,
+    });
+
+    expect(result.exitCode).toBe(1);
+    expect(result.plan.diagnostics).toEqual([
+      {
+        code: "website-fetch-timeout",
+        message: "Fetching the requested website URL timed out.",
+        severity: "error",
+      },
+    ]);
+    expect(result.plan.routes).toEqual([
+      {
+        headings: [],
+        path: "/",
+        sections: [],
+        sourceUrl: "https://example.com/",
+      },
+    ]);
+    expect(JSON.parse(renderWebBoardingPlan(result.plan))).toEqual(result.plan);
+  });
+
   it("returns a diagnostic plan for unsupported content types", async () => {
     const result = await inspectWebsite("https://example.com", {
       fetchImplementation: () =>
@@ -137,6 +171,86 @@ describe("inspectWebsite", () => {
       },
     ]);
     expect(result.plan.routes).toHaveLength(1);
+  });
+
+  it("returns a diagnostic plan for oversized responses declared by content-length", async () => {
+    const result = await inspectWebsite("https://example.com", {
+      fetchImplementation: () =>
+        Promise.resolve(
+          new Response(EXAMPLE_HTML, {
+            headers: {
+              "content-length": "999999",
+              "content-type": "text/html; charset=utf-8",
+            },
+          }),
+        ),
+      maxResponseBytes: 32,
+    });
+
+    expect(result.exitCode).toBe(1);
+    expect(result.plan.diagnostics).toEqual([
+      {
+        code: "website-response-too-large",
+        message: "The requested website response exceeded the size limit.",
+        severity: "error",
+      },
+    ]);
+    expect(result.plan.routes).toEqual([
+      {
+        headings: [],
+        path: "/",
+        sections: [],
+        sourceUrl: "https://example.com/",
+      },
+    ]);
+  });
+
+  it("rejects oversized responses while reading when content-length is absent", async () => {
+    let pullCount = 0;
+    const body = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        pullCount += 1;
+        if (pullCount === 1) {
+          controller.enqueue(new TextEncoder().encode("123456789"));
+          return;
+        }
+
+        controller.enqueue(new TextEncoder().encode("abcdefghi"));
+        controller.close();
+      },
+    });
+
+    const result = await inspectWebsite("https://example.com", {
+      fetchImplementation: () =>
+        Promise.resolve(
+          new Response(body, {
+            headers: {
+              "content-type": "text/html; charset=utf-8",
+            },
+          }),
+        ),
+      maxResponseBytes: 10,
+    });
+
+    expect(result.exitCode).toBe(1);
+    expect(result.plan.diagnostics).toEqual([
+      {
+        code: "website-response-too-large",
+        message: "The requested website response exceeded the size limit.",
+        severity: "error",
+      },
+    ]);
+    expect(result.plan.routes).toEqual([
+      {
+        headings: [],
+        path: "/",
+        sections: [],
+        sourceUrl: "https://example.com/",
+      },
+    ]);
+    expect(pullCount).toBe(2);
+    const parsedPlan: unknown = JSON.parse(renderWebBoardingPlan(result.plan));
+    expect(parsedPlan).toEqual(result.plan);
   });
 
   it("returns a diagnostic plan when HTML extraction fails", async () => {

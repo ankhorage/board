@@ -398,11 +398,29 @@
       }
     },
     {
+      "name": "readStreamChunk",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 252,
+        "column": 1
+      }
+    },
+    {
+      "name": "concatenateChunks",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 275,
+        "column": 1
+      }
+    },
+    {
       "name": "isSupportedHtmlContentType",
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 227,
+        "line": 290,
         "column": 1
       }
     },
@@ -411,7 +429,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 234,
+        "line": 297,
         "column": 1
       }
     },
@@ -420,7 +438,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 246,
+        "line": 309,
         "column": 1
       }
     },
@@ -429,7 +447,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 263,
+        "line": 326,
         "column": 1
       }
     },
@@ -438,7 +456,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 292,
+        "line": 355,
         "column": 1
       }
     },
@@ -447,7 +465,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 309,
+        "line": 372,
         "column": 1
       }
     },
@@ -456,7 +474,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 318,
+        "line": 381,
         "column": 1
       }
     },
@@ -465,7 +483,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 322,
+        "line": 385,
         "column": 1
       }
     },
@@ -474,7 +492,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 331,
+        "line": 394,
         "column": 1
       }
     },
@@ -483,7 +501,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 348,
+        "line": 411,
         "column": 1
       }
     },
@@ -492,7 +510,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 358,
+        "line": 421,
         "column": 1
       }
     },
@@ -501,7 +519,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 367,
+        "line": 430,
         "column": 1
       }
     },
@@ -510,7 +528,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 373,
+        "line": 436,
         "column": 1
       }
     },
@@ -519,7 +537,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 388,
+        "line": 451,
         "column": 1
       }
     },
@@ -528,7 +546,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 418,
+        "line": 481,
         "column": 1
       }
     },
@@ -537,7 +555,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 423,
+        "line": 486,
         "column": 1
       }
     },
@@ -546,7 +564,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 461,
+        "line": 524,
         "column": 1
       }
     },
@@ -555,7 +573,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 470,
+        "line": 533,
         "column": 1
       }
     },
@@ -564,7 +582,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 478,
+        "line": 541,
         "column": 1
       }
     },
@@ -573,7 +591,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 482,
+        "line": 545,
         "column": 1
       }
     },
@@ -582,7 +600,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 492,
+        "line": 555,
         "column": 1
       }
     },
@@ -591,7 +609,16 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
-        "line": 501,
+        "line": 564,
+        "column": 1
+      }
+    },
+    {
+      "name": "isRecord",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/webInspection.ts",
+        "line": 570,
         "column": 1
       }
     }
@@ -1005,6 +1032,24 @@
         "sourcePath": "src/webInspection.ts"
       },
       {
+        "fromSymbol": "readResponseText",
+        "toSymbol": "readStreamChunk",
+        "callExpression": "readStreamChunk",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readResponseText",
+        "toSymbol": "concatenateChunks",
+        "callExpression": "concatenateChunks",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
+        "fromSymbol": "readStreamChunk",
+        "toSymbol": "isRecord",
+        "callExpression": "isRecord",
+        "sourcePath": "src/webInspection.ts"
+      },
+      {
         "fromSymbol": "createFailureResult",
         "toSymbol": "createPlan",
         "callExpression": "createPlan",
@@ -1290,6 +1335,12 @@
         "fromSymbol": "test/webInspection.test.ts",
         "toSymbol": "renderWebBoardingPlan",
         "callExpression": "renderWebBoardingPlan",
+        "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "test/webInspection.test.ts",
+        "toSymbol": "reject",
+        "callExpression": "reject",
         "sourcePath": "test/webInspection.test.ts"
       },
       {
