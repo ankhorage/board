@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.2.0
+
+### Minor Changes
+
+- 63d8433: Implement the first real `board web` website-source boarding pipeline and emit deterministic `WebBoardingPlan` JSON.
+
 ## 0.1.2
 
 ### Patch Changes
