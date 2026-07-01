@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.1.2
+
+### Patch Changes
+
+- 46197f4: fix tests
+
 ## 0.1.1
 
 ### Patch Changes
