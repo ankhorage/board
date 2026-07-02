@@ -105,7 +105,7 @@ describe("board provider planning", () => {
   it("exposes execution and planning handlers", () => {
     expect(provider.handlers).toBeDefined();
     expect(provider.planningHandlers).toBeDefined();
-    expect(provider.planningHandlers?.map((binding) => binding.path)).toEqual([
+    expect(provider.planningHandlers.map((binding) => binding.path)).toEqual([
       ["web"],
     ]);
   });
@@ -174,7 +174,7 @@ describe("board provider planning", () => {
     let executed = false;
     const providerWithTrackedExecutionHandlers = {
       ...provider,
-      handlers: provider.handlers?.map((binding) => ({
+      handlers: provider.handlers.map((binding) => ({
         path: binding.path,
         handler() {
           executed = true;
