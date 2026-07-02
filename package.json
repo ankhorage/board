@@ -68,7 +68,7 @@
     "@ankhorage/contracts": "^1.19.0"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.4.0",
+    "@ankhorage/ankh": "^0.6.0",
     "@ankhorage/devtools": "^1.0.6",
     "@ankhorage/paradox": "^0.1.10",
     "@changesets/cli": "^2.31.0",
