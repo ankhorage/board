@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.0
+
+### Minor Changes
+
+- 5ecd36a: Expose board web planning through the public Ankh planning provider contract.
+
 ## 0.2.0
 
 ### Minor Changes
