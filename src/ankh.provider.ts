@@ -6,6 +6,7 @@ import {
   createProviderHandlers,
   createProviderManifestCommands,
 } from "./commands.js";
+import { createProviderPlanningHandlers } from "./planning.js";
 
 const provider = {
   id: "@ankhorage/board",
@@ -14,6 +15,7 @@ const provider = {
   capabilities: BOARD_COMMANDS.map((command) => command.capability),
   commands: createProviderManifestCommands(),
   handlers: createProviderHandlers(),
+  planningHandlers: createProviderPlanningHandlers(),
 } satisfies AnkhRuntimeCommandProvider;
 
 export default provider;
