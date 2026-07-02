@@ -137,7 +137,11 @@ describe("board provider planning", () => {
       readonly diagnostics: readonly unknown[];
       readonly kind: string;
       readonly steps: readonly [
-        { readonly outputs: { readonly routes: readonly [{ readonly title: string }] } },
+        {
+          readonly outputs: {
+            readonly routes: readonly [{ readonly title: string }];
+          };
+        },
         { readonly outputs: { readonly suggestedSlug: string } },
       ];
       readonly title: string;
