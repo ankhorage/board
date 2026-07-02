@@ -3,25 +3,36 @@ import { runCli } from "./cli.js";
 /***
  * Website-source boarding
  *
- * `@ankhorage/board` is the future home for website and source boarding into
+ * `@ankhorage/board` is the home for website and source boarding into
  * Ankhorage.
  *
- * `ankhorage/board#2` implements the first real website-source boarding slice.
- * `board web <url>` now inspects a single public website URL and emits a
- * deterministic `WebBoardingPlan` JSON document.
+ * `board web <url>` inspects a single public website URL and emits a
+ * deterministic `WebBoardingPlan` JSON document through the standalone package
+ * CLI.
  *
- * Current explicit commands are:
+ * Current explicit standalone commands are:
  *
  * - `board web <url>`
  * - `board web <url> --plan`
  * - `board openapi <source>`
  * - `board manifest generate <source>`
  *
- * `board web <url>` and `board web <url> --plan` produce the same JSON plan.
+ * `board web <url>` and `board web <url> --plan` produce the same package-local
+ * JSON plan.
+ *
+ * The Ankh provider also exposes root planning through the public
+ * `@ankhorage/ankh` planning contract:
+ *
+ * - `ankh plan board web <url>`
+ * - `ankh plan board web <url> --json`
+ *
+ * Root planning returns a generic `AnkhCommandPlan` and does not call board
+ * execution handlers.
  *
  * `board web <url> --create <project>` is parsed only to return a deferred
  * message in this slice. OpenAPI import, standalone manifest generation,
- * project creation, crawling, and root CLI sugar remain deferred.
+ * project creation, crawling, root CLI sugar, and destructive execution remain
+ * deferred.
  *
  * Root CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is
  * deferred.
