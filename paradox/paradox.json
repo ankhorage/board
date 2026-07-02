@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.1.2",
+      "value": "v0.2.0",
       "color": "cb3837"
     },
     {
@@ -70,7 +70,7 @@
   "readmeUsage": [
     {
       "title": "Website-source boarding",
-      "description": "Website-source boarding\n\n`@ankhorage/board` is the future home for website and source boarding into\nAnkhorage.\n\n`ankhorage/board#2` implements the first real website-source boarding slice.\n`board web <url>` now inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document.\n\nCurrent explicit commands are:\n\n- `board web <url>`\n- `board web <url> --plan`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\n`board web <url>` and `board web <url> --plan` produce the same JSON plan.\n\n`board web <url> --create <project>` is parsed only to return a deferred\nmessage in this slice. OpenAPI import, standalone manifest generation,\nproject creation, crawling, and root CLI sugar remain deferred.\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred.",
+      "description": "Website-source boarding\n\n`@ankhorage/board` is the home for website and source boarding into\nAnkhorage.\n\n`board web <url>` inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document through the standalone package\nCLI.\n\nCurrent explicit standalone commands are:\n\n- `board web <url>`\n- `board web <url> --plan`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\n`board web <url>` and `board web <url> --plan` produce the same package-local\nJSON plan.\n\nThe Ankh provider also exposes root planning through the public\n`@ankhorage/ankh` planning contract:\n\n- `ankh plan board web <url>`\n- `ankh plan board web <url> --json`\n\nRoot planning returns a generic `AnkhCommandPlan` and does not call board\nexecution handlers.\n\n`board web <url> --create <project>` is parsed only to return a deferred\nmessage in this slice. OpenAPI import, standalone manifest generation,\nproject creation, crawling, root CLI sugar, and destructive execution remain\ndeferred.\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred.",
       "language": "ts",
       "code": "import { runCli } from \"./cli.js\";\n\nawait runCli([\"--help\"]);",
       "sourcePath": "src/readme-usage.ts"
@@ -94,7 +94,7 @@
     {
       "path": "src/ankh.provider.ts",
       "isEntrypoint": false,
-      "dependencies": ["package.json", "src/commands.ts"],
+      "dependencies": ["package.json", "src/commands.ts", "src/planning.ts"],
       "exports": ["default"]
     },
     {
@@ -140,6 +140,12 @@
       "isEntrypoint": true,
       "dependencies": [],
       "exports": []
+    },
+    {
+      "path": "src/planning.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/commandServices.ts", "src/webBoardingPlan.ts"],
+      "exports": ["createProviderPlanningHandlers"]
     },
     {
       "path": "src/webBoardingPlan.ts",
@@ -195,6 +201,12 @@
       "path": "test/package.test.ts",
       "isEntrypoint": false,
       "dependencies": ["package.json"],
+      "exports": []
+    },
+    {
+      "path": "test/planning.test.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/ankh.provider.ts"],
       "exports": []
     },
     {
@@ -349,6 +361,60 @@
       "sourceLocation": {
         "filePath": "src/commandServices.ts",
         "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "createProviderPlanningHandlers",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "planBoardWebCommand",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 20,
+        "column": 1
+      }
+    },
+    {
+      "name": "parseBoardWebPlanningArgs",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 54,
+        "column": 1
+      }
+    },
+    {
+      "name": "createInvalidRequestPlan",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 127,
+        "column": 1
+      }
+    },
+    {
+      "name": "createBoardWebCommandPlan",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 167,
+        "column": 1
+      }
+    },
+    {
+      "name": "toCommandPlanDiagnostic",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/planning.ts",
+        "line": 220,
         "column": 1
       }
     },
@@ -646,6 +712,11 @@
         "sourcePath": "src/ankh.provider.ts"
       },
       {
+        "fromPath": "src/ankh.provider.ts",
+        "toPath": "src/planning.ts",
+        "sourcePath": "src/ankh.provider.ts"
+      },
+      {
         "fromPath": "src/cli.ts",
         "toPath": "package.json",
         "sourcePath": "src/cli.ts"
@@ -679,6 +750,16 @@
         "fromPath": "src/commandServices.ts",
         "toPath": "src/webInspection.ts",
         "sourcePath": "src/commandServices.ts"
+      },
+      {
+        "fromPath": "src/planning.ts",
+        "toPath": "src/commandServices.ts",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromPath": "src/planning.ts",
+        "toPath": "src/webBoardingPlan.ts",
+        "sourcePath": "src/planning.ts"
       },
       {
         "fromPath": "src/readme-usage.ts",
@@ -746,6 +827,11 @@
         "sourcePath": "test/package.test.ts"
       },
       {
+        "fromPath": "test/planning.test.ts",
+        "toPath": "src/ankh.provider.ts",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
         "fromPath": "test/testSupport.ts",
         "toPath": "src/cli.ts",
         "sourcePath": "test/testSupport.ts"
@@ -783,6 +869,12 @@
         "fromSymbol": "src/ankh.provider.ts",
         "toSymbol": "createProviderHandlers",
         "callExpression": "createProviderHandlers",
+        "sourcePath": "src/ankh.provider.ts"
+      },
+      {
+        "fromSymbol": "src/ankh.provider.ts",
+        "toSymbol": "createProviderPlanningHandlers",
+        "callExpression": "createProviderPlanningHandlers",
         "sourcePath": "src/ankh.provider.ts"
       },
       {
@@ -934,6 +1026,42 @@
         "toSymbol": "inspectWebsite",
         "callExpression": "inspectWebsite",
         "sourcePath": "src/commandServices.ts"
+      },
+      {
+        "fromSymbol": "handler",
+        "toSymbol": "planBoardWebCommand",
+        "callExpression": "planBoardWebCommand",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromSymbol": "planBoardWebCommand",
+        "toSymbol": "parseBoardWebPlanningArgs",
+        "callExpression": "parseBoardWebPlanningArgs",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromSymbol": "planBoardWebCommand",
+        "toSymbol": "createInvalidRequestPlan",
+        "callExpression": "createInvalidRequestPlan",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromSymbol": "planBoardWebCommand",
+        "toSymbol": "createDefaultBoardCommandServices",
+        "callExpression": "createDefaultBoardCommandServices",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromSymbol": "planBoardWebCommand",
+        "toSymbol": "inspectWebsite",
+        "callExpression": "services.inspectWebsite",
+        "sourcePath": "src/planning.ts"
+      },
+      {
+        "fromSymbol": "planBoardWebCommand",
+        "toSymbol": "createBoardWebCommandPlan",
+        "callExpression": "createBoardWebCommandPlan",
+        "sourcePath": "src/planning.ts"
       },
       {
         "fromSymbol": "src/readme-usage.ts",
@@ -1300,6 +1428,72 @@
         "toSymbol": "expect",
         "callExpression": "expect",
         "sourcePath": "test/package.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "join",
+        "callExpression": "join",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "createLoadedProvider",
+        "toSymbol": "createDiscoveredPackage",
+        "callExpression": "createDiscoveredPackage",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "discoverPackages",
+        "toSymbol": "createDiscoveredPackage",
+        "callExpression": "createDiscoveredPackage",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "loadProviders",
+        "toSymbol": "createLoadedProvider",
+        "callExpression": "createLoadedProvider",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "createBufferedAnkhContext",
+        "callExpression": "createBufferedAnkhContext",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "createFixtureEnv",
+        "callExpression": "createFixtureEnv",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "runCli",
+        "callExpression": "runCli",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromSymbol": "test/planning.test.ts",
+        "toSymbol": "createRootRunOptions",
+        "callExpression": "createRootRunOptions",
+        "sourcePath": "test/planning.test.ts"
       },
       {
         "fromSymbol": "createBufferedContext",

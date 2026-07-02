@@ -164,9 +164,7 @@ describe("board provider planning", () => {
       "Board website source: https://example.com/",
     );
     expect(commandPlan.diagnostics).toEqual([]);
-    expect(commandPlan.steps[0].outputs.routes[0].title).toBe(
-      "Example Domain",
-    );
+    expect(commandPlan.steps[0].outputs.routes[0].title).toBe("Example Domain");
     expect(commandPlan.steps[1].outputs.suggestedSlug).toBe("example-domain");
     expect(context.stderr).toBe("");
   });

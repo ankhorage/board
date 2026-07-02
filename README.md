@@ -3,7 +3,7 @@
 
 # @ankhorage/board
 
-![license: MIT](./paradox/badges/license.svg) ![npm: v0.1.2](./paradox/badges/npm.svg) ![runtime: bun](./paradox/badges/runtime.svg) ![typescript: strict](./paradox/badges/typescript.svg) ![eslint: checked](./paradox/badges/eslint.svg) ![prettier: checked](./paradox/badges/prettier.svg) ![build: checked](./paradox/badges/build.svg) ![tests: checked](./paradox/badges/tests.svg) ![docs: paradox](./paradox/badges/docs.svg)
+![license: MIT](./paradox/badges/license.svg) ![npm: v0.2.0](./paradox/badges/npm.svg) ![runtime: bun](./paradox/badges/runtime.svg) ![typescript: strict](./paradox/badges/typescript.svg) ![eslint: checked](./paradox/badges/eslint.svg) ![prettier: checked](./paradox/badges/prettier.svg) ![build: checked](./paradox/badges/build.svg) ![tests: checked](./paradox/badges/tests.svg) ![docs: paradox](./paradox/badges/docs.svg)
 
 Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.
 
@@ -11,10 +11,12 @@ Bootstrap Ankh provider and standalone CLI for boarding websites and source arti
 
 ### Website-source boarding
 
-`@ankhorage/board` is the home for website and source boarding into Ankhorage.
+`@ankhorage/board` is the home for website and source boarding into
+Ankhorage.
 
-`board web <url>` inspects a single public website URL and emits a deterministic
-`WebBoardingPlan` JSON document through the standalone package CLI.
+`board web <url>` inspects a single public website URL and emits a
+deterministic `WebBoardingPlan` JSON document through the standalone package
+CLI.
 
 Current explicit standalone commands are:
 
@@ -26,8 +28,8 @@ Current explicit standalone commands are:
 `board web <url>` and `board web <url> --plan` produce the same package-local
 JSON plan.
 
-The Ankh provider also exposes root planning through the public `@ankhorage/ankh`
-planning contract:
+The Ankh provider also exposes root planning through the public
+`@ankhorage/ankh` planning contract:
 
 - `ankh plan board web <url>`
 - `ankh plan board web <url> --json`
@@ -35,11 +37,13 @@ planning contract:
 Root planning returns a generic `AnkhCommandPlan` and does not call board
 execution handlers.
 
-`board web <url> --create <project>` is parsed only to return a deferred message
-in this slice. OpenAPI import, standalone manifest generation, project creation,
-crawling, and root CLI sugar remain deferred.
+`board web <url> --create <project>` is parsed only to return a deferred
+message in this slice. OpenAPI import, standalone manifest generation,
+project creation, crawling, root CLI sugar, and destructive execution remain
+deferred.
 
-Root CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is deferred.
+Root CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is
+deferred.
 
 Source: `src/readme-usage.ts`
 

@@ -104,7 +104,8 @@ function parseBoardWebPlanningArgs(
     return {
       code: "board-web-invalid-url",
       kind: "error",
-      message: "board web planning requires a syntactically valid absolute website URL.",
+      message:
+        "board web planning requires a syntactically valid absolute website URL.",
     };
   }
 
