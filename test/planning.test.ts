@@ -6,9 +6,9 @@ import type {
   AnkhLoadedProvider,
 } from "@ankhorage/ankh";
 import { runCli } from "@ankhorage/ankh";
+import type { AnkhPackageMetadata } from "@ankhorage/contracts/cli";
 import { describe, expect, it } from "bun:test";
 
-import packageJson from "../package.json";
 import provider from "../src/ankh.provider.js";
 
 interface BufferedAnkhContext extends AnkhCommandContext {
@@ -17,6 +17,15 @@ interface BufferedAnkhContext extends AnkhCommandContext {
 }
 
 const fixturePath = join(import.meta.dir, "fixtures", "example-com.html");
+const packageMetadata = {
+  capabilities: [
+    "board.web.import",
+    "board.openapi.import",
+    "board.manifest.generate",
+  ],
+  category: "board",
+  provider: "./dist/ankh.provider.js",
+} as const satisfies AnkhPackageMetadata;
 
 function createBufferedAnkhContext(
   env: Readonly<Record<string, string | undefined>> = {},
@@ -45,7 +54,7 @@ function createBufferedAnkhContext(
 
 function createDiscoveredPackage(): AnkhDiscoveredPackage {
   return {
-    metadata: packageJson.ankh,
+    metadata: packageMetadata,
     packageJsonPath: "/repo/@ankhorage/board/package.json",
     packageName: "@ankhorage/board",
     packageRoot: "/repo/@ankhorage/board",
