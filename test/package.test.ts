@@ -15,6 +15,10 @@ describe("package metadata", () => {
         types: "./dist/index.d.ts",
         import: "./dist/index.js",
       },
+      "./cli": {
+        types: "./dist/cli/index.d.ts",
+        import: "./dist/cli/index.js",
+      },
       "./package.json": "./package.json",
     });
   });
