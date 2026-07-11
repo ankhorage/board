@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.2.0",
+      "value": "v0.3.0",
       "color": "cb3837"
     },
     {
@@ -72,7 +72,7 @@
       "title": "Website-source boarding",
       "description": "Website-source boarding\n\n`@ankhorage/board` is the home for website and source boarding into\nAnkhorage.\n\n`board web <url>` inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document through the standalone package\nCLI.\n\nCurrent explicit standalone commands are:\n\n- `board web <url>`\n- `board web <url> --plan`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\n`board web <url>` and `board web <url> --plan` produce the same package-local\nJSON plan.\n\nThe Ankh provider also exposes root planning through the public\n`@ankhorage/ankh` planning contract:\n\n- `ankh plan board web <url>`\n- `ankh plan board web <url> --json`\n\nRoot planning returns a generic `AnkhCommandPlan` and does not call board\nexecution handlers.\n\n`board web <url> --create <project>` is parsed only to return a deferred\nmessage in this slice. OpenAPI import, standalone manifest generation,\nproject creation, crawling, root CLI sugar, and destructive execution remain\ndeferred.\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred.",
       "language": "ts",
-      "code": "import { runCli } from \"./cli.js\";\n\nawait runCli([\"--help\"]);",
+      "code": "import { runCli } from \"./cli/index.js\";\n\nawait runCli([\"--help\"]);",
       "sourcePath": "src/readme-usage.ts"
     }
   ],
@@ -98,7 +98,7 @@
       "exports": ["default"]
     },
     {
-      "path": "src/cli.ts",
+      "path": "src/cli/index.ts",
       "isEntrypoint": false,
       "dependencies": [
         "package.json",
@@ -117,7 +117,7 @@
       "path": "src/commands.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/cli.ts",
+        "src/cli/index.ts",
         "src/commandServices.ts",
         "src/webInspection.ts"
       ],
@@ -184,7 +184,11 @@
     {
       "path": "test/cli.test.ts",
       "isEntrypoint": false,
-      "dependencies": ["package.json", "src/cli.ts", "test/testSupport.ts"],
+      "dependencies": [
+        "package.json",
+        "src/cli/index.ts",
+        "test/testSupport.ts"
+      ],
       "exports": []
     },
     {
@@ -212,7 +216,7 @@
     {
       "path": "test/testSupport.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/cli.ts", "src/commandServices.ts"],
+      "dependencies": ["src/cli/index.ts", "src/commandServices.ts"],
       "exports": [
         "BufferedContext",
         "createBufferedContext",
@@ -233,7 +237,7 @@
       "name": "createDefaultBoardCliContext",
       "description": null,
       "sourceLocation": {
-        "filePath": "src/cli.ts",
+        "filePath": "src/cli/index.ts",
         "line": 23,
         "column": 1
       }
@@ -242,7 +246,7 @@
       "name": "runCli",
       "description": null,
       "sourceLocation": {
-        "filePath": "src/cli.ts",
+        "filePath": "src/cli/index.ts",
         "line": 40,
         "column": 1
       }
@@ -251,7 +255,7 @@
       "name": "renderHelp",
       "description": null,
       "sourceLocation": {
-        "filePath": "src/cli.ts",
+        "filePath": "src/cli/index.ts",
         "line": 74,
         "column": 1
       }
@@ -260,7 +264,7 @@
       "name": "renderUnknownCommand",
       "description": null,
       "sourceLocation": {
-        "filePath": "src/cli.ts",
+        "filePath": "src/cli/index.ts",
         "line": 95,
         "column": 1
       }
@@ -693,7 +697,7 @@
     {
       "kind": "bin",
       "name": "ankhorage-board",
-      "sourcePath": "src/cli.ts",
+      "sourcePath": "src/cli/index.ts",
       "symbolName": "runCli",
       "description": null,
       "isReadme": false
@@ -717,23 +721,8 @@
         "sourcePath": "src/ankh.provider.ts"
       },
       {
-        "fromPath": "src/cli.ts",
-        "toPath": "package.json",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromPath": "src/cli.ts",
-        "toPath": "src/commands.ts",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromPath": "src/cli.ts",
-        "toPath": "src/commandServices.ts",
-        "sourcePath": "src/cli.ts"
-      },
-      {
         "fromPath": "src/commands.ts",
-        "toPath": "src/cli.ts",
+        "toPath": "src/cli/index.ts",
         "sourcePath": "src/commands.ts"
       },
       {
@@ -763,7 +752,7 @@
       },
       {
         "fromPath": "src/readme-usage.ts",
-        "toPath": "src/cli.ts",
+        "toPath": "src/cli/index.ts",
         "sourcePath": "src/readme-usage.ts"
       },
       {
@@ -798,7 +787,7 @@
       },
       {
         "fromPath": "test/cli.test.ts",
-        "toPath": "src/cli.ts",
+        "toPath": "src/cli/index.ts",
         "sourcePath": "test/cli.test.ts"
       },
       {
@@ -833,7 +822,7 @@
       },
       {
         "fromPath": "test/testSupport.ts",
-        "toPath": "src/cli.ts",
+        "toPath": "src/cli/index.ts",
         "sourcePath": "test/testSupport.ts"
       },
       {
@@ -850,6 +839,21 @@
         "fromPath": "test/webInspection.test.ts",
         "toPath": "src/webInspection.ts",
         "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "package.json",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/commands.ts",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromPath": "src/cli/index.ts",
+        "toPath": "src/commandServices.ts",
+        "sourcePath": "src/cli/index.ts"
       }
     ],
     "calls": [
@@ -876,60 +880,6 @@
         "toSymbol": "createProviderPlanningHandlers",
         "callExpression": "createProviderPlanningHandlers",
         "sourcePath": "src/ankh.provider.ts"
-      },
-      {
-        "fromSymbol": "createDefaultBoardCliContext",
-        "toSymbol": "createDefaultBoardCommandServices",
-        "callExpression": "createDefaultBoardCommandServices",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "createDefaultBoardCliContext",
-        "callExpression": "createDefaultBoardCliContext",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "writeStdout",
-        "callExpression": "context.writeStdout",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "renderHelp",
-        "callExpression": "renderHelp",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "resolveBoardCommand",
-        "callExpression": "resolveBoardCommand",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "writeStderr",
-        "callExpression": "context.writeStderr",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "renderUnknownCommand",
-        "callExpression": "renderUnknownCommand",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "runCli",
-        "toSymbol": "runBoardCommand",
-        "callExpression": "runBoardCommand",
-        "sourcePath": "src/cli.ts"
-      },
-      {
-        "fromSymbol": "src/cli.ts",
-        "toSymbol": "runCli",
-        "callExpression": "runCli",
-        "sourcePath": "src/cli.ts"
       },
       {
         "fromSymbol": "handler",
@@ -1542,6 +1492,60 @@
         "toSymbol": "extractWebsiteSignals",
         "callExpression": "extractWebsiteSignals",
         "sourcePath": "test/webInspection.test.ts"
+      },
+      {
+        "fromSymbol": "createDefaultBoardCliContext",
+        "toSymbol": "createDefaultBoardCommandServices",
+        "callExpression": "createDefaultBoardCommandServices",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "createDefaultBoardCliContext",
+        "callExpression": "createDefaultBoardCliContext",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "writeStdout",
+        "callExpression": "context.writeStdout",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "renderHelp",
+        "callExpression": "renderHelp",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "resolveBoardCommand",
+        "callExpression": "resolveBoardCommand",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "writeStderr",
+        "callExpression": "context.writeStderr",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "renderUnknownCommand",
+        "callExpression": "renderUnknownCommand",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "runCli",
+        "toSymbol": "runBoardCommand",
+        "callExpression": "runBoardCommand",
+        "sourcePath": "src/cli/index.ts"
+      },
+      {
+        "fromSymbol": "src/cli/index.ts",
+        "toSymbol": "runCli",
+        "callExpression": "runCli",
+        "sourcePath": "src/cli/index.ts"
       }
     ],
     "typeReferences": [],

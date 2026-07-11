@@ -210,8 +210,12 @@
               </button>
             </li>
             <li>
-              <button class="nav-button" type="button" data-target="src/cli.ts">
-                src/cli.ts
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/cli/index.ts"
+              >
+                src/cli/index.ts
                 <small>4 functions</small>
               </button>
             </li>
@@ -310,9 +314,9 @@
             </article>
             <article
               class="item"
-              data-search="src/cli.ts package.json src/commands.ts src/commandServices.ts BoardCliContext BoardCliRunResult createDefaultBoardCliContext renderHelp runCli"
+              data-search="src/cli/index.ts package.json src/commands.ts src/commandServices.ts BoardCliContext BoardCliRunResult createDefaultBoardCliContext renderHelp runCli"
             >
-              <h3>src/cli.ts</h3>
+              <h3>src/cli/index.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>package.json</code>,
@@ -328,12 +332,12 @@
             </article>
             <article
               class="item"
-              data-search="src/commands.ts src/cli.ts src/commandServices.ts src/webInspection.ts BOARD_COMMANDS createProviderHandlers createProviderManifestCommands resolveBoardCommand runBoardCommand"
+              data-search="src/commands.ts src/cli/index.ts src/commandServices.ts src/webInspection.ts BOARD_COMMANDS createProviderHandlers createProviderManifestCommands resolveBoardCommand runBoardCommand"
             >
               <h3>src/commands.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
-                <strong>Dependencies:</strong> <code>src/cli.ts</code>,
+                <strong>Dependencies:</strong> <code>src/cli/index.ts</code>,
                 <code>src/commandServices.ts</code>,
                 <code>src/webInspection.ts</code>
               </p>
@@ -429,13 +433,13 @@
             </article>
             <article
               class="item"
-              data-search="test/cli.test.ts package.json src/cli.ts test/testSupport.ts"
+              data-search="test/cli.test.ts package.json src/cli/index.ts test/testSupport.ts"
             >
               <h3>test/cli.test.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>package.json</code>,
-                <code>src/cli.ts</code>, <code>test/testSupport.ts</code>
+                <code>src/cli/index.ts</code>, <code>test/testSupport.ts</code>
               </p>
               <p><strong>Exports:</strong> <span class="empty">None</span></p>
             </article>
@@ -474,12 +478,12 @@
             </article>
             <article
               class="item"
-              data-search="test/testSupport.ts src/cli.ts src/commandServices.ts BufferedContext createBufferedContext createStubBoardCommandServices"
+              data-search="test/testSupport.ts src/cli/index.ts src/commandServices.ts BufferedContext createBufferedContext createStubBoardCommandServices"
             >
               <h3>test/testSupport.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
-                <strong>Dependencies:</strong> <code>src/cli.ts</code>,
+                <strong>Dependencies:</strong> <code>src/cli/index.ts</code>,
                 <code>src/commandServices.ts</code>
               </p>
               <p>
@@ -532,14 +536,14 @@
                 module_src_ankh_provider_ts --&gt; module_package_json
                 module_src_ankh_provider_ts --&gt; module_src_commands_ts
                 module_src_ankh_provider_ts --&gt; module_src_planning_ts
-                module_src_cli_ts[&quot;src/cli.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_cli_ts
-                module_src_cli_ts --&gt; module_package_json module_src_cli_ts
-                --&gt; module_src_commands_ts module_src_cli_ts --&gt;
-                module_src_commandServices_ts
+                module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+                package__ankhorage_board -.-&gt; module_src_cli_index_ts
+                module_src_cli_index_ts --&gt; module_package_json
+                module_src_cli_index_ts --&gt; module_src_commands_ts
+                module_src_cli_index_ts --&gt; module_src_commandServices_ts
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
                 package__ankhorage_board -.-&gt; module_src_commands_ts
-                module_src_commands_ts --&gt; module_src_cli_ts
+                module_src_commands_ts --&gt; module_src_cli_index_ts
                 module_src_commands_ts --&gt; module_src_commandServices_ts
                 module_src_commands_ts --&gt; module_src_webInspection_ts
                 module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
@@ -566,7 +570,7 @@
                 module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
                 package__ankhorage_board -.-&gt; module_test_cli_test_ts
                 module_test_cli_test_ts --&gt; module_package_json
-                module_test_cli_test_ts --&gt; module_src_cli_ts
+                module_test_cli_test_ts --&gt; module_src_cli_index_ts
                 module_test_cli_test_ts --&gt; module_test_testSupport_ts
                 module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
                 package__ankhorage_board -.-&gt; module_test_commands_test_ts
@@ -581,7 +585,7 @@
                 module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
                 module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
                 package__ankhorage_board -.-&gt; module_test_testSupport_ts
-                module_test_testSupport_ts --&gt; module_src_cli_ts
+                module_test_testSupport_ts --&gt; module_src_cli_index_ts
                 module_test_testSupport_ts --&gt; module_src_commandServices_ts
                 module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
                 package__ankhorage_board -.-&gt;
@@ -606,14 +610,14 @@ graph TD
   module_src_ankh_provider_ts --&gt; module_package_json
   module_src_ankh_provider_ts --&gt; module_src_commands_ts
   module_src_ankh_provider_ts --&gt; module_src_planning_ts
-  module_src_cli_ts[&quot;src/cli.ts&quot;]
-  package__ankhorage_board -.-&gt; module_src_cli_ts
-  module_src_cli_ts --&gt; module_package_json
-  module_src_cli_ts --&gt; module_src_commands_ts
-  module_src_cli_ts --&gt; module_src_commandServices_ts
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_package_json
+  module_src_cli_index_ts --&gt; module_src_commands_ts
+  module_src_cli_index_ts --&gt; module_src_commandServices_ts
   module_src_commands_ts[&quot;src/commands.ts&quot;]
   package__ankhorage_board -.-&gt; module_src_commands_ts
-  module_src_commands_ts --&gt; module_src_cli_ts
+  module_src_commands_ts --&gt; module_src_cli_index_ts
   module_src_commands_ts --&gt; module_src_commandServices_ts
   module_src_commands_ts --&gt; module_src_webInspection_ts
   module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
@@ -638,7 +642,7 @@ graph TD
   module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
   package__ankhorage_board -.-&gt; module_test_cli_test_ts
   module_test_cli_test_ts --&gt; module_package_json
-  module_test_cli_test_ts --&gt; module_src_cli_ts
+  module_test_cli_test_ts --&gt; module_src_cli_index_ts
   module_test_cli_test_ts --&gt; module_test_testSupport_ts
   module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
   package__ankhorage_board -.-&gt; module_test_commands_test_ts
@@ -653,7 +657,7 @@ graph TD
   module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
   module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
   package__ankhorage_board -.-&gt; module_test_testSupport_ts
-  module_test_testSupport_ts --&gt; module_src_cli_ts
+  module_test_testSupport_ts --&gt; module_src_cli_index_ts
   module_test_testSupport_ts --&gt; module_src_commandServices_ts
   module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
   package__ankhorage_board -.-&gt; module_test_webInspection_test_ts
@@ -674,7 +678,7 @@ graph TD
                 graph LR module_package_json[&quot;package.json&quot;]
                 module_paradox_config_ts[&quot;paradox.config.ts&quot;]
                 module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-                module_src_cli_ts[&quot;src/cli.ts&quot;]
+                module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
                 module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
@@ -691,30 +695,30 @@ graph TD
                 module_src_ankh_provider_ts --&gt; module_package_json
                 module_src_ankh_provider_ts --&gt; module_src_commands_ts
                 module_src_ankh_provider_ts --&gt; module_src_planning_ts
-                module_src_cli_ts --&gt; module_package_json module_src_cli_ts
-                --&gt; module_src_commands_ts module_src_cli_ts --&gt;
-                module_src_commandServices_ts module_src_commands_ts --&gt;
-                module_src_cli_ts module_src_commands_ts --&gt;
-                module_src_commandServices_ts module_src_commands_ts --&gt;
-                module_src_webInspection_ts module_src_commandServices_ts --&gt;
-                module_src_webInspection_ts module_src_planning_ts --&gt;
-                module_src_commandServices_ts module_src_planning_ts --&gt;
-                module_src_webBoardingPlan_ts module_src_webInspection_ts --&gt;
-                module_src_webBoardingPlan_ts module_test_ankh_provider_test_ts
-                --&gt; module_package_json module_test_ankh_provider_test_ts
-                --&gt; module_src_ankh_provider_ts
-                module_test_ankh_provider_test_ts --&gt; module_src_commands_ts
+                module_src_cli_index_ts --&gt; module_package_json
+                module_src_cli_index_ts --&gt; module_src_commands_ts
+                module_src_cli_index_ts --&gt; module_src_commandServices_ts
+                module_src_commands_ts --&gt; module_src_cli_index_ts
+                module_src_commands_ts --&gt; module_src_commandServices_ts
+                module_src_commands_ts --&gt; module_src_webInspection_ts
+                module_src_commandServices_ts --&gt; module_src_webInspection_ts
+                module_src_planning_ts --&gt; module_src_commandServices_ts
+                module_src_planning_ts --&gt; module_src_webBoardingPlan_ts
+                module_src_webInspection_ts --&gt; module_src_webBoardingPlan_ts
+                module_test_ankh_provider_test_ts --&gt; module_package_json
                 module_test_ankh_provider_test_ts --&gt;
-                module_test_testSupport_ts module_test_cli_test_ts --&gt;
+                module_src_ankh_provider_ts module_test_ankh_provider_test_ts
+                --&gt; module_src_commands_ts module_test_ankh_provider_test_ts
+                --&gt; module_test_testSupport_ts module_test_cli_test_ts --&gt;
                 module_package_json module_test_cli_test_ts --&gt;
-                module_src_cli_ts module_test_cli_test_ts --&gt;
+                module_src_cli_index_ts module_test_cli_test_ts --&gt;
                 module_test_testSupport_ts module_test_commands_test_ts --&gt;
                 module_src_commands_ts module_test_commands_test_ts --&gt;
                 module_src_webInspection_ts module_test_commands_test_ts --&gt;
                 module_test_testSupport_ts module_test_package_test_ts --&gt;
                 module_package_json module_test_planning_test_ts --&gt;
                 module_src_ankh_provider_ts module_test_testSupport_ts --&gt;
-                module_src_cli_ts module_test_testSupport_ts --&gt;
+                module_src_cli_index_ts module_test_testSupport_ts --&gt;
                 module_src_commandServices_ts module_test_webInspection_test_ts
                 --&gt; module_src_webBoardingPlan_ts
                 module_test_webInspection_test_ts --&gt;
@@ -727,7 +731,7 @@ graph LR
   module_package_json[&quot;package.json&quot;]
   module_paradox_config_ts[&quot;paradox.config.ts&quot;]
   module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-  module_src_cli_ts[&quot;src/cli.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
   module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
@@ -744,10 +748,10 @@ graph LR
   module_src_ankh_provider_ts --&gt; module_package_json
   module_src_ankh_provider_ts --&gt; module_src_commands_ts
   module_src_ankh_provider_ts --&gt; module_src_planning_ts
-  module_src_cli_ts --&gt; module_package_json
-  module_src_cli_ts --&gt; module_src_commands_ts
-  module_src_cli_ts --&gt; module_src_commandServices_ts
-  module_src_commands_ts --&gt; module_src_cli_ts
+  module_src_cli_index_ts --&gt; module_package_json
+  module_src_cli_index_ts --&gt; module_src_commands_ts
+  module_src_cli_index_ts --&gt; module_src_commandServices_ts
+  module_src_commands_ts --&gt; module_src_cli_index_ts
   module_src_commands_ts --&gt; module_src_commandServices_ts
   module_src_commands_ts --&gt; module_src_webInspection_ts
   module_src_commandServices_ts --&gt; module_src_webInspection_ts
@@ -759,14 +763,14 @@ graph LR
   module_test_ankh_provider_test_ts --&gt; module_src_commands_ts
   module_test_ankh_provider_test_ts --&gt; module_test_testSupport_ts
   module_test_cli_test_ts --&gt; module_package_json
-  module_test_cli_test_ts --&gt; module_src_cli_ts
+  module_test_cli_test_ts --&gt; module_src_cli_index_ts
   module_test_cli_test_ts --&gt; module_test_testSupport_ts
   module_test_commands_test_ts --&gt; module_src_commands_ts
   module_test_commands_test_ts --&gt; module_src_webInspection_ts
   module_test_commands_test_ts --&gt; module_test_testSupport_ts
   module_test_package_test_ts --&gt; module_package_json
   module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
-  module_test_testSupport_ts --&gt; module_src_cli_ts
+  module_test_testSupport_ts --&gt; module_src_cli_index_ts
   module_test_testSupport_ts --&gt; module_src_commandServices_ts
   module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
   module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
@@ -783,7 +787,7 @@ graph LR
                 graph LR module_package_json[&quot;package.json&quot;]
                 module_paradox_config_ts[&quot;paradox.config.ts&quot;]
                 module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-                module_src_cli_ts[&quot;src/cli.ts&quot;]
+                module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
                 module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
@@ -805,7 +809,7 @@ graph LR
   module_package_json[&quot;package.json&quot;]
   module_paradox_config_ts[&quot;paradox.config.ts&quot;]
   module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-  module_src_cli_ts[&quot;src/cli.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
   module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
@@ -893,37 +897,37 @@ sequenceDiagram
           </section>
         </section>
         <section
-          id="view-src-cli-ts"
+          id="view-src-cli-index-ts"
           class="view"
-          data-view="src/cli.ts"
+          data-view="src/cli/index.ts"
           hidden
         >
           <section class="panel">
-            <h2>src/cli.ts</h2>
+            <h2>src/cli/index.ts</h2>
             <article
               class="item"
-              data-search="createDefaultBoardCliContext src/cli.ts "
+              data-search="createDefaultBoardCliContext src/cli/index.ts "
             >
               <h3>createDefaultBoardCliContext</h3>
-              <p class="muted"><code>src/cli.ts:23:1</code></p>
+              <p class="muted"><code>src/cli/index.ts:23:1</code></p>
               <p class="empty">No description available.</p>
             </article>
-            <article class="item" data-search="runCli src/cli.ts ">
+            <article class="item" data-search="runCli src/cli/index.ts ">
               <h3>runCli</h3>
-              <p class="muted"><code>src/cli.ts:40:1</code></p>
+              <p class="muted"><code>src/cli/index.ts:40:1</code></p>
               <p class="empty">No description available.</p>
             </article>
-            <article class="item" data-search="renderHelp src/cli.ts ">
+            <article class="item" data-search="renderHelp src/cli/index.ts ">
               <h3>renderHelp</h3>
-              <p class="muted"><code>src/cli.ts:74:1</code></p>
+              <p class="muted"><code>src/cli/index.ts:74:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
               class="item"
-              data-search="renderUnknownCommand src/cli.ts "
+              data-search="renderUnknownCommand src/cli/index.ts "
             >
               <h3>renderUnknownCommand</h3>
-              <p class="muted"><code>src/cli.ts:95:1</code></p>
+              <p class="muted"><code>src/cli/index.ts:95:1</code></p>
               <p class="empty">No description available.</p>
             </article>
           </section>

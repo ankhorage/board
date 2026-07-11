@@ -2,7 +2,7 @@ graph LR
   module_package_json["package.json"]
   module_paradox_config_ts["paradox.config.ts"]
   module_src_ankh_provider_ts["src/ankh.provider.ts"]
-  module_src_cli_ts["src/cli.ts"]
+  module_src_cli_index_ts["src/cli/index.ts"]
   module_src_commands_ts["src/commands.ts"]
   module_src_commandServices_ts["src/commandServices.ts"]
   module_src_index_ts["src/index.ts"]
@@ -19,10 +19,10 @@ graph LR
   module_src_ankh_provider_ts --> module_package_json
   module_src_ankh_provider_ts --> module_src_commands_ts
   module_src_ankh_provider_ts --> module_src_planning_ts
-  module_src_cli_ts --> module_package_json
-  module_src_cli_ts --> module_src_commands_ts
-  module_src_cli_ts --> module_src_commandServices_ts
-  module_src_commands_ts --> module_src_cli_ts
+  module_src_cli_index_ts --> module_package_json
+  module_src_cli_index_ts --> module_src_commands_ts
+  module_src_cli_index_ts --> module_src_commandServices_ts
+  module_src_commands_ts --> module_src_cli_index_ts
   module_src_commands_ts --> module_src_commandServices_ts
   module_src_commands_ts --> module_src_webInspection_ts
   module_src_commandServices_ts --> module_src_webInspection_ts
@@ -34,14 +34,14 @@ graph LR
   module_test_ankh_provider_test_ts --> module_src_commands_ts
   module_test_ankh_provider_test_ts --> module_test_testSupport_ts
   module_test_cli_test_ts --> module_package_json
-  module_test_cli_test_ts --> module_src_cli_ts
+  module_test_cli_test_ts --> module_src_cli_index_ts
   module_test_cli_test_ts --> module_test_testSupport_ts
   module_test_commands_test_ts --> module_src_commands_ts
   module_test_commands_test_ts --> module_src_webInspection_ts
   module_test_commands_test_ts --> module_test_testSupport_ts
   module_test_package_test_ts --> module_package_json
   module_test_planning_test_ts --> module_src_ankh_provider_ts
-  module_test_testSupport_ts --> module_src_cli_ts
+  module_test_testSupport_ts --> module_src_cli_index_ts
   module_test_testSupport_ts --> module_src_commandServices_ts
   module_test_webInspection_test_ts --> module_src_webBoardingPlan_ts
   module_test_webInspection_test_ts --> module_src_webInspection_ts
