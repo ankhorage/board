@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.2
+
+### Patch Changes
+
+- ef46891: Expose the canonical `@ankhorage/board/cli` entrypoint from `src/cli/index.ts`.
+
 ## 0.3.1
 
 ### Patch Changes
