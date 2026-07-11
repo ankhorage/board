@@ -1,4 +1,4 @@
-import type { BoardCliContext } from "../src/cli.js";
+import type { BoardCliContext } from "../src/cli/index.js";
 import type { BoardCommandServices } from "../src/commandServices.js";
 
 export interface BufferedContext extends BoardCliContext {

@@ -1,11 +1,11 @@
 #!/usr/bin/env bun
 
-import packageJson from "../package.json";
-import { resolveBoardCommand, runBoardCommand } from "./commands.js";
+import packageJson from "../../package.json";
+import { resolveBoardCommand, runBoardCommand } from "../commands.js";
 import {
   type BoardCommandServices,
   createDefaultBoardCommandServices,
-} from "./commandServices.js";
+} from "../commandServices.js";
 
 export interface BoardCliContext {
   readonly cwd: string;

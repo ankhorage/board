@@ -8,7 +8,7 @@ describe("package metadata", () => {
     expect(packageJson.name).toBe("@ankhorage/board");
     expect(packageJson.type).toBe("module");
     expect(packageJson.bin).toEqual({
-      "ankhorage-board": "./dist/cli.js",
+      "ankhorage-board": "./dist/cli/index.js",
     });
     expect(packageJson.exports).toEqual({
       ".": {

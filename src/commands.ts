@@ -3,7 +3,7 @@ import type {
   AnkhCommandDescriptor,
 } from "@ankhorage/contracts/cli";
 
-import type { BoardCliContext, BoardCliRunResult } from "./cli.js";
+import type { BoardCliContext, BoardCliRunResult } from "./cli/index.js";
 import { createDefaultBoardCommandServices } from "./commandServices.js";
 import { renderWebBoardingPlan } from "./webInspection.js";
 

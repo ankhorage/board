@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "bun:test";
 
 import packageJson from "../package.json";
-import { runCli } from "../src/cli.js";
+import { runCli } from "../src/cli/index.js";
 import {
   createBufferedContext,
   createStubBoardCommandServices,
@@ -192,9 +192,9 @@ describe("package-scoped CLI commands", () => {
   const fixturePath = join(import.meta.dir, "fixtures", "example-com.html");
   const cwd = import.meta.dir.replace(/\/test$/, "");
 
-  it("covers `bun src/cli.ts web https://example.com`", () => {
+  it("covers `bun src/cli/index.ts web https://example.com`", () => {
     const result = Bun.spawnSync(
-      [process.execPath, "src/cli.ts", "web", "https://example.com"],
+      [process.execPath, "src/cli/index.ts", "web", "https://example.com"],
       {
         cwd,
         env: {
@@ -213,7 +213,7 @@ describe("package-scoped CLI commands", () => {
     expect(stdout).toContain('"url": "https://example.com/"');
   });
 
-  it("covers `bun src/cli.ts web https://example.com --plan` and keeps output identical", () => {
+  it("covers `bun src/cli/index.ts web https://example.com --plan` and keeps output identical", () => {
     const env = {
       ...process.env,
       ANKHORAGE_BOARD_TEST_WEB_FIXTURE_PATH: fixturePath,
@@ -221,7 +221,7 @@ describe("package-scoped CLI commands", () => {
     };
 
     const withoutPlan = Bun.spawnSync(
-      [process.execPath, "src/cli.ts", "web", "https://example.com"],
+      [process.execPath, "src/cli/index.ts", "web", "https://example.com"],
       {
         cwd,
         env,
@@ -230,7 +230,13 @@ describe("package-scoped CLI commands", () => {
       },
     );
     const withPlan = Bun.spawnSync(
-      [process.execPath, "src/cli.ts", "web", "https://example.com", "--plan"],
+      [
+        process.execPath,
+        "src/cli/index.ts",
+        "web",
+        "https://example.com",
+        "--plan",
+      ],
       {
         cwd,
         env,
