@@ -39,7 +39,7 @@
     "paradox"
   ],
   "bin": {
-    "ankhorage-board": "./dist/cli.js"
+    "ankhorage-board": "./dist/cli/index.js"
   },
   "ankh": {
     "category": "board",
