@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.1
+
+### Patch Changes
+
+- fcc5358: Move the standalone CLI entrypoint into `src/cli/` and update the published binary path.
+
 ## 0.3.0
 
 ### Minor Changes
