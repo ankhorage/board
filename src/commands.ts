@@ -1,13 +1,10 @@
-import type {
-  AnkhCapabilityId,
-  AnkhCommandDescriptor,
-} from "@ankhorage/contracts/cli";
+import type { AnkhCapabilityId, AnkhCommandDescriptor } from '@ankhorage/contracts/cli';
 
-import type { BoardCliContext, BoardCliRunResult } from "./cli/index.js";
-import { createDefaultBoardCommandServices } from "./commandServices.js";
-import { renderWebBoardingPlan } from "./webInspection.js";
+import type { BoardCliContext, BoardCliRunResult } from './cli/index.js';
+import { createDefaultBoardCommandServices } from './commandServices.js';
+import { renderWebBoardingPlan } from './webInspection.js';
 
-type BoardCommandPath = readonly [string] | readonly ["manifest", "generate"];
+type BoardCommandPath = readonly [string] | readonly ['manifest', 'generate'];
 
 interface BoardCommandDefinition {
   readonly path: BoardCommandPath;
@@ -20,26 +17,23 @@ interface ResolvedBoardCommand {
   readonly argv: readonly string[];
 }
 
-const DEFERRED_NOTE =
-  "This command surface remains deferred beyond ankhorage/board#2.";
+const DEFERRED_NOTE = 'This command surface remains deferred beyond ankhorage/board#2.';
 
 export const BOARD_COMMANDS = [
   {
-    path: ["web"],
-    capability: "board.web.import",
-    summary:
-      "Inspect a public website URL and emit a deterministic boarding plan.",
+    path: ['web'],
+    capability: 'board.web.import',
+    summary: 'Inspect a public website URL and emit a deterministic boarding plan.',
   },
   {
-    path: ["openapi"],
-    capability: "board.openapi.import",
-    summary: "Board an OpenAPI source through an explicit bootstrap stub.",
+    path: ['openapi'],
+    capability: 'board.openapi.import',
+    summary: 'Board an OpenAPI source through an explicit bootstrap stub.',
   },
   {
-    path: ["manifest", "generate"],
-    capability: "board.manifest.generate",
-    summary:
-      "Generate a manifest from a boarded source through an explicit bootstrap stub.",
+    path: ['manifest', 'generate'],
+    capability: 'board.manifest.generate',
+    summary: 'Generate a manifest from a boarded source through an explicit bootstrap stub.',
   },
 ] as const satisfies readonly BoardCommandDefinition[];
 
@@ -61,12 +55,8 @@ export function createProviderHandlers() {
   }));
 }
 
-export function resolveBoardCommand(
-  argv: readonly string[],
-): ResolvedBoardCommand | null {
-  const sorted = [...BOARD_COMMANDS].sort(
-    (left, right) => right.path.length - left.path.length,
-  );
+export function resolveBoardCommand(argv: readonly string[]): ResolvedBoardCommand | null {
+  const sorted = [...BOARD_COMMANDS].sort((left, right) => right.path.length - left.path.length);
 
   for (const command of sorted) {
     if (matchesPath(command.path, argv)) {
@@ -85,7 +75,7 @@ export async function runBoardCommand(
   argv: readonly string[],
   context: BoardCliContext,
 ): Promise<BoardCliRunResult> {
-  if (command.path[0] === "web") {
+  if (command.path[0] === 'web') {
     return await runWebBoardCommand(argv, context);
   }
 
@@ -97,12 +87,12 @@ export async function runBoardCommand(
 
   context.writeStdout(
     [
-      `command: board ${command.path.join(" ")}`,
+      `command: board ${command.path.join(' ')}`,
       `source: ${source}`,
-      "status: bootstrap stub",
+      'status: bootstrap stub',
       `note: ${DEFERRED_NOTE}`,
-      "",
-    ].join("\n"),
+      '',
+    ].join('\n'),
   );
 
   return { exitCode: 0 };
@@ -113,7 +103,7 @@ async function runWebBoardCommand(
   context: BoardCliContext,
 ): Promise<BoardCliRunResult> {
   const parsed = parseWebCommandArgs(argv);
-  if (parsed.kind === "error") {
+  if (parsed.kind === 'error') {
     context.writeStderr(`${parsed.message}\n`);
     return { exitCode: 1 };
   }
@@ -121,16 +111,15 @@ async function runWebBoardCommand(
   if (parsed.createProject !== null) {
     context.writeStderr(
       [
-        "Project creation from a web boarding plan is deferred.",
-        "Run `ankh board web <url> --plan` to inspect the generated plan.",
-        "",
-      ].join("\n"),
+        'Project creation from a web boarding plan is deferred.',
+        'Run `ankh board web <url> --plan` to inspect the generated plan.',
+        '',
+      ].join('\n'),
     );
     return { exitCode: 1 };
   }
 
-  const services =
-    context.services ?? createDefaultBoardCommandServices(context.env);
+  const services = context.services ?? createDefaultBoardCommandServices(context.env);
   const result = await services.inspectWebsite({
     url: parsed.url,
   });
@@ -139,10 +128,7 @@ async function runWebBoardCommand(
   return { exitCode: result.exitCode };
 }
 
-function matchesPath(
-  path: readonly string[],
-  argv: readonly string[],
-): boolean {
+function matchesPath(path: readonly string[], argv: readonly string[]): boolean {
   if (argv.length < path.length) {
     return false;
   }
@@ -165,20 +151,20 @@ function readExactSourceArg(argv: readonly string[]): string | null {
 
 function renderUsageError(command: BoardCommandDefinition): string {
   return [
-    `Usage: ankhorage-board ${command.path.join(" ")} <source>`,
-    "Each deferred command currently requires exactly one non-empty source argument.",
-    "",
-  ].join("\n");
+    `Usage: ankhorage-board ${command.path.join(' ')} <source>`,
+    'Each deferred command currently requires exactly one non-empty source argument.',
+    '',
+  ].join('\n');
 }
 
 type ParsedWebCommandArgs =
   | {
       readonly createProject: string | null;
-      readonly kind: "ok";
+      readonly kind: 'ok';
       readonly url: string;
     }
   | {
-      readonly kind: "error";
+      readonly kind: 'error';
       readonly message: string;
     };
 
@@ -192,21 +178,16 @@ function parseWebCommandArgs(argv: readonly string[]): ParsedWebCommandArgs {
       continue;
     }
 
-    if (token === "--plan") {
+    if (token === '--plan') {
       continue;
     }
 
-    if (token === "--create") {
+    if (token === '--create') {
       const project = argv[index + 1];
-      if (
-        project === undefined ||
-        project.trim().length === 0 ||
-        project.startsWith("--")
-      ) {
+      if (project === undefined || project.trim().length === 0 || project.startsWith('--')) {
         return {
-          kind: "error",
-          message:
-            "Usage: ankhorage-board web <url> [--plan] [--create <project>]",
+          kind: 'error',
+          message: 'Usage: ankhorage-board web <url> [--plan] [--create <project>]',
         };
       }
 
@@ -215,18 +196,18 @@ function parseWebCommandArgs(argv: readonly string[]): ParsedWebCommandArgs {
       continue;
     }
 
-    if (token.startsWith("--")) {
+    if (token.startsWith('--')) {
       return {
-        kind: "error",
+        kind: 'error',
         message: `Unsupported board web flag: ${token}`,
       };
     }
 
     if (sourceUrl !== null) {
       return {
-        kind: "error",
+        kind: 'error',
         message:
-          "board web accepts exactly one URL and optional flags `--plan` or `--create <project>`.",
+          'board web accepts exactly one URL and optional flags `--plan` or `--create <project>`.',
       };
     }
 
@@ -235,8 +216,8 @@ function parseWebCommandArgs(argv: readonly string[]): ParsedWebCommandArgs {
 
   if (sourceUrl === null || sourceUrl.trim().length === 0) {
     return {
-      kind: "error",
-      message: "Usage: ankhorage-board web <url> [--plan] [--create <project>]",
+      kind: 'error',
+      message: 'Usage: ankhorage-board web <url> [--plan] [--create <project>]',
     };
   }
 
@@ -245,22 +226,21 @@ function parseWebCommandArgs(argv: readonly string[]): ParsedWebCommandArgs {
     parsedUrl = new URL(sourceUrl);
   } catch {
     return {
-      kind: "error",
-      message: "board web requires a syntactically valid absolute website URL.",
+      kind: 'error',
+      message: 'board web requires a syntactically valid absolute website URL.',
     };
   }
 
-  if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+  if (parsedUrl.protocol !== 'http:' && parsedUrl.protocol !== 'https:') {
     return {
-      kind: "error",
-      message:
-        "board web supports only absolute http:// or https:// website URLs.",
+      kind: 'error',
+      message: 'board web supports only absolute http:// or https:// website URLs.',
     };
   }
 
   return {
     createProject,
-    kind: "ok",
+    kind: 'ok',
     url: parsedUrl.toString(),
   };
 }

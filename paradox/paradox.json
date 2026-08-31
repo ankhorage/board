@@ -100,11 +100,7 @@
     {
       "path": "src/cli/index.ts",
       "isEntrypoint": false,
-      "dependencies": [
-        "package.json",
-        "src/commands.ts",
-        "src/commandServices.ts"
-      ],
+      "dependencies": ["package.json", "src/commands.ts", "src/commandServices.ts"],
       "exports": [
         "BoardCliContext",
         "BoardCliRunResult",
@@ -116,11 +112,7 @@
     {
       "path": "src/commands.ts",
       "isEntrypoint": false,
-      "dependencies": [
-        "src/cli/index.ts",
-        "src/commandServices.ts",
-        "src/webInspection.ts"
-      ],
+      "dependencies": ["src/cli/index.ts", "src/commandServices.ts", "src/webInspection.ts"],
       "exports": [
         "BOARD_COMMANDS",
         "createProviderHandlers",
@@ -184,21 +176,13 @@
     {
       "path": "test/cli.test.ts",
       "isEntrypoint": false,
-      "dependencies": [
-        "package.json",
-        "src/cli/index.ts",
-        "test/testSupport.ts"
-      ],
+      "dependencies": ["package.json", "src/cli/index.ts", "test/testSupport.ts"],
       "exports": []
     },
     {
       "path": "test/commands.test.ts",
       "isEntrypoint": false,
-      "dependencies": [
-        "src/commands.ts",
-        "src/webInspection.ts",
-        "test/testSupport.ts"
-      ],
+      "dependencies": ["src/commands.ts", "src/webInspection.ts", "test/testSupport.ts"],
       "exports": []
     },
     {
@@ -217,11 +201,7 @@
       "path": "test/testSupport.ts",
       "isEntrypoint": false,
       "dependencies": ["src/cli/index.ts", "src/commandServices.ts"],
-      "exports": [
-        "BufferedContext",
-        "createBufferedContext",
-        "createStubBoardCommandServices"
-      ]
+      "exports": ["BufferedContext", "createBufferedContext", "createStubBoardCommandServices"]
     },
     {
       "path": "test/webInspection.test.ts",

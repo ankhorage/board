@@ -1,5 +1,5 @@
-import type { BoardCliContext } from "../src/cli/index.js";
-import type { BoardCommandServices } from "../src/commandServices.js";
+import type { BoardCliContext } from '../src/cli/index.js';
+import type { BoardCommandServices } from '../src/commandServices.js';
 
 export interface BufferedContext extends BoardCliContext {
   readonly stdout: string;
@@ -7,18 +7,16 @@ export interface BufferedContext extends BoardCliContext {
 }
 
 export function createBufferedContext(
-  overrides: Partial<
-    Pick<BoardCliContext, "cwd" | "env" | "services" | "version">
-  > = {},
+  overrides: Partial<Pick<BoardCliContext, 'cwd' | 'env' | 'services' | 'version'>> = {},
 ): BufferedContext {
-  let stdout = "";
-  let stderr = "";
+  let stdout = '';
+  let stderr = '';
 
   return {
-    cwd: overrides.cwd ?? "/tmp/board-test",
+    cwd: overrides.cwd ?? '/tmp/board-test',
     env: overrides.env ?? {},
     services: overrides.services ?? createStubBoardCommandServices(),
-    version: overrides.version ?? "0.0.0",
+    version: overrides.version ?? '0.0.0',
     get stdout() {
       return stdout;
     },
@@ -35,27 +33,27 @@ export function createBufferedContext(
 }
 
 export function createStubBoardCommandServices(
-  implementation: BoardCommandServices["inspectWebsite"] = ({ url }) =>
+  implementation: BoardCommandServices['inspectWebsite'] = ({ url }) =>
     Promise.resolve({
       exitCode: 0,
       plan: {
         app: {
-          suggestedName: "Stub",
-          suggestedSlug: "stub",
+          suggestedName: 'Stub',
+          suggestedSlug: 'stub',
         },
         diagnostics: [],
-        kind: "web-boarding-plan",
+        kind: 'web-boarding-plan',
         observedLinks: [],
         routes: [
           {
             headings: [],
-            path: new URL(url).pathname || "/",
+            path: new URL(url).pathname || '/',
             sections: [],
             sourceUrl: url,
           },
         ],
         source: {
-          kind: "website",
+          kind: 'website',
           url,
         },
         version: 1,

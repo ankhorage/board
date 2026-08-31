@@ -48,9 +48,9 @@ deferred.
 Source: `src/readme-usage.ts`
 
 ```ts
-import { runCli } from "./cli/index.js";
+import { runCli } from './cli/index.js';
 
-await runCli(["--help"]);
+await runCli(['--help']);
 ```
 
 ## Installation
