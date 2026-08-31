@@ -1,37 +1,33 @@
-import type { AnkhPackageMetadata } from "@ankhorage/contracts/cli";
-import { describe, expect, it } from "bun:test";
+import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
+import { describe, expect, it } from 'bun:test';
 
-import packageJson from "../package.json";
+import packageJson from '../package.json';
 
-describe("package metadata", () => {
-  it("publishes the expected package shape", () => {
-    expect(packageJson.name).toBe("@ankhorage/board");
-    expect(packageJson.type).toBe("module");
+describe('package metadata', () => {
+  it('publishes the expected package shape', () => {
+    expect(packageJson.name).toBe('@ankhorage/board');
+    expect(packageJson.type).toBe('module');
     expect(packageJson.bin).toEqual({
-      "ankhorage-board": "./dist/cli/index.js",
+      'ankhorage-board': './dist/cli/index.js',
     });
     expect(packageJson.exports).toEqual({
-      ".": {
-        types: "./dist/index.d.ts",
-        import: "./dist/index.js",
+      '.': {
+        types: './dist/index.d.ts',
+        import: './dist/index.js',
       },
-      "./cli": {
-        types: "./dist/cli/index.d.ts",
-        import: "./dist/cli/index.js",
+      './cli': {
+        types: './dist/cli/index.d.ts',
+        import: './dist/cli/index.js',
       },
-      "./package.json": "./package.json",
+      './package.json': './package.json',
     });
   });
 
-  it("publishes exact Ankh package metadata", () => {
+  it('publishes exact Ankh package metadata', () => {
     const expectedAnkhMetadata = {
-      category: "board",
-      provider: "./dist/ankh.provider.js",
-      capabilities: [
-        "board.web.import",
-        "board.openapi.import",
-        "board.manifest.generate",
-      ],
+      category: 'board',
+      provider: './dist/ankh.provider.js',
+      capabilities: ['board.web.import', 'board.openapi.import', 'board.manifest.generate'],
     } satisfies AnkhPackageMetadata;
 
     expect(packageJson.ankh).toEqual({
@@ -40,24 +36,24 @@ describe("package metadata", () => {
     });
   });
 
-  it("exposes the required scripts for public Ankh packages", () => {
+  it('exposes the required scripts for public Ankh packages', () => {
     const requiredScripts = [
-      "build",
-      "typecheck",
-      "lint",
-      "lint:fix",
-      "format",
-      "format:check",
-      "test",
-      "knip",
-      "docs",
-      "changeset",
-      "changeset:status",
-      "version-packages",
+      'build',
+      'typecheck',
+      'lint',
+      'lint:fix',
+      'format',
+      'format:check',
+      'test',
+      'knip:check',
+      'docs',
+      'changeset',
+      'changeset:status',
+      'version-packages',
     ] as const;
 
     for (const script of requiredScripts) {
-      expect(typeof packageJson.scripts[script]).toBe("string");
+      expect(typeof packageJson.scripts[script]).toBe('string');
     }
   });
 });

@@ -1,12 +1,12 @@
 export interface WebBoardingDiagnostic {
   readonly code: string;
   readonly message: string;
-  readonly severity: "info" | "warning" | "error";
+  readonly severity: 'info' | 'warning' | 'error';
 }
 
 interface WebBoardingSource {
   readonly fetchedUrl?: string;
-  readonly kind: "website";
+  readonly kind: 'website';
   readonly url: string;
 }
 
@@ -33,7 +33,7 @@ export interface WebBoardingObservedLink {
 export interface WebBoardingPlan {
   readonly app: WebBoardingAppSuggestion;
   readonly diagnostics: readonly WebBoardingDiagnostic[];
-  readonly kind: "web-boarding-plan";
+  readonly kind: 'web-boarding-plan';
   readonly observedLinks: readonly WebBoardingObservedLink[];
   readonly routes: readonly [WebBoardingRoute];
   readonly source: WebBoardingSource;
