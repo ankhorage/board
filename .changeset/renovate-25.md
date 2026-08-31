@@ -1,5 +1,5 @@
 ---
-'@ankhorage/board': patch
+"@ankhorage/board": patch
 ---
 
 Update Ankhorage dependencies: `@ankhorage/contracts`.
