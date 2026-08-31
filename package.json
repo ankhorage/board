@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/board",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Explicit Ankh provider bootstrap for boarding websites and source artifacts into Ankhorage.",
   "license": "MIT",
   "publishConfig": {
@@ -69,7 +69,7 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^2.1.0"
+    "@ankhorage/contracts": "^8.0.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.4",
