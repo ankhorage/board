@@ -1,42 +1,38 @@
-import { join } from "node:path";
+import { join } from 'node:path';
 
 import type {
   AnkhCommandContext,
   AnkhDiscoveredPackage,
   AnkhLoadedProvider,
-} from "@ankhorage/ankh";
-import { runCli } from "@ankhorage/ankh";
-import type { AnkhPackageMetadata } from "@ankhorage/contracts/cli";
-import { describe, expect, it } from "bun:test";
+} from '@ankhorage/ankh';
+import { runCli } from '@ankhorage/ankh';
+import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
+import { describe, expect, it } from 'bun:test';
 
-import provider from "../src/ankh.provider.js";
+import provider from '../src/ankh.provider.js';
 
 interface BufferedAnkhContext extends AnkhCommandContext {
   readonly stdout: string;
   readonly stderr: string;
 }
 
-const fixturePath = join(import.meta.dir, "fixtures", "example-com.html");
+const fixturePath = join(import.meta.dir, 'fixtures', 'example-com.html');
 const packageMetadata = {
-  capabilities: [
-    "board.web.import",
-    "board.openapi.import",
-    "board.manifest.generate",
-  ],
-  category: "board",
-  provider: "./dist/ankh.provider.js",
+  capabilities: ['board.web.import', 'board.openapi.import', 'board.manifest.generate'],
+  category: 'board',
+  provider: './dist/ankh.provider.js',
 } as const satisfies AnkhPackageMetadata;
 
 function createBufferedAnkhContext(
   env: Readonly<Record<string, string | undefined>> = {},
 ): BufferedAnkhContext {
-  let stdout = "";
-  let stderr = "";
+  let stdout = '';
+  let stderr = '';
 
   return {
-    cwd: "/tmp/board-planning-test",
+    cwd: '/tmp/board-planning-test',
     env,
-    version: "0.0.0-test",
+    version: '0.0.0-test',
     get stdout() {
       return stdout;
     },
@@ -55,16 +51,14 @@ function createBufferedAnkhContext(
 function createDiscoveredPackage(): AnkhDiscoveredPackage {
   return {
     metadata: packageMetadata,
-    packageJsonPath: "/repo/@ankhorage/board/package.json",
-    packageName: "@ankhorage/board",
-    packageRoot: "/repo/@ankhorage/board",
-    source: "workspace",
+    packageJsonPath: '/repo/@ankhorage/board/package.json',
+    packageName: '@ankhorage/board',
+    packageRoot: '/repo/@ankhorage/board',
+    source: 'workspace',
   };
 }
 
-function createLoadedProvider(
-  providerModuleDefaultExport: unknown = provider,
-): AnkhLoadedProvider {
+function createLoadedProvider(providerModuleDefaultExport: unknown = provider): AnkhLoadedProvider {
   const discoveredPackage = createDiscoveredPackage();
 
   return {
@@ -96,51 +90,41 @@ function createFixtureEnv(
 ): Readonly<Record<string, string | undefined>> {
   return {
     ANKHORAGE_BOARD_TEST_WEB_FIXTURE_PATH: fixturePath,
-    ANKHORAGE_BOARD_TEST_WEB_FIXTURE_RESPONSE_URL: "https://example.com/",
+    ANKHORAGE_BOARD_TEST_WEB_FIXTURE_RESPONSE_URL: 'https://example.com/',
     ...overrides,
   };
 }
 
-describe("board provider planning", () => {
-  it("exposes execution and planning handlers", () => {
+describe('board provider planning', () => {
+  it('exposes execution and planning handlers', () => {
     expect(provider.handlers).toBeDefined();
     expect(provider.planningHandlers).toBeDefined();
-    expect(provider.planningHandlers.map((binding) => binding.path)).toEqual([
-      ["web"],
-    ]);
+    expect(provider.planningHandlers.map((binding) => binding.path)).toEqual([['web']]);
   });
 
-  it("returns a deterministic human-readable root plan for board web", async () => {
+  it('returns a deterministic human-readable root plan for board web', async () => {
     const context = createBufferedAnkhContext(createFixtureEnv());
 
-    const result = await runCli(
-      ["plan", "board", "web", "https://example.com"],
-      {
-        context,
-        ...createRootRunOptions(),
-      },
-    );
+    const result = await runCli(['plan', 'board', 'web', 'https://example.com'], {
+      context,
+      ...createRootRunOptions(),
+    });
 
     expect(result).toEqual({ exitCode: 0 });
-    expect(context.stdout).toContain(
-      "Plan: Board website source: https://example.com/",
-    );
-    expect(context.stdout).toContain("1. Inspect website source");
-    expect(context.stdout).toContain("2. Draft Ankhorage project manifest");
-    expect(context.stdout).toContain("destructive: no");
-    expect(context.stderr).toBe("");
+    expect(context.stdout).toContain('Plan: Board website source: https://example.com/');
+    expect(context.stdout).toContain('1. Inspect website source');
+    expect(context.stdout).toContain('2. Draft Ankhorage project manifest');
+    expect(context.stdout).toContain('destructive: no');
+    expect(context.stderr).toBe('');
   });
 
-  it("returns stable root plan JSON for board web", async () => {
+  it('returns stable root plan JSON for board web', async () => {
     const context = createBufferedAnkhContext(createFixtureEnv());
 
-    const result = await runCli(
-      ["plan", "board", "web", "https://example.com", "--json"],
-      {
-        context,
-        ...createRootRunOptions(),
-      },
-    );
+    const result = await runCli(['plan', 'board', 'web', 'https://example.com', '--json'], {
+      context,
+      ...createRootRunOptions(),
+    });
 
     const commandPlan = JSON.parse(context.stdout) as {
       readonly diagnostics: readonly unknown[];
@@ -158,18 +142,16 @@ describe("board provider planning", () => {
     };
 
     expect(result).toEqual({ exitCode: 0 });
-    expect(commandPlan.kind).toBe("ankh-command-plan");
+    expect(commandPlan.kind).toBe('ankh-command-plan');
     expect(commandPlan.version).toBe(1);
-    expect(commandPlan.title).toBe(
-      "Board website source: https://example.com/",
-    );
+    expect(commandPlan.title).toBe('Board website source: https://example.com/');
     expect(commandPlan.diagnostics).toEqual([]);
-    expect(commandPlan.steps[0].outputs.routes[0].title).toBe("Example Domain");
-    expect(commandPlan.steps[1].outputs.suggestedSlug).toBe("example-domain");
-    expect(context.stderr).toBe("");
+    expect(commandPlan.steps[0].outputs.routes[0].title).toBe('Example Domain');
+    expect(commandPlan.steps[1].outputs.suggestedSlug).toBe('example-domain');
+    expect(context.stderr).toBe('');
   });
 
-  it("does not call execution handlers while planning", async () => {
+  it('does not call execution handlers while planning', async () => {
     const context = createBufferedAnkhContext(createFixtureEnv());
     let executed = false;
     const providerWithTrackedExecutionHandlers = {
@@ -182,49 +164,38 @@ describe("board provider planning", () => {
       })),
     };
 
-    const result = await runCli(
-      ["plan", "board", "web", "https://example.com"],
-      {
-        context,
-        ...createRootRunOptions(providerWithTrackedExecutionHandlers),
-      },
-    );
+    const result = await runCli(['plan', 'board', 'web', 'https://example.com'], {
+      context,
+      ...createRootRunOptions(providerWithTrackedExecutionHandlers),
+    });
 
     expect(result).toEqual({ exitCode: 0 });
     expect(executed).toBeFalse();
-    expect(context.stdout).toContain("Plan: Board website source");
-    expect(context.stderr).toBe("");
+    expect(context.stdout).toContain('Plan: Board website source');
+    expect(context.stderr).toBe('');
   });
 
-  it("returns plan diagnostics for unsupported websites", async () => {
+  it('returns plan diagnostics for unsupported websites', async () => {
     const context = createBufferedAnkhContext(
       createFixtureEnv({
-        ANKHORAGE_BOARD_TEST_WEB_FIXTURE_CONTENT_TYPE: "application/json",
+        ANKHORAGE_BOARD_TEST_WEB_FIXTURE_CONTENT_TYPE: 'application/json',
       }),
     );
 
-    const result = await runCli(
-      ["plan", "board", "web", "https://example.com", "--json"],
-      {
-        context,
-        ...createRootRunOptions(),
-      },
-    );
+    const result = await runCli(['plan', 'board', 'web', 'https://example.com', '--json'], {
+      context,
+      ...createRootRunOptions(),
+    });
 
     const commandPlan = JSON.parse(context.stdout) as {
       readonly diagnostics: readonly [{ readonly code: string }];
-      readonly steps: readonly [
-        { readonly status: string },
-        { readonly status: string },
-      ];
+      readonly steps: readonly [{ readonly status: string }, { readonly status: string }];
     };
 
     expect(result).toEqual({ exitCode: 1 });
-    expect(commandPlan.diagnostics[0].code).toBe(
-      "website-unsupported-content-type",
-    );
-    expect(commandPlan.steps[0].status).toBe("blocked");
-    expect(commandPlan.steps[1].status).toBe("blocked");
-    expect(context.stderr).toBe("");
+    expect(commandPlan.diagnostics[0].code).toBe('website-unsupported-content-type');
+    expect(commandPlan.steps[0].status).toBe('blocked');
+    expect(commandPlan.steps[1].status).toBe('blocked');
+    expect(context.stderr).toBe('');
   });
 });

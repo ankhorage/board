@@ -3,14 +3,11 @@ import type {
   WebBoardingObservedLink,
   WebBoardingPlan,
   WebBoardingRoute,
-} from "./webBoardingPlan.js";
+} from './webBoardingPlan.js';
 
 const DEFAULT_MAX_RESPONSE_BYTES = 512_000;
 const DEFAULT_TIMEOUT_MS = 10_000;
-const HTML_CONTENT_TYPE_PREFIXES = [
-  "text/html",
-  "application/xhtml+xml",
-] as const;
+const HTML_CONTENT_TYPE_PREFIXES = ['text/html', 'application/xhtml+xml'] as const;
 const MAX_OBSERVED_LINKS = 25;
 const MAX_TEXT_ITEMS = 12;
 
@@ -22,16 +19,10 @@ interface ExtractedWebsiteSignals {
   readonly title?: string;
 }
 
-type BoardFetch = (
-  input: string | URL | Request,
-  init?: RequestInit,
-) => Promise<Response>;
+type BoardFetch = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
 export interface InspectWebsiteOptions {
-  readonly extractWebsiteSignals?: (
-    html: string,
-    fetchedUrl: URL,
-  ) => ExtractedWebsiteSignals;
+  readonly extractWebsiteSignals?: (html: string, fetchedUrl: URL) => ExtractedWebsiteSignals;
   readonly fetchImplementation?: BoardFetch;
   readonly maxResponseBytes?: number;
   readonly timeoutMs?: number;
@@ -49,42 +40,37 @@ export async function inspectWebsite(
   const parsedUrl = new URL(url);
   const fetchImplementation = options.fetchImplementation ?? fetch;
   const timeoutMs = options.timeoutMs ?? DEFAULT_TIMEOUT_MS;
-  const maxResponseBytes =
-    options.maxResponseBytes ?? DEFAULT_MAX_RESPONSE_BYTES;
+  const maxResponseBytes = options.maxResponseBytes ?? DEFAULT_MAX_RESPONSE_BYTES;
 
   let response: Response;
   try {
-    response = await fetchWithTimeout(
-      fetchImplementation,
-      parsedUrl.toString(),
-      timeoutMs,
-    );
+    response = await fetchWithTimeout(fetchImplementation, parsedUrl.toString(), timeoutMs);
   } catch (error) {
     if (isAbortError(error)) {
       return createFailureResult(parsedUrl, {
-        code: "website-fetch-timeout",
-        message: "Fetching the requested website URL timed out.",
-        severity: "error",
+        code: 'website-fetch-timeout',
+        message: 'Fetching the requested website URL timed out.',
+        severity: 'error',
       });
     }
 
     return createFailureResult(parsedUrl, {
-      code: "website-fetch-failed",
-      message: "Could not fetch the requested website URL.",
-      severity: "error",
+      code: 'website-fetch-failed',
+      message: 'Could not fetch the requested website URL.',
+      severity: 'error',
     });
   }
 
   const fetchedUrl = resolveFetchedUrl(response, parsedUrl);
-  const contentType = response.headers.get("content-type");
+  const contentType = response.headers.get('content-type');
 
   if (contentType !== null && !isSupportedHtmlContentType(contentType)) {
     return createFailureResult(
       parsedUrl,
       {
-        code: "website-unsupported-content-type",
-        message: "The requested website URL did not return HTML content.",
-        severity: "error",
+        code: 'website-unsupported-content-type',
+        message: 'The requested website URL did not return HTML content.',
+        severity: 'error',
       },
       fetchedUrl,
     );
@@ -98,9 +84,9 @@ export async function inspectWebsite(
       return createFailureResult(
         parsedUrl,
         {
-          code: "website-response-too-large",
-          message: "The requested website response exceeded the size limit.",
-          severity: "error",
+          code: 'website-response-too-large',
+          message: 'The requested website response exceeded the size limit.',
+          severity: 'error',
         },
         fetchedUrl,
       );
@@ -109,25 +95,26 @@ export async function inspectWebsite(
     return createFailureResult(
       parsedUrl,
       {
-        code: "website-fetch-failed",
-        message: "Could not read the requested website response.",
-        severity: "error",
+        code: 'website-fetch-failed',
+        message: 'Could not read the requested website response.',
+        severity: 'error',
       },
       fetchedUrl,
     );
   }
 
   try {
-    const extractedSignals = (
-      options.extractWebsiteSignals ?? extractWebsiteSignals
-    )(html, fetchedUrl);
+    const extractedSignals = (options.extractWebsiteSignals ?? extractWebsiteSignals)(
+      html,
+      fetchedUrl,
+    );
 
     const diagnostics: WebBoardingDiagnostic[] = [];
     if (!response.ok) {
       diagnostics.push({
-        code: "website-http-status-not-ok",
+        code: 'website-http-status-not-ok',
         message: `Fetched website responded with HTTP status ${response.status}.`,
-        severity: "warning",
+        severity: 'warning',
       });
     }
 
@@ -152,9 +139,9 @@ export async function inspectWebsite(
     return createFailureResult(
       parsedUrl,
       {
-        code: "website-parse-failed",
-        message: "The requested website HTML could not be inspected.",
-        severity: "error",
+        code: 'website-parse-failed',
+        message: 'The requested website HTML could not be inspected.',
+        severity: 'error',
       },
       fetchedUrl,
     );
@@ -165,10 +152,7 @@ export function renderWebBoardingPlan(plan: WebBoardingPlan): string {
   return `${JSON.stringify(plan, null, 2)}\n`;
 }
 
-export function extractWebsiteSignals(
-  html: string,
-  fetchedUrl: URL,
-): ExtractedWebsiteSignals {
+export function extractWebsiteSignals(html: string, fetchedUrl: URL): ExtractedWebsiteSignals {
   const title = readFirstMatch(html, /<title[^>]*>([\s\S]*?)<\/title>/i);
   const description = readMetaDescription(html);
 
@@ -204,11 +188,8 @@ async function fetchWithTimeout(
   }
 }
 
-async function readResponseText(
-  response: Response,
-  maxResponseBytes: number,
-): Promise<string> {
-  const declaredLength = response.headers.get("content-length");
+async function readResponseText(response: Response, maxResponseBytes: number): Promise<string> {
+  const declaredLength = response.headers.get('content-length');
   if (declaredLength !== null) {
     const parsedLength = Number.parseInt(declaredLength, 10);
     if (Number.isFinite(parsedLength) && parsedLength > maxResponseBytes) {
@@ -251,11 +232,9 @@ async function readResponseText(
 
 function readStreamChunk(
   value: unknown,
-):
-  | { readonly done: true }
-  | { readonly done: false; readonly value: Uint8Array } {
-  if (!isRecord(value) || typeof value.done !== "boolean") {
-    throw new Error("Invalid response stream chunk.");
+): { readonly done: true } | { readonly done: false; readonly value: Uint8Array } {
+  if (!isRecord(value) || typeof value.done !== 'boolean') {
+    throw new Error('Invalid response stream chunk.');
   }
 
   if (value.done) {
@@ -263,7 +242,7 @@ function readStreamChunk(
   }
 
   if (!(value.value instanceof Uint8Array)) {
-    throw new Error("Invalid response stream chunk value.");
+    throw new Error('Invalid response stream chunk value.');
   }
 
   return {
@@ -272,10 +251,7 @@ function readStreamChunk(
   };
 }
 
-function concatenateChunks(
-  chunks: readonly Uint8Array[],
-  totalBytes: number,
-): Uint8Array {
+function concatenateChunks(chunks: readonly Uint8Array[], totalBytes: number): Uint8Array {
   const output = new Uint8Array(totalBytes);
   let offset = 0;
 
@@ -289,9 +265,7 @@ function concatenateChunks(
 
 function isSupportedHtmlContentType(contentType: string): boolean {
   const normalized = contentType.trim().toLowerCase();
-  return HTML_CONTENT_TYPE_PREFIXES.some((prefix) =>
-    normalized.startsWith(prefix),
-  );
+  return HTML_CONTENT_TYPE_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 }
 
 function resolveFetchedUrl(response: Response, fallbackUrl: URL): URL {
@@ -340,12 +314,12 @@ function createPlan(args: {
       suggestedSlug,
     },
     diagnostics: args.diagnostics,
-    kind: "web-boarding-plan",
+    kind: 'web-boarding-plan',
     observedLinks: args.observedLinks,
     routes: [args.route],
     source: {
       fetchedUrl: args.fetchedUrl?.toString(),
-      kind: "website",
+      kind: 'website',
       url: args.sourceUrl.toString(),
     },
     version: 1,
@@ -379,7 +353,7 @@ function createPlaceholderRoute(url: URL): WebBoardingRoute {
 }
 
 function normalizeRoutePath(url: URL): string {
-  return url.pathname.trim().length > 0 ? url.pathname : "/";
+  return url.pathname.trim().length > 0 ? url.pathname : '/';
 }
 
 function createSuggestedName(title: string | undefined, url: URL): string {
@@ -392,20 +366,20 @@ function createSuggestedName(title: string | undefined, url: URL): string {
 }
 
 function hostnameToName(hostname: string): string {
-  const base = hostname.replace(/^www\./i, "");
+  const base = hostname.replace(/^www\./i, '');
   const parts = base
-    .split(".")
+    .split('.')
     .filter((segment) => segment.length > 0)
     .map((segment) =>
       segment
         .split(/[-_]+/)
         .filter((part) => part.length > 0)
         .map(capitalizeWord)
-        .join(" "),
+        .join(' '),
     )
     .filter((segment) => segment.length > 0);
 
-  return parts[0] ?? "Boarded Site";
+  return parts[0] ?? 'Boarded Site';
 }
 
 function createSuggestedSlug(name: string, url: URL): string {
@@ -414,17 +388,17 @@ function createSuggestedSlug(name: string, url: URL): string {
     return fromName;
   }
 
-  const fromHostname = slugify(url.hostname.replace(/\./g, "-"));
-  return fromHostname.length > 0 ? fromHostname : "boarded-site";
+  const fromHostname = slugify(url.hostname.replace(/\./g, '-'));
+  return fromHostname.length > 0 ? fromHostname : 'boarded-site';
 }
 
 function slugify(value: string): string {
   return value
     .trim()
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/-{2,}/g, "-");
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .replace(/-{2,}/g, '-');
 }
 
 function capitalizeWord(value: string): string {
@@ -448,11 +422,7 @@ function readMetaDescription(html: string): string | undefined {
   );
 }
 
-function readTextMatches(
-  html: string,
-  pattern: RegExp,
-  captureGroup = 1,
-): readonly string[] {
+function readTextMatches(html: string, pattern: RegExp, captureGroup = 1): readonly string[] {
   const values: string[] = [];
   const seen = new Set<string>();
 
@@ -480,23 +450,20 @@ function readTextMatches(
 
 function readFirstMatch(html: string, pattern: RegExp): string | undefined {
   const match = pattern.exec(html);
-  return stripHtml(match?.[1] ?? "");
+  return stripHtml(match?.[1] ?? '');
 }
 
-function readObservedLinks(
-  html: string,
-  fetchedUrl: URL,
-): readonly WebBoardingObservedLink[] {
+function readObservedLinks(html: string, fetchedUrl: URL): readonly WebBoardingObservedLink[] {
   const links: WebBoardingObservedLink[] = [];
   const seen = new Set<string>();
 
   for (const match of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)) {
-    const href = readHref(match[1] ?? "");
+    const href = readHref(match[1] ?? '');
     if (href === undefined) {
       continue;
     }
 
-    const label = normalizeOptionalText(stripHtml(match[2] ?? ""));
+    const label = normalizeOptionalText(stripHtml(match[2] ?? ''));
 
     const sameOrigin = resolveSameOriginLink(href, fetchedUrl);
 
@@ -505,7 +472,7 @@ function readObservedLinks(
       label,
       sameOrigin,
     };
-    const key = `${entry.href}::${entry.label ?? ""}`;
+    const key = `${entry.href}::${entry.label ?? ''}`;
     if (seen.has(key)) {
       continue;
     }
@@ -539,15 +506,15 @@ function resolveSameOriginLink(href: string, fetchedUrl: URL): boolean {
 }
 
 function stripHtml(value: string): string {
-  return decodeHtmlEntities(value.replace(/<[^>]+>/g, " "));
+  return decodeHtmlEntities(value.replace(/<[^>]+>/g, ' '));
 }
 
 function decodeHtmlEntities(value: string): string {
   return value
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
     .replace(/&quot;/gi, '"')
     .replace(/&#39;/gi, "'");
 }
@@ -557,16 +524,16 @@ function normalizeOptionalText(value: string | undefined): string | undefined {
     return undefined;
   }
 
-  const normalized = value.replace(/\s+/g, " ").trim();
+  const normalized = value.replace(/\s+/g, ' ').trim();
   return normalized.length > 0 ? normalized : undefined;
 }
 
 function isAbortError(error: unknown): boolean {
-  return error instanceof DOMException && error.name === "AbortError";
+  return error instanceof DOMException && error.name === 'AbortError';
 }
 
 class ResponseTooLargeError extends Error {}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
+  return typeof value === 'object' && value !== null;
 }

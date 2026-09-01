@@ -1,4 +1,4 @@
-import { runCli } from "./cli/index.js";
+import { runCli } from './cli/index.js';
 
 /***
  * Website-source boarding
@@ -39,4 +39,4 @@ import { runCli } from "./cli/index.js";
  *
  * @usage
  */
-await runCli(["--help"]);
+await runCli(['--help']);
