@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.4
+
+### Patch Changes
+
+- 8e1c8d4: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 0.3.3
 
 ### Patch Changes
