@@ -69,7 +69,7 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^8.0.2"
+    "@ankhorage/contracts": "^8.2.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.10",
