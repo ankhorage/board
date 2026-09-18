@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.10
+
+### Patch Changes
+
+- b7578ad: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 0.3.9
 
 ### Patch Changes
