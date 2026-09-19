@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.11
+
+### Patch Changes
+
+- beab270: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 0.3.10
 
 ### Patch Changes
