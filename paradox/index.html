@@ -7,37 +7,16 @@
     <style>
       :root {
         color-scheme: light;
-        font-family:
-          Inter,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          sans-serif;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: #f5f7fb;
         color: #11203b;
       }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-      }
-      a {
-        color: #2459d3;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      button {
-        font: inherit;
-      }
-      code,
-      pre {
-        font-family: 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, monospace;
-      }
+      * { box-sizing: border-box; }
+      body { margin: 0; }
+      a { color: #2459d3; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      button { font: inherit; }
+      code, pre { font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, monospace; }
       .layout {
         display: grid;
         grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
@@ -52,11 +31,8 @@
         max-height: 100vh;
         overflow: auto;
       }
-      .content {
-        padding: 2rem;
-      }
-      .panel,
-      .item {
+      .content { padding: 2rem; }
+      .panel, .item {
         background: #ffffff;
         border: 1px solid #d8dfec;
         border-radius: 0.9rem;
@@ -80,15 +56,12 @@
         border: 1px solid #c7d2e5;
         margin: 1rem 0 1.5rem;
       }
-      .nav-list,
-      .meta-list {
+      .nav-list, .meta-list {
         list-style: none;
         padding: 0;
         margin: 0;
       }
-      .nav-list li + li {
-        margin-top: 0.5rem;
-      }
+      .nav-list li + li { margin-top: 0.5rem; }
       .nav-button {
         width: 100%;
         display: block;
@@ -100,8 +73,7 @@
         padding: 0.55rem 0.7rem;
         text-align: left;
       }
-      .nav-button:hover,
-      .nav-button[aria-current='page'] {
+      .nav-button:hover, .nav-button[aria-current="page"] {
         background: #e8eefb;
         text-decoration: none;
       }
@@ -110,19 +82,9 @@
         color: #5e6d8c;
         margin-top: 0.15rem;
       }
-      .view[hidden] {
-        display: none;
-      }
-      .muted {
-        color: #5e6d8c;
-      }
-      .chips {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        padding: 0;
-        list-style: none;
-      }
+      .view[hidden] { display: none; }
+      .muted { color: #5e6d8c; }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; list-style: none; }
       .chip {
         border-radius: 999px;
         background: #e8eefb;
@@ -130,18 +92,8 @@
         padding: 0.25rem 0.65rem;
         font-size: 0.85rem;
       }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 0.8rem;
-      }
-      th,
-      td {
-        padding: 0.6rem;
-        border-bottom: 1px solid #e2e7f2;
-        text-align: left;
-        vertical-align: top;
-      }
+      table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; }
+      th, td { padding: 0.6rem; border-bottom: 1px solid #e2e7f2; text-align: left; vertical-align: top; }
       pre {
         overflow: auto;
         border-radius: 0.75rem;
@@ -149,34 +101,13 @@
         color: #e7edf7;
         padding: 1rem;
       }
-      .empty {
-        font-style: italic;
-        color: #6f7f9c;
-      }
-      .mermaid {
-        margin: 1rem 0;
-        overflow: auto;
-      }
-      details > summary {
-        cursor: pointer;
-        color: #5e6d8c;
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-        user-select: none;
-      }
+      .empty { font-style: italic; color: #6f7f9c; }
+      .mermaid { margin: 1rem 0; overflow: auto; }
+      details > summary { cursor: pointer; color: #5e6d8c; font-size: 0.9rem; margin-top: 0.5rem; user-select: none; }
       @media (max-width: 900px) {
-        .layout {
-          grid-template-columns: 1fr;
-        }
-        .sidebar {
-          position: static;
-          max-height: none;
-          border-right: 0;
-          border-bottom: 1px solid #d8dfec;
-        }
-        .content {
-          padding: 1rem;
-        }
+        .layout { grid-template-columns: 1fr; }
+        .sidebar { position: static; max-height: none; border-right: 0; border-bottom: 1px solid #d8dfec; }
+        .content { padding: 1rem; }
       }
     </style>
   </head>
@@ -185,9 +116,7 @@
       <aside class="sidebar">
         <p class="muted">Generated with Paradox</p>
         <h1>@ankhorage/board</h1>
-        <p>
-          Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.
-        </p>
+        <p>Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.</p>
         <input id="search" class="search" type="search" placeholder="Search current view" />
         <nav aria-label="Documentation sections">
           <ul class="nav-list">
@@ -198,325 +127,223 @@
               </button>
             </li>
             <li>
-              <button class="nav-button" type="button" data-target="src/cli/index.ts">
-                src/cli/index.ts
-                <small>4 functions</small>
-              </button>
-            </li>
-            <li>
-              <button class="nav-button" type="button" data-target="src/commands.ts">
-                src/commands.ts
-                <small>9 functions</small>
-              </button>
-            </li>
-            <li>
-              <button class="nav-button" type="button" data-target="src/commandServices.ts">
-                src/commandServices.ts
-                <small>2 functions</small>
-              </button>
-            </li>
-            <li>
-              <button class="nav-button" type="button" data-target="src/planning.ts">
-                src/planning.ts
-                <small>6 functions</small>
-              </button>
-            </li>
-            <li>
-              <button class="nav-button" type="button" data-target="src/webInspection.ts">
-                src/webInspection.ts
-                <small>30 functions</small>
-              </button>
-            </li>
+    <button class="nav-button" type="button" data-target="src/cli/index.ts">
+      src/cli/index.ts
+      <small>4 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/commands.ts">
+      src/commands.ts
+      <small>9 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/commandServices.ts">
+      src/commandServices.ts
+      <small>2 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/planning.ts">
+      src/planning.ts
+      <small>6 functions</small>
+    </button>
+  </li><li>
+    <button class="nav-button" type="button" data-target="src/webInspection.ts">
+      src/webInspection.ts
+      <small>30 functions</small>
+    </button>
+  </li>
           </ul>
         </nav>
       </aside>
       <main class="content">
         <section id="view-home" class="view" data-view="home">
-          <section class="panel">
-            <h2>Package overview</h2>
-            <div class="summary">
-              <div><strong>0</strong><span class="muted">public exports</span></div>
-              <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>17</strong><span class="muted">modules</span></div>
-              <div><strong>1</strong><span class="muted">entrypoints</span></div>
-            </div>
-            <h3>Entrypoints</h3>
-            <ul class="meta-list">
-              <li><code>src/index.ts</code></li>
-            </ul>
-          </section>
-
-          <section class="panel">
-            <h2>Modules</h2>
-            <article class="item" data-search="package.json">
-              <h3>package.json</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article class="item" data-search="paradox.config.ts default">
-              <h3>paradox.config.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-              <p><strong>Exports:</strong> <code>default</code></p>
-            </article>
-            <article
-              class="item"
-              data-search="src/ankh.provider.ts package.json src/commands.ts src/planning.ts default"
-            >
-              <h3>src/ankh.provider.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>package.json</code>,
-                <code>src/commands.ts</code>, <code>src/planning.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <code>default</code></p>
-            </article>
-            <article
-              class="item"
-              data-search="src/cli/index.ts package.json src/commands.ts src/commandServices.ts BoardCliContext BoardCliRunResult createDefaultBoardCliContext renderHelp runCli"
-            >
-              <h3>src/cli/index.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>package.json</code>,
-                <code>src/commands.ts</code>, <code>src/commandServices.ts</code>
-              </p>
-              <p>
-                <strong>Exports:</strong> <code>BoardCliContext</code>,
-                <code>BoardCliRunResult</code>, <code>createDefaultBoardCliContext</code>,
-                <code>renderHelp</code>, <code>runCli</code>
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="src/commands.ts src/cli/index.ts src/commandServices.ts src/webInspection.ts BOARD_COMMANDS createProviderHandlers createProviderManifestCommands resolveBoardCommand runBoardCommand"
-            >
-              <h3>src/commands.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/cli/index.ts</code>,
-                <code>src/commandServices.ts</code>, <code>src/webInspection.ts</code>
-              </p>
-              <p>
-                <strong>Exports:</strong> <code>BOARD_COMMANDS</code>,
-                <code>createProviderHandlers</code>, <code>createProviderManifestCommands</code>,
-                <code>resolveBoardCommand</code>, <code>runBoardCommand</code>
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="src/commandServices.ts src/webInspection.ts BoardCommandServices createDefaultBoardCommandServices"
-            >
-              <h3>src/commandServices.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/webInspection.ts</code></p>
-              <p>
-                <strong>Exports:</strong> <code>BoardCommandServices</code>,
-                <code>createDefaultBoardCommandServices</code>
-              </p>
-            </article>
-            <article class="item" data-search="src/index.ts">
-              <h3>src/index.ts</h3>
-              <p class="muted">Configured entrypoint</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article
-              class="item"
-              data-search="src/planning.ts src/commandServices.ts src/webBoardingPlan.ts createProviderPlanningHandlers"
-            >
-              <h3>src/planning.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/commandServices.ts</code>,
-                <code>src/webBoardingPlan.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <code>createProviderPlanningHandlers</code></p>
-            </article>
-            <article
-              class="item"
-              data-search="src/webBoardingPlan.ts WebBoardingDiagnostic WebBoardingObservedLink WebBoardingPlan WebBoardingRoute"
-            >
-              <h3>src/webBoardingPlan.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
-              <p>
-                <strong>Exports:</strong> <code>WebBoardingDiagnostic</code>,
-                <code>WebBoardingObservedLink</code>, <code>WebBoardingPlan</code>,
-                <code>WebBoardingRoute</code>
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="src/webInspection.ts src/webBoardingPlan.ts extractWebsiteSignals inspectWebsite InspectWebsiteOptions InspectWebsiteResult renderWebBoardingPlan"
-            >
-              <h3>src/webInspection.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/webBoardingPlan.ts</code></p>
-              <p>
-                <strong>Exports:</strong> <code>extractWebsiteSignals</code>,
-                <code>inspectWebsite</code>, <code>InspectWebsiteOptions</code>,
-                <code>InspectWebsiteResult</code>, <code>renderWebBoardingPlan</code>
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="test/ankh.provider.test.ts package.json src/ankh.provider.ts src/commands.ts test/testSupport.ts"
-            >
-              <h3>test/ankh.provider.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>package.json</code>,
-                <code>src/ankh.provider.ts</code>, <code>src/commands.ts</code>,
-                <code>test/testSupport.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article
-              class="item"
-              data-search="test/cli.test.ts package.json src/cli/index.ts test/testSupport.ts"
-            >
-              <h3>test/cli.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>package.json</code>,
-                <code>src/cli/index.ts</code>, <code>test/testSupport.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article
-              class="item"
-              data-search="test/commands.test.ts src/commands.ts src/webInspection.ts test/testSupport.ts"
-            >
-              <h3>test/commands.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/commands.ts</code>,
-                <code>src/webInspection.ts</code>, <code>test/testSupport.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article class="item" data-search="test/package.test.ts package.json">
-              <h3>test/package.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>package.json</code></p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article class="item" data-search="test/planning.test.ts src/ankh.provider.ts">
-              <h3>test/planning.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/ankh.provider.ts</code></p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-            <article
-              class="item"
-              data-search="test/testSupport.ts src/cli/index.ts src/commandServices.ts BufferedContext createBufferedContext createStubBoardCommandServices"
-            >
-              <h3>test/testSupport.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/cli/index.ts</code>,
-                <code>src/commandServices.ts</code>
-              </p>
-              <p>
-                <strong>Exports:</strong> <code>BufferedContext</code>,
-                <code>createBufferedContext</code>, <code>createStubBoardCommandServices</code>
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="test/webInspection.test.ts src/webBoardingPlan.ts src/webInspection.ts"
-            >
-              <h3>test/webInspection.test.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/webBoardingPlan.ts</code>,
-                <code>src/webInspection.ts</code>
-              </p>
-              <p><strong>Exports:</strong> <span class="empty">None</span></p>
-            </article>
-          </section>
-          <section class="panel">
-            <h2>Public API</h2>
-          </section>
-          <section class="panel">
-            <h2>Component registry</h2>
-            <p class="empty">No components were detected.</p>
-          </section>
-          <section class="panel">
-            <h2>Diagrams</h2>
-            <article
-              class="item"
-              data-search="Architecture overview diagrams/architecture-overview.mmd"
-            >
-              <h3>Architecture overview</h3>
-              <p class="muted"><code>diagrams/architecture-overview.mmd</code></p>
-              <div class="mermaid">
-                graph TD package__ankhorage_board[&quot;@ankhorage/board&quot;]
-                entrypoint_src_index_ts[&quot;src/index.ts&quot;] package__ankhorage_board --&gt;
-                entrypoint_src_index_ts module_package_json[&quot;package.json&quot;]
-                package__ankhorage_board -.-&gt; module_package_json
-                module_paradox_config_ts[&quot;paradox.config.ts&quot;] package__ankhorage_board
-                -.-&gt; module_paradox_config_ts
-                module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_ankh_provider_ts
-                module_src_ankh_provider_ts --&gt; module_package_json module_src_ankh_provider_ts
-                --&gt; module_src_commands_ts module_src_ankh_provider_ts --&gt;
-                module_src_planning_ts module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_cli_index_ts module_src_cli_index_ts
-                --&gt; module_package_json module_src_cli_index_ts --&gt; module_src_commands_ts
-                module_src_cli_index_ts --&gt; module_src_commandServices_ts
-                module_src_commands_ts[&quot;src/commands.ts&quot;] package__ankhorage_board -.-&gt;
-                module_src_commands_ts module_src_commands_ts --&gt; module_src_cli_index_ts
-                module_src_commands_ts --&gt; module_src_commandServices_ts module_src_commands_ts
-                --&gt; module_src_webInspection_ts
-                module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_commandServices_ts
-                module_src_commandServices_ts --&gt; module_src_webInspection_ts
-                module_src_index_ts[&quot;src/index.ts&quot;]
-                module_src_planning_ts[&quot;src/planning.ts&quot;] package__ankhorage_board -.-&gt;
-                module_src_planning_ts module_src_planning_ts --&gt; module_src_commandServices_ts
-                module_src_planning_ts --&gt; module_src_webBoardingPlan_ts
-                module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_webBoardingPlan_ts
-                module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
-                package__ankhorage_board -.-&gt; module_src_webInspection_ts
-                module_src_webInspection_ts --&gt; module_src_webBoardingPlan_ts
-                module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
-                package__ankhorage_board -.-&gt; module_test_ankh_provider_test_ts
-                module_test_ankh_provider_test_ts --&gt; module_package_json
-                module_test_ankh_provider_test_ts --&gt; module_src_ankh_provider_ts
-                module_test_ankh_provider_test_ts --&gt; module_src_commands_ts
-                module_test_ankh_provider_test_ts --&gt; module_test_testSupport_ts
-                module_test_cli_test_ts[&quot;test/cli.test.ts&quot;] package__ankhorage_board
-                -.-&gt; module_test_cli_test_ts module_test_cli_test_ts --&gt; module_package_json
-                module_test_cli_test_ts --&gt; module_src_cli_index_ts module_test_cli_test_ts
-                --&gt; module_test_testSupport_ts
-                module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
-                package__ankhorage_board -.-&gt; module_test_commands_test_ts
-                module_test_commands_test_ts --&gt; module_src_commands_ts
-                module_test_commands_test_ts --&gt; module_src_webInspection_ts
-                module_test_commands_test_ts --&gt; module_test_testSupport_ts
-                module_test_package_test_ts[&quot;test/package.test.ts&quot;]
-                package__ankhorage_board -.-&gt; module_test_package_test_ts
-                module_test_package_test_ts --&gt; module_package_json
-                module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
-                package__ankhorage_board -.-&gt; module_test_planning_test_ts
-                module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
-                module_test_testSupport_ts[&quot;test/testSupport.ts&quot;] package__ankhorage_board
-                -.-&gt; module_test_testSupport_ts module_test_testSupport_ts --&gt;
-                module_src_cli_index_ts module_test_testSupport_ts --&gt;
-                module_src_commandServices_ts
-                module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
-                package__ankhorage_board -.-&gt; module_test_webInspection_test_ts
-                module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
-                module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
-              </div>
-              <details>
-                <summary>View Mermaid source</summary>
-                <pre>
-graph TD
+          
+    <section class="panel">
+      <h2>Package overview</h2>
+      <div class="summary">
+        <div><strong>0</strong><span class="muted">public exports</span></div>
+        <div><strong>0</strong><span class="muted">components</span></div>
+        <div><strong>17</strong><span class="muted">modules</span></div>
+        <div><strong>1</strong><span class="muted">entrypoints</span></div>
+      </div>
+      <h3>Entrypoints</h3>
+      <ul class="meta-list">
+        <li><code>src/index.ts</code></li>
+      </ul>
+    </section>
+    
+    <section class="panel">
+      <h2>Modules</h2>
+      <article class="item" data-search="package.json">
+    <h3>package.json</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="paradox.config.ts default">
+    <h3>paradox.config.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>default</code></p>
+  </article><article class="item" data-search="src/ankh.provider.ts package.json src/commands.ts src/planning.ts default">
+    <h3>src/ankh.provider.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/commands.ts</code>, <code>src/planning.ts</code></p>
+    <p><strong>Exports:</strong> <code>default</code></p>
+  </article><article class="item" data-search="src/cli/index.ts package.json src/commands.ts src/commandServices.ts BoardCliContext BoardCliRunResult createDefaultBoardCliContext renderHelp runCli">
+    <h3>src/cli/index.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/commands.ts</code>, <code>src/commandServices.ts</code></p>
+    <p><strong>Exports:</strong> <code>BoardCliContext</code>, <code>BoardCliRunResult</code>, <code>createDefaultBoardCliContext</code>, <code>renderHelp</code>, <code>runCli</code></p>
+  </article><article class="item" data-search="src/commands.ts src/cli/index.ts src/commandServices.ts src/webInspection.ts BOARD_COMMANDS createProviderHandlers createProviderManifestCommands resolveBoardCommand runBoardCommand">
+    <h3>src/commands.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/cli/index.ts</code>, <code>src/commandServices.ts</code>, <code>src/webInspection.ts</code></p>
+    <p><strong>Exports:</strong> <code>BOARD_COMMANDS</code>, <code>createProviderHandlers</code>, <code>createProviderManifestCommands</code>, <code>resolveBoardCommand</code>, <code>runBoardCommand</code></p>
+  </article><article class="item" data-search="src/commandServices.ts src/webInspection.ts BoardCommandServices createDefaultBoardCommandServices">
+    <h3>src/commandServices.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/webInspection.ts</code></p>
+    <p><strong>Exports:</strong> <code>BoardCommandServices</code>, <code>createDefaultBoardCommandServices</code></p>
+  </article><article class="item" data-search="src/index.ts">
+    <h3>src/index.ts</h3>
+    <p class="muted">Configured entrypoint</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="src/planning.ts src/commandServices.ts src/webBoardingPlan.ts createProviderPlanningHandlers">
+    <h3>src/planning.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/commandServices.ts</code>, <code>src/webBoardingPlan.ts</code></p>
+    <p><strong>Exports:</strong> <code>createProviderPlanningHandlers</code></p>
+  </article><article class="item" data-search="src/webBoardingPlan.ts WebBoardingDiagnostic WebBoardingObservedLink WebBoardingPlan WebBoardingRoute">
+    <h3>src/webBoardingPlan.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+    <p><strong>Exports:</strong> <code>WebBoardingDiagnostic</code>, <code>WebBoardingObservedLink</code>, <code>WebBoardingPlan</code>, <code>WebBoardingRoute</code></p>
+  </article><article class="item" data-search="src/webInspection.ts src/webBoardingPlan.ts extractWebsiteSignals inspectWebsite InspectWebsiteOptions InspectWebsiteResult renderWebBoardingPlan">
+    <h3>src/webInspection.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/webBoardingPlan.ts</code></p>
+    <p><strong>Exports:</strong> <code>extractWebsiteSignals</code>, <code>inspectWebsite</code>, <code>InspectWebsiteOptions</code>, <code>InspectWebsiteResult</code>, <code>renderWebBoardingPlan</code></p>
+  </article><article class="item" data-search="test/ankh.provider.test.ts package.json src/ankh.provider.ts src/commands.ts test/testSupport.ts">
+    <h3>test/ankh.provider.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/ankh.provider.ts</code>, <code>src/commands.ts</code>, <code>test/testSupport.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="test/cli.test.ts package.json src/cli/index.ts test/testSupport.ts">
+    <h3>test/cli.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code>, <code>src/cli/index.ts</code>, <code>test/testSupport.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="test/commands.test.ts src/commands.ts src/webInspection.ts test/testSupport.ts">
+    <h3>test/commands.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/commands.ts</code>, <code>src/webInspection.ts</code>, <code>test/testSupport.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="test/package.test.ts package.json">
+    <h3>test/package.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>package.json</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="test/planning.test.ts src/ankh.provider.ts">
+    <h3>test/planning.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/ankh.provider.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article><article class="item" data-search="test/testSupport.ts src/cli/index.ts src/commandServices.ts BufferedContext createBufferedContext createStubBoardCommandServices">
+    <h3>test/testSupport.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/cli/index.ts</code>, <code>src/commandServices.ts</code></p>
+    <p><strong>Exports:</strong> <code>BufferedContext</code>, <code>createBufferedContext</code>, <code>createStubBoardCommandServices</code></p>
+  </article><article class="item" data-search="test/webInspection.test.ts src/webBoardingPlan.ts src/webInspection.ts">
+    <h3>test/webInspection.test.ts</h3>
+    <p class="muted">Referenced module</p>
+    <p><strong>Dependencies:</strong> <code>src/webBoardingPlan.ts</code>, <code>src/webInspection.ts</code></p>
+    <p><strong>Exports:</strong> <span class="empty">None</span></p>
+  </article>
+    </section>
+    <section class="panel">
+      <h2>Public API</h2>
+      
+    </section>
+    <section class="panel">
+      <h2>Component registry</h2>
+      <p class="empty">No components were detected.</p>
+    </section>
+    <section class="panel">
+      <h2>Diagrams</h2>
+      <article class="item" data-search="Architecture overview diagrams/architecture-overview.mmd">
+    <h3>Architecture overview</h3>
+    <p class="muted"><code>diagrams/architecture-overview.mmd</code></p>
+    <div class="mermaid">graph TD
+  package__ankhorage_board[&quot;@ankhorage/board&quot;]
+  entrypoint_src_index_ts[&quot;src/index.ts&quot;]
+  package__ankhorage_board --&gt; entrypoint_src_index_ts
+  module_package_json[&quot;package.json&quot;]
+  package__ankhorage_board -.-&gt; module_package_json
+  module_paradox_config_ts[&quot;paradox.config.ts&quot;]
+  package__ankhorage_board -.-&gt; module_paradox_config_ts
+  module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_ankh_provider_ts
+  module_src_ankh_provider_ts --&gt; module_package_json
+  module_src_ankh_provider_ts --&gt; module_src_commands_ts
+  module_src_ankh_provider_ts --&gt; module_src_planning_ts
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_cli_index_ts
+  module_src_cli_index_ts --&gt; module_package_json
+  module_src_cli_index_ts --&gt; module_src_commands_ts
+  module_src_cli_index_ts --&gt; module_src_commandServices_ts
+  module_src_commands_ts[&quot;src/commands.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_commands_ts
+  module_src_commands_ts --&gt; module_src_cli_index_ts
+  module_src_commands_ts --&gt; module_src_commandServices_ts
+  module_src_commands_ts --&gt; module_src_webInspection_ts
+  module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_commandServices_ts
+  module_src_commandServices_ts --&gt; module_src_webInspection_ts
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_planning_ts[&quot;src/planning.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_planning_ts
+  module_src_planning_ts --&gt; module_src_commandServices_ts
+  module_src_planning_ts --&gt; module_src_webBoardingPlan_ts
+  module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_webBoardingPlan_ts
+  module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
+  package__ankhorage_board -.-&gt; module_src_webInspection_ts
+  module_src_webInspection_ts --&gt; module_src_webBoardingPlan_ts
+  module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_ankh_provider_test_ts
+  module_test_ankh_provider_test_ts --&gt; module_package_json
+  module_test_ankh_provider_test_ts --&gt; module_src_ankh_provider_ts
+  module_test_ankh_provider_test_ts --&gt; module_src_commands_ts
+  module_test_ankh_provider_test_ts --&gt; module_test_testSupport_ts
+  module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_cli_test_ts
+  module_test_cli_test_ts --&gt; module_package_json
+  module_test_cli_test_ts --&gt; module_src_cli_index_ts
+  module_test_cli_test_ts --&gt; module_test_testSupport_ts
+  module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_commands_test_ts
+  module_test_commands_test_ts --&gt; module_src_commands_ts
+  module_test_commands_test_ts --&gt; module_src_webInspection_ts
+  module_test_commands_test_ts --&gt; module_test_testSupport_ts
+  module_test_package_test_ts[&quot;test/package.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_package_test_ts
+  module_test_package_test_ts --&gt; module_package_json
+  module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_planning_test_ts
+  module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
+  module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_testSupport_ts
+  module_test_testSupport_ts --&gt; module_src_cli_index_ts
+  module_test_testSupport_ts --&gt; module_src_commandServices_ts
+  module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
+  package__ankhorage_board -.-&gt; module_test_webInspection_test_ts
+  module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
+  module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph TD
   package__ankhorage_board[&quot;@ankhorage/board&quot;]
   entrypoint_src_index_ts[&quot;src/index.ts&quot;]
   package__ankhorage_board --&gt; entrypoint_src_index_ts
@@ -583,62 +410,61 @@ graph TD
   module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
   module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
 </pre>
-              </details>
-            </article>
-            <article
-              class="item"
-              data-search="Module relationships diagrams/module-relationships.mmd"
-            >
-              <h3>Module relationships</h3>
-              <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
-              <div class="mermaid">
-                graph LR module_package_json[&quot;package.json&quot;]
-                module_paradox_config_ts[&quot;paradox.config.ts&quot;]
-                module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-                module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
-                module_src_commands_ts[&quot;src/commands.ts&quot;]
-                module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
-                module_src_index_ts[&quot;src/index.ts&quot;]
-                module_src_planning_ts[&quot;src/planning.ts&quot;]
-                module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
-                module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
-                module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
-                module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
-                module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
-                module_test_package_test_ts[&quot;test/package.test.ts&quot;]
-                module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
-                module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
-                module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
-                module_src_ankh_provider_ts --&gt; module_package_json module_src_ankh_provider_ts
-                --&gt; module_src_commands_ts module_src_ankh_provider_ts --&gt;
-                module_src_planning_ts module_src_cli_index_ts --&gt; module_package_json
-                module_src_cli_index_ts --&gt; module_src_commands_ts module_src_cli_index_ts --&gt;
-                module_src_commandServices_ts module_src_commands_ts --&gt; module_src_cli_index_ts
-                module_src_commands_ts --&gt; module_src_commandServices_ts module_src_commands_ts
-                --&gt; module_src_webInspection_ts module_src_commandServices_ts --&gt;
-                module_src_webInspection_ts module_src_planning_ts --&gt;
-                module_src_commandServices_ts module_src_planning_ts --&gt;
-                module_src_webBoardingPlan_ts module_src_webInspection_ts --&gt;
-                module_src_webBoardingPlan_ts module_test_ankh_provider_test_ts --&gt;
-                module_package_json module_test_ankh_provider_test_ts --&gt;
-                module_src_ankh_provider_ts module_test_ankh_provider_test_ts --&gt;
-                module_src_commands_ts module_test_ankh_provider_test_ts --&gt;
-                module_test_testSupport_ts module_test_cli_test_ts --&gt; module_package_json
-                module_test_cli_test_ts --&gt; module_src_cli_index_ts module_test_cli_test_ts
-                --&gt; module_test_testSupport_ts module_test_commands_test_ts --&gt;
-                module_src_commands_ts module_test_commands_test_ts --&gt;
-                module_src_webInspection_ts module_test_commands_test_ts --&gt;
-                module_test_testSupport_ts module_test_package_test_ts --&gt; module_package_json
-                module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
-                module_test_testSupport_ts --&gt; module_src_cli_index_ts module_test_testSupport_ts
-                --&gt; module_src_commandServices_ts module_test_webInspection_test_ts --&gt;
-                module_src_webBoardingPlan_ts module_test_webInspection_test_ts --&gt;
-                module_src_webInspection_ts
-              </div>
-              <details>
-                <summary>View Mermaid source</summary>
-                <pre>
-graph LR
+    </details>
+  </article><article class="item" data-search="Module relationships diagrams/module-relationships.mmd">
+    <h3>Module relationships</h3>
+    <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
+    <div class="mermaid">graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_paradox_config_ts[&quot;paradox.config.ts&quot;]
+  module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  module_src_commands_ts[&quot;src/commands.ts&quot;]
+  module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_planning_ts[&quot;src/planning.ts&quot;]
+  module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
+  module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
+  module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
+  module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
+  module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
+  module_test_package_test_ts[&quot;test/package.test.ts&quot;]
+  module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
+  module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
+  module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
+  module_src_ankh_provider_ts --&gt; module_package_json
+  module_src_ankh_provider_ts --&gt; module_src_commands_ts
+  module_src_ankh_provider_ts --&gt; module_src_planning_ts
+  module_src_cli_index_ts --&gt; module_package_json
+  module_src_cli_index_ts --&gt; module_src_commands_ts
+  module_src_cli_index_ts --&gt; module_src_commandServices_ts
+  module_src_commands_ts --&gt; module_src_cli_index_ts
+  module_src_commands_ts --&gt; module_src_commandServices_ts
+  module_src_commands_ts --&gt; module_src_webInspection_ts
+  module_src_commandServices_ts --&gt; module_src_webInspection_ts
+  module_src_planning_ts --&gt; module_src_commandServices_ts
+  module_src_planning_ts --&gt; module_src_webBoardingPlan_ts
+  module_src_webInspection_ts --&gt; module_src_webBoardingPlan_ts
+  module_test_ankh_provider_test_ts --&gt; module_package_json
+  module_test_ankh_provider_test_ts --&gt; module_src_ankh_provider_ts
+  module_test_ankh_provider_test_ts --&gt; module_src_commands_ts
+  module_test_ankh_provider_test_ts --&gt; module_test_testSupport_ts
+  module_test_cli_test_ts --&gt; module_package_json
+  module_test_cli_test_ts --&gt; module_src_cli_index_ts
+  module_test_cli_test_ts --&gt; module_test_testSupport_ts
+  module_test_commands_test_ts --&gt; module_src_commands_ts
+  module_test_commands_test_ts --&gt; module_src_webInspection_ts
+  module_test_commands_test_ts --&gt; module_test_testSupport_ts
+  module_test_package_test_ts --&gt; module_package_json
+  module_test_planning_test_ts --&gt; module_src_ankh_provider_ts
+  module_test_testSupport_ts --&gt; module_src_cli_index_ts
+  module_test_testSupport_ts --&gt; module_src_commandServices_ts
+  module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
+  module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph LR
   module_package_json[&quot;package.json&quot;]
   module_paradox_config_ts[&quot;paradox.config.ts&quot;]
   module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
@@ -686,34 +512,32 @@ graph LR
   module_test_webInspection_test_ts --&gt; module_src_webBoardingPlan_ts
   module_test_webInspection_test_ts --&gt; module_src_webInspection_ts
 </pre>
-              </details>
-            </article>
-            <article class="item" data-search="Export graph diagrams/export-graph.mmd">
-              <h3>Export graph</h3>
-              <p class="muted"><code>diagrams/export-graph.mmd</code></p>
-              <div class="mermaid">
-                graph LR module_package_json[&quot;package.json&quot;]
-                module_paradox_config_ts[&quot;paradox.config.ts&quot;]
-                module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
-                module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
-                module_src_commands_ts[&quot;src/commands.ts&quot;]
-                module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
-                module_src_index_ts[&quot;src/index.ts&quot;]
-                module_src_planning_ts[&quot;src/planning.ts&quot;]
-                module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
-                module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
-                module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
-                module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
-                module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
-                module_test_package_test_ts[&quot;test/package.test.ts&quot;]
-                module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
-                module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
-                module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
-              </div>
-              <details>
-                <summary>View Mermaid source</summary>
-                <pre>
-graph LR
+    </details>
+  </article><article class="item" data-search="Export graph diagrams/export-graph.mmd">
+    <h3>Export graph</h3>
+    <p class="muted"><code>diagrams/export-graph.mmd</code></p>
+    <div class="mermaid">graph LR
+  module_package_json[&quot;package.json&quot;]
+  module_paradox_config_ts[&quot;paradox.config.ts&quot;]
+  module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
+  module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
+  module_src_commands_ts[&quot;src/commands.ts&quot;]
+  module_src_commandServices_ts[&quot;src/commandServices.ts&quot;]
+  module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_planning_ts[&quot;src/planning.ts&quot;]
+  module_src_webBoardingPlan_ts[&quot;src/webBoardingPlan.ts&quot;]
+  module_src_webInspection_ts[&quot;src/webInspection.ts&quot;]
+  module_test_ankh_provider_test_ts[&quot;test/ankh.provider.test.ts&quot;]
+  module_test_cli_test_ts[&quot;test/cli.test.ts&quot;]
+  module_test_commands_test_ts[&quot;test/commands.test.ts&quot;]
+  module_test_package_test_ts[&quot;test/package.test.ts&quot;]
+  module_test_planning_test_ts[&quot;test/planning.test.ts&quot;]
+  module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
+  module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>graph LR
   module_package_json[&quot;package.json&quot;]
   module_paradox_config_ts[&quot;paradox.config.ts&quot;]
   module_src_ankh_provider_ts[&quot;src/ankh.provider.ts&quot;]
@@ -732,42 +556,37 @@ graph LR
   module_test_testSupport_ts[&quot;test/testSupport.ts&quot;]
   module_test_webInspection_test_ts[&quot;test/webInspection.test.ts&quot;]
 </pre>
-              </details>
-            </article>
-            <article
-              class="item"
-              data-search="ankhorage-board sequence diagrams/sequences/ankhorage-board.mmd"
-            >
-              <h3>ankhorage-board sequence</h3>
-              <p class="muted"><code>diagrams/sequences/ankhorage-board.mmd</code></p>
-              <div class="mermaid">
-                sequenceDiagram participant participant_createDefaultBoardCliContext as
-                createDefaultBoardCliContext participant participant_renderHelp as renderHelp
-                participant participant_renderUnknownCommand as renderUnknownCommand participant
-                participant_resolveBoardCommand as resolveBoardCommand participant
-                participant_runBoardCommand as runBoardCommand participant participant_runCli as
-                runCli participant participant_writeStderr as writeStderr participant
-                participant_writeStdout as writeStdout
-                participant_runCli-&gt;&gt;participant_createDefaultBoardCliContext:
-                createDefaultBoardCliContext()
-                participant_createDefaultBoardCliContext--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_writeStdout: context.writeStdout()
-                participant_writeStdout--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_renderHelp: renderHelp()
-                participant_renderHelp--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_resolveBoardCommand: resolveBoardCommand()
-                participant_resolveBoardCommand--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_writeStderr: context.writeStderr()
-                participant_writeStderr--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_renderUnknownCommand: renderUnknownCommand()
-                participant_renderUnknownCommand--&gt;&gt;participant_runCli: return
-                participant_runCli-&gt;&gt;participant_runBoardCommand: runBoardCommand()
-                participant_runBoardCommand--&gt;&gt;participant_runCli: return
-              </div>
-              <details>
-                <summary>View Mermaid source</summary>
-                <pre>
-sequenceDiagram
+    </details>
+  </article><article class="item" data-search="ankhorage-board sequence diagrams/sequences/ankhorage-board.mmd">
+    <h3>ankhorage-board sequence</h3>
+    <p class="muted"><code>diagrams/sequences/ankhorage-board.mmd</code></p>
+    <div class="mermaid">sequenceDiagram
+  participant participant_createDefaultBoardCliContext as createDefaultBoardCliContext
+  participant participant_renderHelp as renderHelp
+  participant participant_renderUnknownCommand as renderUnknownCommand
+  participant participant_resolveBoardCommand as resolveBoardCommand
+  participant participant_runBoardCommand as runBoardCommand
+  participant participant_runCli as runCli
+  participant participant_writeStderr as writeStderr
+  participant participant_writeStdout as writeStdout
+  participant_runCli-&gt;&gt;participant_createDefaultBoardCliContext: createDefaultBoardCliContext()
+  participant_createDefaultBoardCliContext--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_writeStdout: context.writeStdout()
+  participant_writeStdout--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_renderHelp: renderHelp()
+  participant_renderHelp--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_resolveBoardCommand: resolveBoardCommand()
+  participant_resolveBoardCommand--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_writeStderr: context.writeStderr()
+  participant_writeStderr--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_renderUnknownCommand: renderUnknownCommand()
+  participant_renderUnknownCommand--&gt;&gt;participant_runCli: return
+  participant_runCli-&gt;&gt;participant_runBoardCommand: runBoardCommand()
+  participant_runBoardCommand--&gt;&gt;participant_runCli: return
+</div>
+    <details>
+      <summary>View Mermaid source</summary>
+      <pre>sequenceDiagram
   participant participant_createDefaultBoardCliContext as createDefaultBoardCliContext
   participant participant_renderHelp as renderHelp
   participant participant_renderUnknownCommand as renderUnknownCommand
@@ -791,303 +610,240 @@ sequenceDiagram
   participant_runCli-&gt;&gt;participant_runBoardCommand: runBoardCommand()
   participant_runBoardCommand--&gt;&gt;participant_runCli: return
 </pre>
-              </details>
-            </article>
-          </section>
+    </details>
+  </article>
+    </section>
         </section>
         <section id="view-src-cli-index-ts" class="view" data-view="src/cli/index.ts" hidden>
-          <section class="panel">
-            <h2>src/cli/index.ts</h2>
-            <article class="item" data-search="createDefaultBoardCliContext src/cli/index.ts ">
-              <h3>createDefaultBoardCliContext</h3>
-              <p class="muted"><code>src/cli/index.ts:23:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="runCli src/cli/index.ts ">
-              <h3>runCli</h3>
-              <p class="muted"><code>src/cli/index.ts:40:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="renderHelp src/cli/index.ts ">
-              <h3>renderHelp</h3>
-              <p class="muted"><code>src/cli/index.ts:70:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="renderUnknownCommand src/cli/index.ts ">
-              <h3>renderUnknownCommand</h3>
-              <p class="muted"><code>src/cli/index.ts:91:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-          </section>
-        </section>
-        <section id="view-src-commands-ts" class="view" data-view="src/commands.ts" hidden>
-          <section class="panel">
-            <h2>src/commands.ts</h2>
-            <article class="item" data-search="createProviderManifestCommands src/commands.ts ">
-              <h3>createProviderManifestCommands</h3>
-              <p class="muted"><code>src/commands.ts:40:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createProviderHandlers src/commands.ts ">
-              <h3>createProviderHandlers</h3>
-              <p class="muted"><code>src/commands.ts:48:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="resolveBoardCommand src/commands.ts ">
-              <h3>resolveBoardCommand</h3>
-              <p class="muted"><code>src/commands.ts:58:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="runBoardCommand src/commands.ts ">
-              <h3>runBoardCommand</h3>
-              <p class="muted"><code>src/commands.ts:73:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="runWebBoardCommand src/commands.ts ">
-              <h3>runWebBoardCommand</h3>
-              <p class="muted"><code>src/commands.ts:101:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="matchesPath src/commands.ts ">
-              <h3>matchesPath</h3>
-              <p class="muted"><code>src/commands.ts:131:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readExactSourceArg src/commands.ts ">
-              <h3>readExactSourceArg</h3>
-              <p class="muted"><code>src/commands.ts:139:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="renderUsageError src/commands.ts ">
-              <h3>renderUsageError</h3>
-              <p class="muted"><code>src/commands.ts:152:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="parseWebCommandArgs src/commands.ts ">
-              <h3>parseWebCommandArgs</h3>
-              <p class="muted"><code>src/commands.ts:171:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-          </section>
-        </section>
-        <section
-          id="view-src-commandservices-ts"
-          class="view"
-          data-view="src/commandServices.ts"
-          hidden
-        >
-          <section class="panel">
-            <h2>src/commandServices.ts</h2>
-            <article
-              class="item"
-              data-search="createDefaultBoardCommandServices src/commandServices.ts "
-            >
-              <h3>createDefaultBoardCommandServices</h3>
-              <p class="muted"><code>src/commandServices.ts:13:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="parseFixtureStatus src/commandServices.ts ">
-              <h3>parseFixtureStatus</h3>
-              <p class="muted"><code>src/commandServices.ts:57:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-          </section>
-        </section>
-        <section id="view-src-planning-ts" class="view" data-view="src/planning.ts" hidden>
-          <section class="panel">
-            <h2>src/planning.ts</h2>
-            <article class="item" data-search="createProviderPlanningHandlers src/planning.ts ">
-              <h3>createProviderPlanningHandlers</h3>
-              <p class="muted"><code>src/planning.ts:11:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="planBoardWebCommand src/planning.ts ">
-              <h3>planBoardWebCommand</h3>
-              <p class="muted"><code>src/planning.ts:20:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="parseBoardWebPlanningArgs src/planning.ts ">
-              <h3>parseBoardWebPlanningArgs</h3>
-              <p class="muted"><code>src/planning.ts:52:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createInvalidRequestPlan src/planning.ts ">
-              <h3>createInvalidRequestPlan</h3>
-              <p class="muted"><code>src/planning.ts:121:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createBoardWebCommandPlan src/planning.ts ">
-              <h3>createBoardWebCommandPlan</h3>
-              <p class="muted"><code>src/planning.ts:161:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="toCommandPlanDiagnostic src/planning.ts ">
-              <h3>toCommandPlanDiagnostic</h3>
-              <p class="muted"><code>src/planning.ts:212:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-          </section>
-        </section>
-        <section
-          id="view-src-webinspection-ts"
-          class="view"
-          data-view="src/webInspection.ts"
-          hidden
-        >
-          <section class="panel">
-            <h2>src/webInspection.ts</h2>
-            <article class="item" data-search="inspectWebsite src/webInspection.ts ">
-              <h3>inspectWebsite</h3>
-              <p class="muted"><code>src/webInspection.ts:36:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="renderWebBoardingPlan src/webInspection.ts ">
-              <h3>renderWebBoardingPlan</h3>
-              <p class="muted"><code>src/webInspection.ts:151:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="extractWebsiteSignals src/webInspection.ts ">
-              <h3>extractWebsiteSignals</h3>
-              <p class="muted"><code>src/webInspection.ts:155:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="fetchWithTimeout src/webInspection.ts ">
-              <h3>fetchWithTimeout</h3>
-              <p class="muted"><code>src/webInspection.ts:172:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readResponseText src/webInspection.ts ">
-              <h3>readResponseText</h3>
-              <p class="muted"><code>src/webInspection.ts:191:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readStreamChunk src/webInspection.ts ">
-              <h3>readStreamChunk</h3>
-              <p class="muted"><code>src/webInspection.ts:233:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="concatenateChunks src/webInspection.ts ">
-              <h3>concatenateChunks</h3>
-              <p class="muted"><code>src/webInspection.ts:254:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="isSupportedHtmlContentType src/webInspection.ts ">
-              <h3>isSupportedHtmlContentType</h3>
-              <p class="muted"><code>src/webInspection.ts:266:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="resolveFetchedUrl src/webInspection.ts ">
-              <h3>resolveFetchedUrl</h3>
-              <p class="muted"><code>src/webInspection.ts:271:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createFailureResult src/webInspection.ts ">
-              <h3>createFailureResult</h3>
-              <p class="muted"><code>src/webInspection.ts:283:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createPlan src/webInspection.ts ">
-              <h3>createPlan</h3>
-              <p class="muted"><code>src/webInspection.ts:300:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createRoute src/webInspection.ts ">
-              <h3>createRoute</h3>
-              <p class="muted"><code>src/webInspection.ts:329:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createPlaceholderRoute src/webInspection.ts ">
-              <h3>createPlaceholderRoute</h3>
-              <p class="muted"><code>src/webInspection.ts:346:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="normalizeRoutePath src/webInspection.ts ">
-              <h3>normalizeRoutePath</h3>
-              <p class="muted"><code>src/webInspection.ts:355:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createSuggestedName src/webInspection.ts ">
-              <h3>createSuggestedName</h3>
-              <p class="muted"><code>src/webInspection.ts:359:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="hostnameToName src/webInspection.ts ">
-              <h3>hostnameToName</h3>
-              <p class="muted"><code>src/webInspection.ts:368:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="createSuggestedSlug src/webInspection.ts ">
-              <h3>createSuggestedSlug</h3>
-              <p class="muted"><code>src/webInspection.ts:385:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="slugify src/webInspection.ts ">
-              <h3>slugify</h3>
-              <p class="muted"><code>src/webInspection.ts:395:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="capitalizeWord src/webInspection.ts ">
-              <h3>capitalizeWord</h3>
-              <p class="muted"><code>src/webInspection.ts:404:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readMetaDescription src/webInspection.ts ">
-              <h3>readMetaDescription</h3>
-              <p class="muted"><code>src/webInspection.ts:410:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readTextMatches src/webInspection.ts ">
-              <h3>readTextMatches</h3>
-              <p class="muted"><code>src/webInspection.ts:425:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readFirstMatch src/webInspection.ts ">
-              <h3>readFirstMatch</h3>
-              <p class="muted"><code>src/webInspection.ts:451:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readObservedLinks src/webInspection.ts ">
-              <h3>readObservedLinks</h3>
-              <p class="muted"><code>src/webInspection.ts:456:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="readHref src/webInspection.ts ">
-              <h3>readHref</h3>
-              <p class="muted"><code>src/webInspection.ts:491:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="resolveSameOriginLink src/webInspection.ts ">
-              <h3>resolveSameOriginLink</h3>
-              <p class="muted"><code>src/webInspection.ts:500:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="stripHtml src/webInspection.ts ">
-              <h3>stripHtml</h3>
-              <p class="muted"><code>src/webInspection.ts:508:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="decodeHtmlEntities src/webInspection.ts ">
-              <h3>decodeHtmlEntities</h3>
-              <p class="muted"><code>src/webInspection.ts:512:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="normalizeOptionalText src/webInspection.ts ">
-              <h3>normalizeOptionalText</h3>
-              <p class="muted"><code>src/webInspection.ts:522:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="isAbortError src/webInspection.ts ">
-              <h3>isAbortError</h3>
-              <p class="muted"><code>src/webInspection.ts:531:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="isRecord src/webInspection.ts ">
-              <h3>isRecord</h3>
-              <p class="muted"><code>src/webInspection.ts:537:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-          </section>
-        </section>
+    <section class="panel">
+      <h2>src/cli/index.ts</h2>
+      <article class="item" data-search="createDefaultBoardCliContext src/cli/index.ts ">
+    <h3>createDefaultBoardCliContext</h3>
+    <p class="muted"><code>src/cli/index.ts:23:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="runCli src/cli/index.ts ">
+    <h3>runCli</h3>
+    <p class="muted"><code>src/cli/index.ts:40:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="renderHelp src/cli/index.ts ">
+    <h3>renderHelp</h3>
+    <p class="muted"><code>src/cli/index.ts:70:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="renderUnknownCommand src/cli/index.ts ">
+    <h3>renderUnknownCommand</h3>
+    <p class="muted"><code>src/cli/index.ts:91:1</code></p>
+    <p class="empty">No description available.</p>
+  </article>
+    </section>
+  </section><section id="view-src-commands-ts" class="view" data-view="src/commands.ts" hidden>
+    <section class="panel">
+      <h2>src/commands.ts</h2>
+      <article class="item" data-search="createProviderManifestCommands src/commands.ts ">
+    <h3>createProviderManifestCommands</h3>
+    <p class="muted"><code>src/commands.ts:40:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createProviderHandlers src/commands.ts ">
+    <h3>createProviderHandlers</h3>
+    <p class="muted"><code>src/commands.ts:48:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="resolveBoardCommand src/commands.ts ">
+    <h3>resolveBoardCommand</h3>
+    <p class="muted"><code>src/commands.ts:58:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="runBoardCommand src/commands.ts ">
+    <h3>runBoardCommand</h3>
+    <p class="muted"><code>src/commands.ts:73:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="runWebBoardCommand src/commands.ts ">
+    <h3>runWebBoardCommand</h3>
+    <p class="muted"><code>src/commands.ts:101:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="matchesPath src/commands.ts ">
+    <h3>matchesPath</h3>
+    <p class="muted"><code>src/commands.ts:131:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readExactSourceArg src/commands.ts ">
+    <h3>readExactSourceArg</h3>
+    <p class="muted"><code>src/commands.ts:139:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="renderUsageError src/commands.ts ">
+    <h3>renderUsageError</h3>
+    <p class="muted"><code>src/commands.ts:152:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="parseWebCommandArgs src/commands.ts ">
+    <h3>parseWebCommandArgs</h3>
+    <p class="muted"><code>src/commands.ts:171:1</code></p>
+    <p class="empty">No description available.</p>
+  </article>
+    </section>
+  </section><section id="view-src-commandservices-ts" class="view" data-view="src/commandServices.ts" hidden>
+    <section class="panel">
+      <h2>src/commandServices.ts</h2>
+      <article class="item" data-search="createDefaultBoardCommandServices src/commandServices.ts ">
+    <h3>createDefaultBoardCommandServices</h3>
+    <p class="muted"><code>src/commandServices.ts:13:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="parseFixtureStatus src/commandServices.ts ">
+    <h3>parseFixtureStatus</h3>
+    <p class="muted"><code>src/commandServices.ts:57:1</code></p>
+    <p class="empty">No description available.</p>
+  </article>
+    </section>
+  </section><section id="view-src-planning-ts" class="view" data-view="src/planning.ts" hidden>
+    <section class="panel">
+      <h2>src/planning.ts</h2>
+      <article class="item" data-search="createProviderPlanningHandlers src/planning.ts ">
+    <h3>createProviderPlanningHandlers</h3>
+    <p class="muted"><code>src/planning.ts:11:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="planBoardWebCommand src/planning.ts ">
+    <h3>planBoardWebCommand</h3>
+    <p class="muted"><code>src/planning.ts:20:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="parseBoardWebPlanningArgs src/planning.ts ">
+    <h3>parseBoardWebPlanningArgs</h3>
+    <p class="muted"><code>src/planning.ts:52:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createInvalidRequestPlan src/planning.ts ">
+    <h3>createInvalidRequestPlan</h3>
+    <p class="muted"><code>src/planning.ts:121:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createBoardWebCommandPlan src/planning.ts ">
+    <h3>createBoardWebCommandPlan</h3>
+    <p class="muted"><code>src/planning.ts:161:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="toCommandPlanDiagnostic src/planning.ts ">
+    <h3>toCommandPlanDiagnostic</h3>
+    <p class="muted"><code>src/planning.ts:212:1</code></p>
+    <p class="empty">No description available.</p>
+  </article>
+    </section>
+  </section><section id="view-src-webinspection-ts" class="view" data-view="src/webInspection.ts" hidden>
+    <section class="panel">
+      <h2>src/webInspection.ts</h2>
+      <article class="item" data-search="inspectWebsite src/webInspection.ts ">
+    <h3>inspectWebsite</h3>
+    <p class="muted"><code>src/webInspection.ts:36:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="renderWebBoardingPlan src/webInspection.ts ">
+    <h3>renderWebBoardingPlan</h3>
+    <p class="muted"><code>src/webInspection.ts:151:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="extractWebsiteSignals src/webInspection.ts ">
+    <h3>extractWebsiteSignals</h3>
+    <p class="muted"><code>src/webInspection.ts:155:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="fetchWithTimeout src/webInspection.ts ">
+    <h3>fetchWithTimeout</h3>
+    <p class="muted"><code>src/webInspection.ts:172:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readResponseText src/webInspection.ts ">
+    <h3>readResponseText</h3>
+    <p class="muted"><code>src/webInspection.ts:191:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readStreamChunk src/webInspection.ts ">
+    <h3>readStreamChunk</h3>
+    <p class="muted"><code>src/webInspection.ts:233:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="concatenateChunks src/webInspection.ts ">
+    <h3>concatenateChunks</h3>
+    <p class="muted"><code>src/webInspection.ts:254:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="isSupportedHtmlContentType src/webInspection.ts ">
+    <h3>isSupportedHtmlContentType</h3>
+    <p class="muted"><code>src/webInspection.ts:266:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="resolveFetchedUrl src/webInspection.ts ">
+    <h3>resolveFetchedUrl</h3>
+    <p class="muted"><code>src/webInspection.ts:271:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createFailureResult src/webInspection.ts ">
+    <h3>createFailureResult</h3>
+    <p class="muted"><code>src/webInspection.ts:283:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createPlan src/webInspection.ts ">
+    <h3>createPlan</h3>
+    <p class="muted"><code>src/webInspection.ts:300:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createRoute src/webInspection.ts ">
+    <h3>createRoute</h3>
+    <p class="muted"><code>src/webInspection.ts:329:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createPlaceholderRoute src/webInspection.ts ">
+    <h3>createPlaceholderRoute</h3>
+    <p class="muted"><code>src/webInspection.ts:346:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="normalizeRoutePath src/webInspection.ts ">
+    <h3>normalizeRoutePath</h3>
+    <p class="muted"><code>src/webInspection.ts:355:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createSuggestedName src/webInspection.ts ">
+    <h3>createSuggestedName</h3>
+    <p class="muted"><code>src/webInspection.ts:359:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="hostnameToName src/webInspection.ts ">
+    <h3>hostnameToName</h3>
+    <p class="muted"><code>src/webInspection.ts:368:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="createSuggestedSlug src/webInspection.ts ">
+    <h3>createSuggestedSlug</h3>
+    <p class="muted"><code>src/webInspection.ts:385:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="slugify src/webInspection.ts ">
+    <h3>slugify</h3>
+    <p class="muted"><code>src/webInspection.ts:395:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="capitalizeWord src/webInspection.ts ">
+    <h3>capitalizeWord</h3>
+    <p class="muted"><code>src/webInspection.ts:404:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readMetaDescription src/webInspection.ts ">
+    <h3>readMetaDescription</h3>
+    <p class="muted"><code>src/webInspection.ts:410:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readTextMatches src/webInspection.ts ">
+    <h3>readTextMatches</h3>
+    <p class="muted"><code>src/webInspection.ts:425:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readFirstMatch src/webInspection.ts ">
+    <h3>readFirstMatch</h3>
+    <p class="muted"><code>src/webInspection.ts:451:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readObservedLinks src/webInspection.ts ">
+    <h3>readObservedLinks</h3>
+    <p class="muted"><code>src/webInspection.ts:456:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="readHref src/webInspection.ts ">
+    <h3>readHref</h3>
+    <p class="muted"><code>src/webInspection.ts:491:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="resolveSameOriginLink src/webInspection.ts ">
+    <h3>resolveSameOriginLink</h3>
+    <p class="muted"><code>src/webInspection.ts:500:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="stripHtml src/webInspection.ts ">
+    <h3>stripHtml</h3>
+    <p class="muted"><code>src/webInspection.ts:508:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="decodeHtmlEntities src/webInspection.ts ">
+    <h3>decodeHtmlEntities</h3>
+    <p class="muted"><code>src/webInspection.ts:512:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="normalizeOptionalText src/webInspection.ts ">
+    <h3>normalizeOptionalText</h3>
+    <p class="muted"><code>src/webInspection.ts:522:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="isAbortError src/webInspection.ts ">
+    <h3>isAbortError</h3>
+    <p class="muted"><code>src/webInspection.ts:531:1</code></p>
+    <p class="empty">No description available.</p>
+  </article><article class="item" data-search="isRecord src/webInspection.ts ">
+    <h3>isRecord</h3>
+    <p class="muted"><code>src/webInspection.ts:537:1</code></p>
+    <p class="empty">No description available.</p>
+  </article>
+    </section>
+  </section>
       </main>
     </div>
     <script>
