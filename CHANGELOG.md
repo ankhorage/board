@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.18
+
+### Patch Changes
+
+- fca43bd: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 0.3.17
 
 ### Patch Changes
