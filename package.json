@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/board",
-  "version": "0.3.19",
+  "version": "0.3.20",
   "description": "Explicit Ankh provider bootstrap for boarding websites and source artifacts into Ankhorage.",
   "license": "MIT",
   "publishConfig": {
