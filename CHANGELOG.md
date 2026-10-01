@@ -1,5 +1,12 @@
 # @ankhorage/board
 
+## 0.3.39
+
+### Patch Changes
+
+- befdbc6: Update Renovate-managed workflows.
+- ec3450c: Update dependencies: `@ankhorage/ankh`, `@ankhorage/devtools`.
+
 ## 0.3.38
 
 ### Patch Changes
