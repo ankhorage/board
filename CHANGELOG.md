@@ -1,5 +1,12 @@
 # @ankhorage/board
 
+## 0.3.48
+
+### Patch Changes
+
+- ea8d44d: Update dependencies: `@ankhorage/ankh`, `@ankhorage/devtools`.
+- 7a8ebc0: Update dependencies: `@types/node`.
+
 ## 0.3.47
 
 ### Patch Changes
