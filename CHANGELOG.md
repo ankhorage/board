@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.36
+
+### Patch Changes
+
+- 677f540: Update dependencies: `@ankhorage/ankh`.
+
 ## 0.3.35
 
 ### Patch Changes
