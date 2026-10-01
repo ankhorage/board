@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.28
+
+### Patch Changes
+
+- fd384cd: Update Renovate-managed workflows.
+
 ## 0.3.27
 
 ### Patch Changes
