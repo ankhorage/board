@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.24
+
+### Patch Changes
+
+- 7052853: Update dependencies: `@ankhorage/devtools`.
+
 ## 0.3.23
 
 ### Patch Changes
