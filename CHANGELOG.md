@@ -1,5 +1,12 @@
 # @ankhorage/board
 
+## 0.3.81
+
+### Patch Changes
+
+- d1f41af: Update dependencies: `@ankhorage/ankh`, `@ankhorage/devtools`.
+- eb4afda: Update Renovate-managed workflows.
+
 ## 0.3.80
 
 ### Patch Changes
