@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.60
+
+### Patch Changes
+
+- ccd7775: Update dependencies: `@ankhorage/ankh`, `@ankhorage/devtools`.
+
 ## 0.3.59
 
 ### Patch Changes
