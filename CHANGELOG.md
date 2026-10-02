@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.3.71
+
+### Patch Changes
+
+- d4b6dce: Update Renovate-managed workflows.
+
 ## 0.3.70
 
 ### Patch Changes
