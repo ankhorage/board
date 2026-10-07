@@ -1,6 +1,7 @@
 import type { AnkhRuntimeCommandProvider } from '@ankhorage/ankh';
 
 import packageJson from '../package.json';
+import { CAPABILITIES } from './capabilities/index.js';
 import {
   BOARD_COMMANDS,
   createProviderHandlers,
@@ -12,7 +13,7 @@ const provider = {
   id: '@ankhorage/board',
   category: 'board',
   version: packageJson.version,
-  capabilities: BOARD_COMMANDS.map((command) => command.capability),
+  capabilities: CAPABILITIES,
   commands: createProviderManifestCommands(),
   handlers: createProviderHandlers(),
   planningHandlers: createProviderPlanningHandlers(),

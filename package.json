@@ -33,6 +33,10 @@
       "types": "./dist/cli/index.d.ts",
       "import": "./dist/cli/index.js"
     },
+    "./capabilities": {
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -49,9 +53,51 @@
     "category": "board",
     "provider": "./dist/ankh.provider.js",
     "capabilities": [
-      "board.web.import",
-      "board.openapi.import",
-      "board.manifest.generate"
+      {
+        "id": "board.web.import",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Import website",
+        "description": "Inspect a public website URL and emit a deterministic boarding plan."
+      },
+      {
+        "id": "board.openapi.import",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Import OpenAPI",
+        "description": "Board an OpenAPI source through the package-owned import command."
+      },
+      {
+        "id": "board.manifest.generate",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Generate manifest",
+        "description": "Generate an Ankhorage manifest from a boarded source."
+      }
     ]
   },
   "scripts": {
@@ -69,11 +115,11 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^22.8.2"
+    "@ankhorage/contracts": "^24.1.0"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.11.1",
-    "@ankhorage/devtools": "^2.1.18",
+    "@ankhorage/ankh": "^0.12.0",
+    "@ankhorage/devtools": "^2.1.19",
     "@ankhorage/paradox": "^0.1.27",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",

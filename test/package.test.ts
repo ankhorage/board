@@ -1,7 +1,8 @@
-import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
+import { areCapabilitiesEqual, isCapability } from '@ankhorage/contracts/capabilities';
 import { describe, expect, it } from 'bun:test';
 
 import packageJson from '../package.json';
+import { CAPABILITIES } from '../src/capabilities/index.js';
 
 describe('package metadata', () => {
   it('publishes the expected package shape', () => {
@@ -19,21 +20,26 @@ describe('package metadata', () => {
         types: './dist/cli/index.d.ts',
         import: './dist/cli/index.js',
       },
+      './capabilities': {
+        types: './dist/capabilities/index.d.ts',
+        import: './dist/capabilities/index.js',
+      },
       './package.json': './package.json',
     });
   });
 
-  it('publishes exact Ankh package metadata', () => {
-    const expectedAnkhMetadata = {
-      category: 'board',
-      provider: './dist/ankh.provider.js',
-      capabilities: ['board.web.import', 'board.openapi.import', 'board.manifest.generate'],
-    } satisfies AnkhPackageMetadata;
+  it('publishes the canonical Ankh capability descriptors without drift', () => {
+    expect(packageJson.ankh.category).toBe('board');
+    expect(packageJson.ankh.provider).toBe('./dist/ankh.provider.js');
+    expect(packageJson.ankh.capabilities).toHaveLength(CAPABILITIES.length);
+    expect(packageJson.ankh.capabilities.every(isCapability)).toBeTrue();
 
-    expect(packageJson.ankh).toEqual({
-      ...expectedAnkhMetadata,
-      capabilities: [...expectedAnkhMetadata.capabilities],
-    });
+    for (const [index, capability] of CAPABILITIES.entries()) {
+      const published = packageJson.ankh.capabilities.at(index);
+      expect(published).toBeDefined();
+      if (published === undefined) continue;
+      expect(areCapabilitiesEqual(published, capability)).toBeTrue();
+    }
   });
 
   it('exposes the required scripts for public Ankh packages', () => {
