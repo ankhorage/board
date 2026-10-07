@@ -3,6 +3,7 @@ import { describe, expect, it } from 'bun:test';
 
 import packageJson from '../package.json';
 import provider from '../src/ankh.provider.js';
+import { CAPABILITIES } from '../src/capabilities/index.js';
 import { BOARD_COMMANDS, runBoardCommand } from '../src/commands.js';
 import { createBufferedContext } from './testSupport.js';
 
@@ -11,11 +12,7 @@ describe('board provider', () => {
     expect(provider.id).toBe('@ankhorage/board');
     expect(provider.category).toBe('board');
     expect(provider.version).toBe(packageJson.version);
-    expect(provider.capabilities).toEqual([
-      'board.web.import',
-      'board.openapi.import',
-      'board.manifest.generate',
-    ]);
+    expect(provider.capabilities).toEqual(CAPABILITIES);
   });
 
   it('matches the runtime provider shape', () => {
@@ -25,6 +22,9 @@ describe('board provider', () => {
   });
 
   it('derives command descriptors directly from the shared command table', () => {
+    expect(BOARD_COMMANDS.map((command) => command.capability)).toEqual(
+      CAPABILITIES.map((capability) => capability.id),
+    );
     expect(provider.commands).toEqual(
       BOARD_COMMANDS.map((command) => ({
         path: command.path,
