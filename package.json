@@ -33,6 +33,10 @@
       "types": "./dist/cli/index.d.ts",
       "import": "./dist/cli/index.js"
     },
+    "./capabilities": {
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -49,9 +53,51 @@
     "category": "board",
     "provider": "./dist/ankh.provider.js",
     "capabilities": [
-      "board.web.import",
-      "board.openapi.import",
-      "board.manifest.generate"
+      {
+        "id": "board.web.import",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Import website source",
+        "description": "Inspect a public website URL and emit a deterministic boarding plan."
+      },
+      {
+        "id": "board.openapi.import",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Import OpenAPI source",
+        "description": "Board an OpenAPI source through an explicit bootstrap stub."
+      },
+      {
+        "id": "board.manifest.generate",
+        "owner": "@ankhorage/board",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        },
+        "label": "Generate boarding manifest",
+        "description": "Generate a manifest from a boarded source through an explicit bootstrap stub."
+      }
     ]
   },
   "scripts": {
@@ -69,11 +115,11 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^22.8.2"
+    "@ankhorage/contracts": "^25.0.1"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.11.1",
-    "@ankhorage/devtools": "^2.1.18",
+    "@ankhorage/ankh": "^0.13.0",
+    "@ankhorage/devtools": "^2.3.9",
     "@ankhorage/paradox": "^0.1.27",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.5",

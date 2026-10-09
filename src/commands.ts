@@ -1,4 +1,5 @@
-import type { AnkhCapabilityId, AnkhCommandDescriptor } from '@ankhorage/contracts/cli';
+import type { Capability } from '@ankhorage/contracts/capability';
+import type { AnkhCommandDescriptor } from '@ankhorage/contracts/cli';
 
 import type { BoardCliContext, BoardCliRunResult } from './cli/index.js';
 import { createDefaultBoardCommandServices } from './commandServices.js';
@@ -8,7 +9,7 @@ type BoardCommandPath = readonly [string] | readonly ['manifest', 'generate'];
 
 interface BoardCommandDefinition {
   readonly path: BoardCommandPath;
-  readonly capability: AnkhCapabilityId;
+  readonly capability: Capability['id'];
   readonly summary: string;
 }
 

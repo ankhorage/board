@@ -10,6 +10,7 @@ import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
 import { describe, expect, it } from 'bun:test';
 
 import provider from '../src/ankh.provider.js';
+import { CAPABILITIES } from '../src/capabilities/index.js';
 
 interface BufferedAnkhContext extends AnkhCommandContext {
   readonly stdout: string;
@@ -18,7 +19,7 @@ interface BufferedAnkhContext extends AnkhCommandContext {
 
 const fixturePath = join(import.meta.dir, 'fixtures', 'example-com.html');
 const packageMetadata = {
-  capabilities: ['board.web.import', 'board.openapi.import', 'board.manifest.generate'],
+  capabilities: CAPABILITIES,
   category: 'board',
   provider: './dist/ankh.provider.js',
 } as const satisfies AnkhPackageMetadata;
