@@ -3,6 +3,7 @@ import { describe, expect, it } from 'bun:test';
 
 import packageJson from '../package.json';
 import provider from '../src/ankh.provider.js';
+import { CAPABILITIES } from '../src/capabilities/index.js';
 import { BOARD_COMMANDS, runBoardCommand } from '../src/commands.js';
 import { createBufferedContext } from './testSupport.js';
 
@@ -11,11 +12,7 @@ describe('board provider', () => {
     expect(provider.id).toBe('@ankhorage/board');
     expect(provider.category).toBe('board');
     expect(provider.version).toBe(packageJson.version);
-    expect(provider.capabilities).toEqual([
-      'board.web.import',
-      'board.openapi.import',
-      'board.manifest.generate',
-    ]);
+    expect(provider.capabilities).toEqual(CAPABILITIES);
   });
 
   it('matches the runtime provider shape', () => {
@@ -24,7 +21,17 @@ describe('board provider', () => {
     expect(typedProvider.handlers.length).toBe(3);
   });
 
-  it('derives command descriptors directly from the shared command table', () => {
+  it('keeps commands and the catalog in order-independent exact parity', () => {
+    const catalogIds = new Set<string>(CAPABILITIES.map(({ id }) => id));
+    const commandIds = new Set<string>(provider.commands.map(({ capability }) => capability));
+
+    expect(catalogIds.size).toBe(CAPABILITIES.length);
+    expect(commandIds.size).toBe(provider.commands.length);
+    expect([...catalogIds].every((capability) => commandIds.has(capability))).toBe(true);
+    expect([...commandIds].every((capability) => catalogIds.has(capability))).toBe(true);
+  });
+
+  it('keeps command descriptors directly derived from the shared command table', () => {
     expect(provider.commands).toEqual(
       BOARD_COMMANDS.map((command) => ({
         path: command.path,

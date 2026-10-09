@@ -2,6 +2,23 @@ import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
 import { describe, expect, it } from 'bun:test';
 
 import packageJson from '../package.json';
+import { CAPABILITIES } from '../src/capabilities/index.js';
+
+const PACKAGE_EXPORTS = {
+  '.': {
+    types: './dist/index.d.ts',
+    import: './dist/index.js',
+  },
+  './cli': {
+    types: './dist/cli/index.d.ts',
+    import: './dist/cli/index.js',
+  },
+  './capabilities': {
+    types: './dist/capabilities/index.d.ts',
+    import: './dist/capabilities/index.js',
+  },
+  './package.json': './package.json',
+};
 
 describe('package metadata', () => {
   it('publishes the expected package shape', () => {
@@ -10,30 +27,17 @@ describe('package metadata', () => {
     expect(packageJson.bin).toEqual({
       'ankhorage-board': './dist/cli/index.js',
     });
-    expect(packageJson.exports).toEqual({
-      '.': {
-        types: './dist/index.d.ts',
-        import: './dist/index.js',
-      },
-      './cli': {
-        types: './dist/cli/index.d.ts',
-        import: './dist/cli/index.js',
-      },
-      './package.json': './package.json',
-    });
+    expect(packageJson.exports).toEqual(PACKAGE_EXPORTS);
   });
 
   it('publishes exact Ankh package metadata', () => {
     const expectedAnkhMetadata = {
       category: 'board',
       provider: './dist/ankh.provider.js',
-      capabilities: ['board.web.import', 'board.openapi.import', 'board.manifest.generate'],
+      capabilities: CAPABILITIES,
     } satisfies AnkhPackageMetadata;
 
-    expect(packageJson.ankh).toEqual({
-      ...expectedAnkhMetadata,
-      capabilities: [...expectedAnkhMetadata.capabilities],
-    });
+    expect(JSON.stringify(packageJson.ankh)).toBe(JSON.stringify(expectedAnkhMetadata));
   });
 
   it('exposes the required scripts for public Ankh packages', () => {
