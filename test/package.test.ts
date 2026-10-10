@@ -1,3 +1,4 @@
+import { isCapabilityCatalog } from '@ankhorage/capability';
 import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
 import { describe, expect, it } from 'bun:test';
 
@@ -31,6 +32,9 @@ describe('package metadata', () => {
   });
 
   it('publishes exact Ankh package metadata', () => {
+    expect(isCapabilityCatalog(CAPABILITIES)).toBe(true);
+    expect(isCapabilityCatalog(packageJson.ankh.capabilities)).toBe(true);
+
     const expectedAnkhMetadata = {
       category: 'board',
       provider: './dist/ankh.provider.js',

@@ -115,6 +115,7 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
+    "@ankhorage/capability": "^0.2.1",
     "@ankhorage/contracts": "^25.0.1"
   },
   "devDependencies": {
