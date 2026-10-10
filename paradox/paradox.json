@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.3.91",
+      "value": "v0.4.0",
       "color": "cb3837"
     },
     {
@@ -105,11 +105,20 @@
       "isEntrypoint": false,
       "dependencies": [
         "package.json",
+        "src/capabilities/index.ts",
         "src/commands.ts",
         "src/planning.ts"
       ],
       "exports": [
         "default"
+      ]
+    },
+    {
+      "path": "src/capabilities/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": [
+        "CAPABILITIES"
       ]
     },
     {
@@ -203,8 +212,17 @@
       "dependencies": [
         "package.json",
         "src/ankh.provider.ts",
+        "src/capabilities/index.ts",
         "src/commands.ts",
         "test/testSupport.ts"
+      ],
+      "exports": []
+    },
+    {
+      "path": "test/capabilities.public-import.test.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/capabilities/index.ts"
       ],
       "exports": []
     },
@@ -232,7 +250,8 @@
       "path": "test/package.test.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "package.json"
+        "package.json",
+        "src/capabilities/index.ts"
       ],
       "exports": []
     },
@@ -240,7 +259,8 @@
       "path": "test/planning.test.ts",
       "isEntrypoint": false,
       "dependencies": [
-        "src/ankh.provider.ts"
+        "src/ankh.provider.ts",
+        "src/capabilities/index.ts"
       ],
       "exports": []
     },
@@ -311,7 +331,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 40,
+        "line": 41,
         "column": 1
       }
     },
@@ -320,7 +340,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 48,
+        "line": 49,
         "column": 1
       }
     },
@@ -329,7 +349,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 58,
+        "line": 59,
         "column": 1
       }
     },
@@ -338,7 +358,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 73,
+        "line": 74,
         "column": 1
       }
     },
@@ -347,7 +367,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 101,
+        "line": 102,
         "column": 1
       }
     },
@@ -356,7 +376,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 131,
+        "line": 132,
         "column": 1
       }
     },
@@ -365,7 +385,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 139,
+        "line": 140,
         "column": 1
       }
     },
@@ -374,7 +394,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 152,
+        "line": 153,
         "column": 1
       }
     },
@@ -383,7 +403,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 171,
+        "line": 172,
         "column": 1
       }
     },
@@ -749,6 +769,11 @@
       },
       {
         "fromPath": "src/ankh.provider.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/ankh.provider.ts"
+      },
+      {
+        "fromPath": "src/ankh.provider.ts",
         "toPath": "src/commands.ts",
         "sourcePath": "src/ankh.provider.ts"
       },
@@ -809,6 +834,11 @@
       },
       {
         "fromPath": "test/ankh.provider.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "test/ankh.provider.test.ts"
+      },
+      {
+        "fromPath": "test/ankh.provider.test.ts",
         "toPath": "src/commands.ts",
         "sourcePath": "test/ankh.provider.test.ts"
       },
@@ -816,6 +846,11 @@
         "fromPath": "test/ankh.provider.test.ts",
         "toPath": "test/testSupport.ts",
         "sourcePath": "test/ankh.provider.test.ts"
+      },
+      {
+        "fromPath": "test/capabilities.public-import.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "test/capabilities.public-import.test.ts"
       },
       {
         "fromPath": "test/cli.test.ts",
@@ -853,8 +888,18 @@
         "sourcePath": "test/package.test.ts"
       },
       {
+        "fromPath": "test/package.test.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "test/package.test.ts"
+      },
+      {
         "fromPath": "test/planning.test.ts",
         "toPath": "src/ankh.provider.ts",
+        "sourcePath": "test/planning.test.ts"
+      },
+      {
+        "fromPath": "test/planning.test.ts",
+        "toPath": "src/capabilities/index.ts",
         "sourcePath": "test/planning.test.ts"
       },
       {
@@ -1307,6 +1352,24 @@
         "toSymbol": "runBoardCommand",
         "callExpression": "runBoardCommand",
         "sourcePath": "test/ankh.provider.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "describe",
+        "callExpression": "describe",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "it",
+        "callExpression": "it",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "expect",
+        "callExpression": "expect",
+        "sourcePath": "test/capabilities.public-import.test.ts"
       },
       {
         "fromSymbol": "test/cli.test.ts",

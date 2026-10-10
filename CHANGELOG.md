@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.4.0
+
+### Minor Changes
+
+- c2dcc22: Publish Board's canonical capability catalog and descriptor-based package metadata.
+
 ## 0.3.91
 
 ### Patch Changes
