@@ -14,7 +14,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.4.0",
+      "value": "v0.4.1",
       "color": "cb3837"
     },
     {
@@ -1477,6 +1477,12 @@
         "fromSymbol": "test/package.test.ts",
         "toSymbol": "expect",
         "callExpression": "expect",
+        "sourcePath": "test/package.test.ts"
+      },
+      {
+        "fromSymbol": "test/package.test.ts",
+        "toSymbol": "isCapabilityCatalog",
+        "callExpression": "isCapabilityCatalog",
         "sourcePath": "test/package.test.ts"
       },
       {

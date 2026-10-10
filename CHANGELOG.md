@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.4.1
+
+### Patch Changes
+
+- 0f1acb7: Declare the standalone Capability toolkit as a direct runtime dependency so packed catalog parity verification works in fresh consumers.
+
 ## 0.4.0
 
 ### Minor Changes
