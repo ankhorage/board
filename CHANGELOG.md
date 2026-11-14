@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.4.2
+
+### Patch Changes
+
+- ade2660: Add canonical repository metadata for package discovery and generated documentation.
+
 ## 0.4.1
 
 ### Patch Changes
