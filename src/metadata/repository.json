@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "tooling",
+  "title": "Ankhorage Board",
+  "summary": "Provides explicit Ankh provider bootstraps for boarding websites and source artifacts into Ankhorage.",
+  "purpose": "Provide an explicit, capability-based boundary for importing website and OpenAPI sources and generating boarding manifests.",
+  "domain": "source boarding",
+  "responsibilities": [
+    "Expose website-source import, OpenAPI-source import, and manifest-generation capabilities.",
+    "Provide a public CLI and capability entrypoint.",
+    "Produce deterministic boarding plans for public website URLs."
+  ],
+  "boundaries": [
+    "Does not own the destination application's persisted source data.",
+    "Does not silently select an import provider outside its explicit capability boundary.",
+    "Does not replace application-specific source authorization policy."
+  ],
+  "audience": [
+    "Ankh CLI and provider hosts.",
+    "Tools that bootstrap website or source-artifact boarding."
+  ],
+  "useCases": [
+    "Inspect a public website URL and emit a deterministic boarding plan.",
+    "Bootstrap an OpenAPI source import.",
+    "Generate a boarding manifest from a boarded source."
+  ],
+  "architecture": {
+    "role": "Tooling package that exposes explicit Ankh provider capabilities and a CLI delivery edge.",
+    "invariants": [
+      "Boarding operations are exposed through declared package capabilities.",
+      "Provider bootstrap remains explicit rather than implicit in consuming applications."
+    ]
+  },
+  "constraints": {
+    "limitations": [
+      "Only the package's declared website, OpenAPI, and manifest capabilities are available through its provider."
+    ]
+  }
+}
