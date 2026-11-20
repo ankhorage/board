@@ -4,7 +4,7 @@ import { CAPABILITIES } from '../src/capabilities/index.js';
 
 describe('public capability catalog', () => {
   it('imports the compiled public capability catalog', async () => {
-    const { CAPABILITIES: publishedCapabilities } = await import('@ankhorage/board/capabilities');
+    const { CAPABILITIES: publishedCapabilities } = await import('../dist/capabilities/index.js');
 
     expect(publishedCapabilities).toEqual(CAPABILITIES);
   });
