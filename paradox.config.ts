@@ -6,9 +6,6 @@ export default defineParadoxConfig({
     title: '@ankhorage/board',
     description:
       'Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.',
-    usage: {
-      entrypoints: ['src/readme-usage.ts'],
-    },
   },
   package: {
     entrypoints: ['src/index.ts'],
