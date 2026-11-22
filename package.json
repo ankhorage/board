@@ -116,13 +116,13 @@
   },
   "dependencies": {
     "@ankhorage/capability": "^0.2.3",
-    "@ankhorage/contracts": "^26.12.0"
+    "@ankhorage/contracts": "^26.13.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.7",
-    "@ankhorage/devtools": "^2.9.6",
+    "@ankhorage/devtools": "^2.9.10",
     "@ankhorage/paradox": "^0.6.0",
-    "@types/bun": "^1.4.5",
+    "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
     "typescript": "^7.0.2"
   },
