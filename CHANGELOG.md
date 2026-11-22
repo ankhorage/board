@@ -1,5 +1,11 @@
 # @ankhorage/board
 
+## 0.4.3
+
+### Patch Changes
+
+- 917024a: Use the canonical Devtools CI-impact and cyclic-dependency audit policy.
+
 ## 0.4.2
 
 ### Patch Changes

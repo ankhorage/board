@@ -1,9 +1,13 @@
 {
   "packageName": "@ankhorage/board",
   "packageId": "@ankhorage/board",
-  "description": "Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.",
-  "collaborators": null,
-  "donation": null,
+  "description": "Provides explicit Ankh provider bootstraps for boarding websites and source artifacts into Ankhorage.",
+  "purpose": "Provide an explicit, capability-based boundary for importing website and OpenAPI sources and generating boarding manifests.",
+  "productDocumentation": null,
+  "collaborators": true,
+  "donation": {
+    "account": "ankhorage"
+  },
   "badges": [
     {
       "id": "license",
@@ -14,7 +18,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v0.4.2",
+      "value": "v0.4.3",
       "color": "cb3837"
     },
     {
@@ -50,37 +54,35 @@
     {
       "id": "tests",
       "label": "tests",
-      "value": "checked",
-      "color": "0a7f3f"
+      "value": "configured",
+      "color": "6f42c1"
     },
     {
       "id": "docs",
-      "label": "docs",
-      "value": "paradox",
-      "color": "0f766e"
+      "label": "paradox",
+      "value": "canonical",
+      "color": "0a7f3f"
     }
   ],
   "usage": {
     "packageName": "@ankhorage/board",
-    "commands": [
-      {
-        "name": "ankhorage-board",
-        "command": "bunx @ankhorage/board"
-      }
-    ]
+    "command": "ankh board --help"
   },
-  "readmeUsageDescription": null,
-  "readmeUsage": [
+  "usageEntries": [
     {
+      "area": "examples",
       "title": "Website-source boarding",
-      "description": "Website-source boarding\n\n`@ankhorage/board` is the home for website and source boarding into\nAnkhorage.\n\n`board web <url>` inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document through the standalone package\nCLI.\n\nCurrent explicit standalone commands are:\n\n- `board web <url>`\n- `board web <url> --plan`\n- `board openapi <source>`\n- `board manifest generate <source>`\n\n`board web <url>` and `board web <url> --plan` produce the same package-local\nJSON plan.\n\nThe Ankh provider also exposes root planning through the public\n`@ankhorage/ankh` planning contract:\n\n- `ankh plan board web <url>`\n- `ankh plan board web <url> --json`\n\nRoot planning returns a generic `AnkhCommandPlan` and does not call board\nexecution handlers.\n\n`board web <url> --create <project>` is parsed only to return a deferred\nmessage in this slice. OpenAPI import, standalone manifest generation,\nproject creation, crawling, root CLI sugar, and destructive execution remain\ndeferred.\n\nRoot CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is\ndeferred.",
+      "description": "Website-source boarding\n\n`@ankhorage/board` inspects a single public website URL and emits a\ndeterministic `WebBoardingPlan` JSON document through its standalone CLI.\n\nCurrent standalone commands are `board web <url>`, `board web <url> --plan`,\n`board openapi <source>`, and `board manifest generate <source>`. Root\nplanning is available through `ankh plan board web <url>` and produces a\ngeneric `AnkhCommandPlan` without calling Board execution handlers.\n\nProject creation, crawling, and root CLI sugar remain deferred.",
       "language": "ts",
-      "code": "import { runCli } from './cli/index.js';\n\nawait runCli(['--help']);",
-      "sourcePath": "src/readme-usage.ts"
+      "code": "await runCli(['--help']);",
+      "sourcePath": "examples/website-source-boarding/index.ts",
+      "isReadme": true,
+      "see": [],
+      "security": []
     }
   ],
-  "readmeCli": null,
-  "readmeConfig": null,
+  "exampleCount": 1,
+  "findings": [],
   "config": null,
   "entrypoints": [
     "src/index.ts"
@@ -293,6 +295,8 @@
     {
       "name": "createDefaultBoardCliContext",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/cli/index.ts",
         "line": 23,
@@ -302,6 +306,8 @@
     {
       "name": "runCli",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/cli/index.ts",
         "line": 40,
@@ -311,6 +317,8 @@
     {
       "name": "renderHelp",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/cli/index.ts",
         "line": 70,
@@ -320,6 +328,8 @@
     {
       "name": "renderUnknownCommand",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/cli/index.ts",
         "line": 91,
@@ -329,6 +339,8 @@
     {
       "name": "createProviderManifestCommands",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 41,
@@ -338,6 +350,8 @@
     {
       "name": "createProviderHandlers",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 49,
@@ -347,6 +361,8 @@
     {
       "name": "resolveBoardCommand",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 59,
@@ -356,6 +372,8 @@
     {
       "name": "runBoardCommand",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 74,
@@ -365,6 +383,8 @@
     {
       "name": "runWebBoardCommand",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 102,
@@ -374,6 +394,8 @@
     {
       "name": "matchesPath",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 132,
@@ -383,6 +405,8 @@
     {
       "name": "readExactSourceArg",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 140,
@@ -392,6 +416,8 @@
     {
       "name": "renderUsageError",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 153,
@@ -401,6 +427,8 @@
     {
       "name": "parseWebCommandArgs",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commands.ts",
         "line": 172,
@@ -410,6 +438,8 @@
     {
       "name": "createDefaultBoardCommandServices",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commandServices.ts",
         "line": 13,
@@ -419,6 +449,8 @@
     {
       "name": "parseFixtureStatus",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/commandServices.ts",
         "line": 57,
@@ -428,6 +460,8 @@
     {
       "name": "createProviderPlanningHandlers",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 11,
@@ -437,6 +471,8 @@
     {
       "name": "planBoardWebCommand",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 20,
@@ -446,6 +482,8 @@
     {
       "name": "parseBoardWebPlanningArgs",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 52,
@@ -455,6 +493,8 @@
     {
       "name": "createInvalidRequestPlan",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 121,
@@ -464,6 +504,8 @@
     {
       "name": "createBoardWebCommandPlan",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 161,
@@ -473,6 +515,8 @@
     {
       "name": "toCommandPlanDiagnostic",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/planning.ts",
         "line": 212,
@@ -482,6 +526,8 @@
     {
       "name": "inspectWebsite",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 36,
@@ -491,6 +537,8 @@
     {
       "name": "renderWebBoardingPlan",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 151,
@@ -500,6 +548,8 @@
     {
       "name": "extractWebsiteSignals",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 155,
@@ -509,6 +559,8 @@
     {
       "name": "fetchWithTimeout",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 172,
@@ -518,6 +570,8 @@
     {
       "name": "readResponseText",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 191,
@@ -527,6 +581,8 @@
     {
       "name": "readStreamChunk",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 233,
@@ -536,6 +592,8 @@
     {
       "name": "concatenateChunks",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 254,
@@ -545,6 +603,8 @@
     {
       "name": "isSupportedHtmlContentType",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 266,
@@ -554,6 +614,8 @@
     {
       "name": "resolveFetchedUrl",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 271,
@@ -563,6 +625,8 @@
     {
       "name": "createFailureResult",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 283,
@@ -572,6 +636,8 @@
     {
       "name": "createPlan",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 300,
@@ -581,6 +647,8 @@
     {
       "name": "createRoute",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 329,
@@ -590,6 +658,8 @@
     {
       "name": "createPlaceholderRoute",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 346,
@@ -599,6 +669,8 @@
     {
       "name": "normalizeRoutePath",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 355,
@@ -608,6 +680,8 @@
     {
       "name": "createSuggestedName",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 359,
@@ -617,6 +691,8 @@
     {
       "name": "hostnameToName",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 368,
@@ -626,6 +702,8 @@
     {
       "name": "createSuggestedSlug",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 385,
@@ -635,6 +713,8 @@
     {
       "name": "slugify",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 395,
@@ -644,6 +724,8 @@
     {
       "name": "capitalizeWord",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 404,
@@ -653,6 +735,8 @@
     {
       "name": "readMetaDescription",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 410,
@@ -662,6 +746,8 @@
     {
       "name": "readTextMatches",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 425,
@@ -671,6 +757,8 @@
     {
       "name": "readFirstMatch",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 451,
@@ -680,6 +768,8 @@
     {
       "name": "readObservedLinks",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 456,
@@ -689,6 +779,8 @@
     {
       "name": "readHref",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 491,
@@ -698,6 +790,8 @@
     {
       "name": "resolveSameOriginLink",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 500,
@@ -707,6 +801,8 @@
     {
       "name": "stripHtml",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 508,
@@ -716,6 +812,8 @@
     {
       "name": "decodeHtmlEntities",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 512,
@@ -725,6 +823,8 @@
     {
       "name": "normalizeOptionalText",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 522,
@@ -734,6 +834,8 @@
     {
       "name": "isAbortError",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 531,
@@ -743,6 +845,8 @@
     {
       "name": "isRecord",
       "description": null,
+      "see": [],
+      "security": [],
       "sourceLocation": {
         "filePath": "src/webInspection.ts",
         "line": 537,
@@ -811,11 +915,6 @@
         "fromPath": "src/planning.ts",
         "toPath": "src/webBoardingPlan.ts",
         "sourcePath": "src/planning.ts"
-      },
-      {
-        "fromPath": "src/readme-usage.ts",
-        "toPath": "src/cli/index.ts",
-        "sourcePath": "src/readme-usage.ts"
       },
       {
         "fromPath": "src/webInspection.ts",
@@ -1096,12 +1195,6 @@
         "sourcePath": "src/planning.ts"
       },
       {
-        "fromSymbol": "src/readme-usage.ts",
-        "toSymbol": "runCli",
-        "callExpression": "runCli",
-        "sourcePath": "src/readme-usage.ts"
-      },
-      {
         "fromSymbol": "inspectWebsite",
         "toSymbol": "fetchWithTimeout",
         "callExpression": "fetchWithTimeout",
@@ -1367,8 +1460,62 @@
       },
       {
         "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "mkdtemp",
+        "callExpression": "mkdtemp",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "join",
+        "callExpression": "join",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "tmpdir",
+        "callExpression": "tmpdir",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "runAsync",
+        "callExpression": "runAsync",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "findPackedTarballAsync",
+        "callExpression": "findPackedTarballAsync",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "writeFile",
+        "callExpression": "writeFile",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
         "toSymbol": "expect",
         "callExpression": "expect",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "outputAsync",
+        "callExpression": "outputAsync",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "test/capabilities.public-import.test.ts",
+        "toSymbol": "rm",
+        "callExpression": "rm",
+        "sourcePath": "test/capabilities.public-import.test.ts"
+      },
+      {
+        "fromSymbol": "runAsync",
+        "toSymbol": "outputAsync",
+        "callExpression": "outputAsync",
         "sourcePath": "test/capabilities.public-import.test.ts"
       },
       {

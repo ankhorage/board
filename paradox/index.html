@@ -116,7 +116,8 @@
       <aside class="sidebar">
         <p class="muted">Generated with Paradox</p>
         <h1>@ankhorage/board</h1>
-        <p>Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.</p>
+        <p>Provides explicit Ankh provider bootstraps for boarding websites and source artifacts into Ankhorage.</p>
+        <p>Provide an explicit, capability-based boundary for importing website and OpenAPI sources and generating boarding manifests.</p>
         <input id="search" class="search" type="search" placeholder="Search current view" />
         <nav aria-label="Documentation sections">
           <ul class="nav-list">
@@ -171,7 +172,32 @@
         <li><code>src/index.ts</code></li>
       </ul>
     </section>
+
+    <section class="panel" data-search="usage ankh board --help Website-source boarding Website-source boarding&#10;&#10;`@ankhorage/board` inspects a single public website URL and emits a&#10;deterministic `WebBoardingPlan` JSON document through its standalone CLI.&#10;&#10;Current standalone commands are `board web &lt;url&gt;`, `board web &lt;url&gt; --plan`,&#10;`board openapi &lt;source&gt;`, and `board manifest generate &lt;source&gt;`. Root&#10;planning is available through `ankh plan board web &lt;url&gt;` and produces a&#10;generic `AnkhCommandPlan` without calling Board execution handlers.&#10;&#10;Project creation, crawling, and root CLI sugar remain deferred. examples/website-source-boarding/index.ts">
+    <h2>Usage</h2>
+    <article class="item">
+      <h3>CLI</h3>
+      <pre>ankh board --help</pre>
+    </article>
+    <article class="item" data-search="Website-source boarding Website-source boarding&#10;&#10;`@ankhorage/board` inspects a single public website URL and emits a&#10;deterministic `WebBoardingPlan` JSON document through its standalone CLI.&#10;&#10;Current standalone commands are `board web &lt;url&gt;`, `board web &lt;url&gt; --plan`,&#10;`board openapi &lt;source&gt;`, and `board manifest generate &lt;source&gt;`. Root&#10;planning is available through `ankh plan board web &lt;url&gt;` and produces a&#10;generic `AnkhCommandPlan` without calling Board execution handlers.&#10;&#10;Project creation, crawling, and root CLI sugar remain deferred. examples/website-source-boarding/index.ts">
+    <h3>Website-source boarding</h3>
+    <p class="muted"><code>examples/website-source-boarding/index.ts</code></p>
+    <p>Website-source boarding
+
+`@ankhorage/board` inspects a single public website URL and emits a
+deterministic `WebBoardingPlan` JSON document through its standalone CLI.
+
+Current standalone commands are `board web &lt;url&gt;`, `board web &lt;url&gt; --plan`,
+`board openapi &lt;source&gt;`, and `board manifest generate &lt;source&gt;`. Root
+planning is available through `ankh plan board web &lt;url&gt;` and produces a
+generic `AnkhCommandPlan` without calling Board execution handlers.
+
+Project creation, crawling, and root CLI sugar remain deferred.</p>
     
+    <pre>await runCli([&#39;--help&#39;]);</pre>
+  </article>
+  </section>
+    <section class="panel"><h2>Policy</h2><p>No documentation findings.</p></section>
     <section class="panel">
       <h2>Modules</h2>
       <article class="item" data-search="package.json">
@@ -659,6 +685,11 @@
     </details>
   </article>
     </section>
+          <section class="panel" data-search="donation sponsor support">
+            <h2>Donation</h2>
+            <p>If this project is useful to you, you can support its continued development.</p>
+            <p><a href="https://github.com/sponsors/ankhorage">Support @ankhorage</a></p>
+          </section>
         </section>
         <section id="view-src-cli-index-ts" class="view" data-view="src/cli/index.ts" hidden>
     <section class="panel">
@@ -667,19 +698,19 @@
     <h3>createDefaultBoardCliContext</h3>
     <p class="muted"><code>src/cli/index.ts:23:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="runCli src/cli/index.ts ">
+</article><article class="item" data-search="runCli src/cli/index.ts ">
     <h3>runCli</h3>
     <p class="muted"><code>src/cli/index.ts:40:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="renderHelp src/cli/index.ts ">
+</article><article class="item" data-search="renderHelp src/cli/index.ts ">
     <h3>renderHelp</h3>
     <p class="muted"><code>src/cli/index.ts:70:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="renderUnknownCommand src/cli/index.ts ">
+</article><article class="item" data-search="renderUnknownCommand src/cli/index.ts ">
     <h3>renderUnknownCommand</h3>
     <p class="muted"><code>src/cli/index.ts:91:1</code></p>
     <p class="empty">No description available.</p>
-  </article>
+</article>
     </section>
   </section><section id="view-src-commands-ts" class="view" data-view="src/commands.ts" hidden>
     <section class="panel">
@@ -688,39 +719,39 @@
     <h3>createProviderManifestCommands</h3>
     <p class="muted"><code>src/commands.ts:41:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createProviderHandlers src/commands.ts ">
+</article><article class="item" data-search="createProviderHandlers src/commands.ts ">
     <h3>createProviderHandlers</h3>
     <p class="muted"><code>src/commands.ts:49:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="resolveBoardCommand src/commands.ts ">
+</article><article class="item" data-search="resolveBoardCommand src/commands.ts ">
     <h3>resolveBoardCommand</h3>
     <p class="muted"><code>src/commands.ts:59:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="runBoardCommand src/commands.ts ">
+</article><article class="item" data-search="runBoardCommand src/commands.ts ">
     <h3>runBoardCommand</h3>
     <p class="muted"><code>src/commands.ts:74:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="runWebBoardCommand src/commands.ts ">
+</article><article class="item" data-search="runWebBoardCommand src/commands.ts ">
     <h3>runWebBoardCommand</h3>
     <p class="muted"><code>src/commands.ts:102:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="matchesPath src/commands.ts ">
+</article><article class="item" data-search="matchesPath src/commands.ts ">
     <h3>matchesPath</h3>
     <p class="muted"><code>src/commands.ts:132:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readExactSourceArg src/commands.ts ">
+</article><article class="item" data-search="readExactSourceArg src/commands.ts ">
     <h3>readExactSourceArg</h3>
     <p class="muted"><code>src/commands.ts:140:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="renderUsageError src/commands.ts ">
+</article><article class="item" data-search="renderUsageError src/commands.ts ">
     <h3>renderUsageError</h3>
     <p class="muted"><code>src/commands.ts:153:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="parseWebCommandArgs src/commands.ts ">
+</article><article class="item" data-search="parseWebCommandArgs src/commands.ts ">
     <h3>parseWebCommandArgs</h3>
     <p class="muted"><code>src/commands.ts:172:1</code></p>
     <p class="empty">No description available.</p>
-  </article>
+</article>
     </section>
   </section><section id="view-src-commandservices-ts" class="view" data-view="src/commandServices.ts" hidden>
     <section class="panel">
@@ -729,11 +760,11 @@
     <h3>createDefaultBoardCommandServices</h3>
     <p class="muted"><code>src/commandServices.ts:13:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="parseFixtureStatus src/commandServices.ts ">
+</article><article class="item" data-search="parseFixtureStatus src/commandServices.ts ">
     <h3>parseFixtureStatus</h3>
     <p class="muted"><code>src/commandServices.ts:57:1</code></p>
     <p class="empty">No description available.</p>
-  </article>
+</article>
     </section>
   </section><section id="view-src-planning-ts" class="view" data-view="src/planning.ts" hidden>
     <section class="panel">
@@ -742,27 +773,27 @@
     <h3>createProviderPlanningHandlers</h3>
     <p class="muted"><code>src/planning.ts:11:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="planBoardWebCommand src/planning.ts ">
+</article><article class="item" data-search="planBoardWebCommand src/planning.ts ">
     <h3>planBoardWebCommand</h3>
     <p class="muted"><code>src/planning.ts:20:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="parseBoardWebPlanningArgs src/planning.ts ">
+</article><article class="item" data-search="parseBoardWebPlanningArgs src/planning.ts ">
     <h3>parseBoardWebPlanningArgs</h3>
     <p class="muted"><code>src/planning.ts:52:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createInvalidRequestPlan src/planning.ts ">
+</article><article class="item" data-search="createInvalidRequestPlan src/planning.ts ">
     <h3>createInvalidRequestPlan</h3>
     <p class="muted"><code>src/planning.ts:121:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createBoardWebCommandPlan src/planning.ts ">
+</article><article class="item" data-search="createBoardWebCommandPlan src/planning.ts ">
     <h3>createBoardWebCommandPlan</h3>
     <p class="muted"><code>src/planning.ts:161:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="toCommandPlanDiagnostic src/planning.ts ">
+</article><article class="item" data-search="toCommandPlanDiagnostic src/planning.ts ">
     <h3>toCommandPlanDiagnostic</h3>
     <p class="muted"><code>src/planning.ts:212:1</code></p>
     <p class="empty">No description available.</p>
-  </article>
+</article>
     </section>
   </section><section id="view-src-webinspection-ts" class="view" data-view="src/webInspection.ts" hidden>
     <section class="panel">
@@ -771,123 +802,123 @@
     <h3>inspectWebsite</h3>
     <p class="muted"><code>src/webInspection.ts:36:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="renderWebBoardingPlan src/webInspection.ts ">
+</article><article class="item" data-search="renderWebBoardingPlan src/webInspection.ts ">
     <h3>renderWebBoardingPlan</h3>
     <p class="muted"><code>src/webInspection.ts:151:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="extractWebsiteSignals src/webInspection.ts ">
+</article><article class="item" data-search="extractWebsiteSignals src/webInspection.ts ">
     <h3>extractWebsiteSignals</h3>
     <p class="muted"><code>src/webInspection.ts:155:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="fetchWithTimeout src/webInspection.ts ">
+</article><article class="item" data-search="fetchWithTimeout src/webInspection.ts ">
     <h3>fetchWithTimeout</h3>
     <p class="muted"><code>src/webInspection.ts:172:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readResponseText src/webInspection.ts ">
+</article><article class="item" data-search="readResponseText src/webInspection.ts ">
     <h3>readResponseText</h3>
     <p class="muted"><code>src/webInspection.ts:191:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readStreamChunk src/webInspection.ts ">
+</article><article class="item" data-search="readStreamChunk src/webInspection.ts ">
     <h3>readStreamChunk</h3>
     <p class="muted"><code>src/webInspection.ts:233:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="concatenateChunks src/webInspection.ts ">
+</article><article class="item" data-search="concatenateChunks src/webInspection.ts ">
     <h3>concatenateChunks</h3>
     <p class="muted"><code>src/webInspection.ts:254:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="isSupportedHtmlContentType src/webInspection.ts ">
+</article><article class="item" data-search="isSupportedHtmlContentType src/webInspection.ts ">
     <h3>isSupportedHtmlContentType</h3>
     <p class="muted"><code>src/webInspection.ts:266:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="resolveFetchedUrl src/webInspection.ts ">
+</article><article class="item" data-search="resolveFetchedUrl src/webInspection.ts ">
     <h3>resolveFetchedUrl</h3>
     <p class="muted"><code>src/webInspection.ts:271:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createFailureResult src/webInspection.ts ">
+</article><article class="item" data-search="createFailureResult src/webInspection.ts ">
     <h3>createFailureResult</h3>
     <p class="muted"><code>src/webInspection.ts:283:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createPlan src/webInspection.ts ">
+</article><article class="item" data-search="createPlan src/webInspection.ts ">
     <h3>createPlan</h3>
     <p class="muted"><code>src/webInspection.ts:300:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createRoute src/webInspection.ts ">
+</article><article class="item" data-search="createRoute src/webInspection.ts ">
     <h3>createRoute</h3>
     <p class="muted"><code>src/webInspection.ts:329:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createPlaceholderRoute src/webInspection.ts ">
+</article><article class="item" data-search="createPlaceholderRoute src/webInspection.ts ">
     <h3>createPlaceholderRoute</h3>
     <p class="muted"><code>src/webInspection.ts:346:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="normalizeRoutePath src/webInspection.ts ">
+</article><article class="item" data-search="normalizeRoutePath src/webInspection.ts ">
     <h3>normalizeRoutePath</h3>
     <p class="muted"><code>src/webInspection.ts:355:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createSuggestedName src/webInspection.ts ">
+</article><article class="item" data-search="createSuggestedName src/webInspection.ts ">
     <h3>createSuggestedName</h3>
     <p class="muted"><code>src/webInspection.ts:359:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="hostnameToName src/webInspection.ts ">
+</article><article class="item" data-search="hostnameToName src/webInspection.ts ">
     <h3>hostnameToName</h3>
     <p class="muted"><code>src/webInspection.ts:368:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="createSuggestedSlug src/webInspection.ts ">
+</article><article class="item" data-search="createSuggestedSlug src/webInspection.ts ">
     <h3>createSuggestedSlug</h3>
     <p class="muted"><code>src/webInspection.ts:385:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="slugify src/webInspection.ts ">
+</article><article class="item" data-search="slugify src/webInspection.ts ">
     <h3>slugify</h3>
     <p class="muted"><code>src/webInspection.ts:395:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="capitalizeWord src/webInspection.ts ">
+</article><article class="item" data-search="capitalizeWord src/webInspection.ts ">
     <h3>capitalizeWord</h3>
     <p class="muted"><code>src/webInspection.ts:404:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readMetaDescription src/webInspection.ts ">
+</article><article class="item" data-search="readMetaDescription src/webInspection.ts ">
     <h3>readMetaDescription</h3>
     <p class="muted"><code>src/webInspection.ts:410:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readTextMatches src/webInspection.ts ">
+</article><article class="item" data-search="readTextMatches src/webInspection.ts ">
     <h3>readTextMatches</h3>
     <p class="muted"><code>src/webInspection.ts:425:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readFirstMatch src/webInspection.ts ">
+</article><article class="item" data-search="readFirstMatch src/webInspection.ts ">
     <h3>readFirstMatch</h3>
     <p class="muted"><code>src/webInspection.ts:451:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readObservedLinks src/webInspection.ts ">
+</article><article class="item" data-search="readObservedLinks src/webInspection.ts ">
     <h3>readObservedLinks</h3>
     <p class="muted"><code>src/webInspection.ts:456:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="readHref src/webInspection.ts ">
+</article><article class="item" data-search="readHref src/webInspection.ts ">
     <h3>readHref</h3>
     <p class="muted"><code>src/webInspection.ts:491:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="resolveSameOriginLink src/webInspection.ts ">
+</article><article class="item" data-search="resolveSameOriginLink src/webInspection.ts ">
     <h3>resolveSameOriginLink</h3>
     <p class="muted"><code>src/webInspection.ts:500:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="stripHtml src/webInspection.ts ">
+</article><article class="item" data-search="stripHtml src/webInspection.ts ">
     <h3>stripHtml</h3>
     <p class="muted"><code>src/webInspection.ts:508:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="decodeHtmlEntities src/webInspection.ts ">
+</article><article class="item" data-search="decodeHtmlEntities src/webInspection.ts ">
     <h3>decodeHtmlEntities</h3>
     <p class="muted"><code>src/webInspection.ts:512:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="normalizeOptionalText src/webInspection.ts ">
+</article><article class="item" data-search="normalizeOptionalText src/webInspection.ts ">
     <h3>normalizeOptionalText</h3>
     <p class="muted"><code>src/webInspection.ts:522:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="isAbortError src/webInspection.ts ">
+</article><article class="item" data-search="isAbortError src/webInspection.ts ">
     <h3>isAbortError</h3>
     <p class="muted"><code>src/webInspection.ts:531:1</code></p>
     <p class="empty">No description available.</p>
-  </article><article class="item" data-search="isRecord src/webInspection.ts ">
+</article><article class="item" data-search="isRecord src/webInspection.ts ">
     <h3>isRecord</h3>
     <p class="muted"><code>src/webInspection.ts:537:1</code></p>
     <p class="empty">No description available.</p>
-  </article>
+</article>
     </section>
   </section>
       </main>

@@ -3,62 +3,55 @@
 
 # @ankhorage/board
 
-![license: MIT](./paradox/badges/license.svg) ![npm: v0.4.2](./paradox/badges/npm.svg) ![runtime: bun](./paradox/badges/runtime.svg) ![typescript: strict](./paradox/badges/typescript.svg) ![eslint: checked](./paradox/badges/eslint.svg) ![prettier: checked](./paradox/badges/prettier.svg) ![build: checked](./paradox/badges/build.svg) ![tests: checked](./paradox/badges/tests.svg) ![docs: paradox](./paradox/badges/docs.svg)
+![license: MIT](./paradox/badges/license.svg) ![npm: v0.4.3](./paradox/badges/npm.svg) ![runtime: bun](./paradox/badges/runtime.svg) ![typescript: strict](./paradox/badges/typescript.svg) ![eslint: checked](./paradox/badges/eslint.svg) ![prettier: checked](./paradox/badges/prettier.svg) ![build: checked](./paradox/badges/build.svg) ![tests: configured](./paradox/badges/tests.svg) ![paradox: canonical](./paradox/badges/docs.svg)
 
-Bootstrap Ankh provider and standalone CLI for boarding websites and source artifacts.
+Provides explicit Ankh provider bootstraps for boarding websites and source artifacts into Ankhorage.
+
+Provide an explicit, capability-based boundary for importing website and OpenAPI sources and generating boarding manifests.
 
 ## Usage
 
+### CLI
+
+Ankhorage packages expose their command-line interface through `ankh`. Use `ankh --help` to discover available package commands, or run a package command with `--help` for package-specific usage.
+
+```zsh
+# Install the Ankhorage CLI
+bun add --global @ankhorage/ankh
+
+# Show usage information for board
+ankh board --help
+```
+
 ### Website-source boarding
 
-`@ankhorage/board` is the home for website and source boarding into
-Ankhorage.
+Website-source boarding
 
-`board web <url>` inspects a single public website URL and emits a
-deterministic `WebBoardingPlan` JSON document through the standalone package
-CLI.
+`@ankhorage/board` inspects a single public website URL and emits a
+deterministic `WebBoardingPlan` JSON document through its standalone CLI.
 
-Current explicit standalone commands are:
+Current standalone commands are `board web <url>`, `board web <url> --plan`,
+`board openapi <source>`, and `board manifest generate <source>`. Root
+planning is available through `ankh plan board web <url>` and produces a
+generic `AnkhCommandPlan` without calling Board execution handlers.
 
-- `board web <url>`
-- `board web <url> --plan`
-- `board openapi <source>`
-- `board manifest generate <source>`
-
-`board web <url>` and `board web <url> --plan` produce the same package-local
-JSON plan.
-
-The Ankh provider also exposes root planning through the public
-`@ankhorage/ankh` planning contract:
-
-- `ankh plan board web <url>`
-- `ankh plan board web <url> --json`
-
-Root planning returns a generic `AnkhCommandPlan` and does not call board
-execution handlers.
-
-`board web <url> --create <project>` is parsed only to return a deferred
-message in this slice. OpenAPI import, standalone manifest generation,
-project creation, crawling, root CLI sugar, and destructive execution remain
-deferred.
-
-Root CLI sugar such as `ankh board <url>` or `ankh board --url <url>` is
-deferred.
-
-Source: `src/readme-usage.ts`
+Project creation, crawling, and root CLI sugar remain deferred.
 
 ```ts
-import { runCli } from './cli/index.js';
-
 await runCli(['--help']);
 ```
 
-## Generated documentation
+## Documentation
 
-- [Interactive documentation app](./paradox/index.html)
-- [Public API reference](./paradox/exports.md)
-- [Component registry](./paradox/components.md)
-- [Architecture overview](./paradox/diagrams/architecture-overview.mmd)
-- [Module relationships](./paradox/diagrams/module-relationships.mmd)
-- [Export graph](./paradox/diagrams/export-graph.mmd)
-- [ankhorage-board sequence](./paradox/diagrams/sequences/ankhorage-board.mmd)
+Open `paradox/index.html` locally in your browser to browse the complete documentation.
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
+## Donation
+
+If this project is useful to you, you can support its continued development.
+
+[Support @ankhorage](https://github.com/sponsors/ankhorage)
